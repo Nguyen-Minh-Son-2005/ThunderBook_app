@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/spacing_md"
+        android:paddingVertical="@dimen/spacing_sm">
+
+        <!-- Ô TÌM KIẾM: đổi hint theo từng màn — vd "Tìm theo tên sách", "Tìm theo tên tác giả" -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/input_height"
+            android:layout_weight="1"
+            android:background="@drawable/bg_search_bar"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/spacing_sm">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_search"
+                app:tint="@color/text_hint" />
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/spacing_xs"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="Tìm theo tên..."
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_hint"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/iv_clear_search"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:padding="2dp"
+                android:src="@drawable/ic_more"
+                android:visibility="gone"
+                app:tint="@color/text_hint"
+                tools:visibility="visible"
+                xmlns:tools="http://schemas.android.com/tools" />
+        </LinearLayout>
+
+        <!-- NÚT SẮP XẾP: mở BottomSheet/PopupMenu chọn tiêu chí phù hợp từng màn -->
+        <FrameLayout
+            android:id="@+id/fl_sort"
+            android:layout_width="@dimen/input_height"
+            android:layout_height="@dimen/input_height"
+            android:layout_marginStart="@dimen/spacing_xs"
+            android:background="@drawable/bg_search_bar">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_sort"
+                app:tint="@color/primary" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- CHIP HIỂN THỊ TIÊU CHÍ SẮP XẾP / LỌC ĐANG ÁP DỤNG -->
+    <HorizontalScrollView
+        android:id="@+id/hsv_active_filters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/spacing_md"
+        android:paddingBottom="@dimen/spacing_xs"
+        android:scrollbars="none"
+        android:visibility="gone"
+        tools:visibility="visible"
+        xmlns:tools="http://schemas.android.com/tools">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cg_active_filters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleLine="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_current_sort"
+                style="@style/Widget.MaterialComponents.Chip.Action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mới nhất"
+                android:textSize="12sp"
+                app:chipIcon="@drawable/ic_sort"
+                app:chipIconSize="14dp"
+                app:closeIconVisible="true" />
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+</merge>

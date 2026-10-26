@@ -1,0 +1,225 @@
+@startuml vopc_02_mua_hang
+title Biểu đồ lớp tham gia (VOPC) - UC2: Mua hàng (Checkout)
+
+skinparam classAttributeIconSize 0
+skinparam defaultFontName "Segoe UI", Arial, sans-serif
+skinparam defaultFontSize 12
+skinparam roundcorner 6
+skinparam shadowing false
+
+skinparam class {
+    BackgroundColor #FFFFFF
+    ArrowColor #1976D2
+    BorderColor #1976D2
+    HeaderBackgroundColor #E3F2FD
+}
+
+skinparam stereotype {
+    CBackgroundColor #BBDEFB
+}
+
+class CheckoutActivity <<boundary>> {
+    - tvAddressNamePhone: TextView
+    - tvAddressDetail: TextView
+    - tvSubtotal: TextView
+    - tvShippingFee: TextView
+    - tvDiscount: TextView
+    - tvFinalTotal: TextView
+    - tvVoucherStatus: TextView
+    - rvCheckoutItems: RecyclerView
+    - btnPlaceOrder: Button
+    - viewModel: CheckoutViewModel
+    - selectedBookIds: List<String>
+    - currentSelectedAddress: Address
+    - currentSelectedVoucher: Voucher
+    - currentOrderItems: List<OrderItem>
+    # onCreate(savedInstanceState: Bundle): void
+    - bindViews(): void
+    - setupClicks(): void
+    - placeOrder(): void
+    - getSubtotal(): double
+    - recalculateTotal(): void
+}
+
+class CheckoutViewModel <<control>> {
+    - cartRepository: CartRepository
+    - orderRepository: OrderRepository
+    - voucherRepository: VoucherRepository
+    - addressRepository: AddressRepository
+    - _orderItems: MutableLiveData<List<OrderItem>>
+    - _selectedAddress: MutableLiveData<Address>
+    - _selectedVoucher: MutableLiveData<Voucher>
+    - _placeOrderResult: MutableLiveData<String>
+    - _errorMessage: MutableLiveData<String>
+    + getOrderItems(): LiveData<List<OrderItem>>
+    + getSelectedAddress(): LiveData<Address>
+    + getSelectedVoucher(): LiveData<Voucher>
+    + getPlaceOrderResult(): LiveData<String>
+    + getErrorMessage(): LiveData<String>
+    + loadCheckoutItems(uid: String, selectedBookIds: List<String>): void
+    + loadAddress(uid: String, addressId: String): void
+    + loadDefaultAddress(uid: String): void
+    + setSelectedVoucher(voucher: Voucher): void
+    + placeOrder(uid: String, orderItems: List<OrderItem>, address: Address, voucher: Voucher, subtotal: double, shippingFee: double, discount: double, note: String, selectedBookIds: List<String>): void
+    + clearCart(uid: String, bookIds: List<String>): void
+}
+
+class OrderRepository {
+    + createOrder(order: Order, callback: FirebaseCallback<String>): void
+    + getOrder(orderId: String): LiveData<Order>
+    + getOrdersByUser(uid: String, status: String): LiveData<List<Order>>
+    + updateOrderStatus(orderId: String, newStatus: String, callback: FirebaseCallback<Void>): void
+}
+
+class CartRepository {
+    + getCartItems(uid: String): LiveData<List<CartItem>>
+    + addToCart(uid: String, bookId: String, quantity: int, priceAtAdd: double, callback: FirebaseCallback<Void>): void
+    + removeCartItem(uid: String, bookId: String, callback: FirebaseCallback<Void>): void
+    + removeCartItems(uid: String, bookIds: List<String>, callback: FirebaseCallback<Void>): void
+}
+
+class AddressRepository {
+    + getAddresses(uid: String): LiveData<List<Address>>
+    + getAddress(uid: String, addressId: String): LiveData<Address>
+    + saveAddress(uid: String, address: Address, callback: FirebaseCallback<Void>): void
+}
+
+class VoucherRepository {
+    + getVouchers(): LiveData<List<Voucher>>
+    + getVoucherByCode(code: String): LiveData<Voucher>
+}
+
+class Order <<entity>> {
+    - orderId: String
+    - userId: String
+    - items: List<OrderItem>
+    - totalPrice: double
+    - shippingFee: double
+    - discountAmount: double
+    - voucherCode: String
+    - finalTotal: double
+    - paymentStatus: String
+    - orderStatus: String
+    - shippingAddress: Address
+    - note: String
+    - createdAt: Timestamp
+    + Order()
+    + Order(...)
+    + getOrderId(): String
+    + getItems(): List<OrderItem>
+    + getTotalPrice(): double
+    + getFinalTotal(): double
+    + getOrderStatus(): String
+    + getTotalItemCount(): int
+}
+
+class OrderItem <<entity>> {
+    - bookId: String
+    - title: String
+    - coverImageUrl: String
+    - price: double
+    - quantity: int
+    + OrderItem()
+    + OrderItem(bookId: String, title: String, coverImageUrl: String, price: double, quantity: int)
+    + getBookId(): String
+    + getTitle(): String
+    + getPrice(): double
+    + getQuantity(): int
+    + getLineTotal(): double
+}
+
+class Address <<entity>> {
+    - addressId: String
+    - name: String
+    - phone: String
+    - province: String
+    - district: String
+    - ward: String
+    - detailAddress: String
+    + Address()
+    + Address(addressId: String, name: String, phone: String, province: String, district: String, ward: String, detailAddress: String)
+    + getAddressId(): String
+    + getName(): String
+    + getPhone(): String
+    + getFullAddress(): String
+}
+
+class Voucher <<entity>> {
+    - voucherId: String
+    - code: String
+    - kind: String
+    - value: double
+    - startDate: Timestamp
+    - endDate: Timestamp
+    - active: boolean
+    + Voucher()
+    + getCode(): String
+    + getKind(): String
+    + getValue(): double
+    + calculateDiscount(orderTotal: double): double
+}
+
+class CartItem <<entity>> {
+    - bookId: String
+    - quantity: int
+    - priceAtAdd: double
+    - addedAt: Timestamp
+    + getBookId(): String
+    + getQuantity(): int
+    + getPriceAtAdd(): double
+    + getSubTotal(): double
+}
+
+interface FirebaseCallback<T> {
+    + onSuccess(result: T): void
+    + onFailure(e: Exception): void
+}
+
+class OrderDetailActivity <<boundary>> {
+    # onCreate(savedInstanceState: Bundle): void
+}
+
+' Relationships
+CheckoutActivity ..> CheckoutViewModel : "<<observes & invokes>>"
+CheckoutActivity ..> OrderDetailActivity : "<<navigates to>>"
+CheckoutActivity ..> Address : "holds selected"
+CheckoutActivity ..> Voucher : "holds selected"
+CheckoutActivity ..> OrderItem : "displays list"
+
+CheckoutViewModel --> OrderRepository : "uses"
+CheckoutViewModel --> CartRepository : "uses"
+CheckoutViewModel --> AddressRepository : "uses"
+CheckoutViewModel --> VoucherRepository : "uses"
+CheckoutViewModel ..> Order : "<<creates>>"
+CheckoutViewModel ..> OrderItem : "<<creates snapshot>>"
+
+OrderRepository ..> Order : "<<persists with Transaction>>"
+OrderRepository ..> FirebaseCallback : "<<triggers>>"
+CartRepository ..> CartItem : "<<manages>>"
+CartRepository ..> FirebaseCallback : "<<triggers>>"
+AddressRepository ..> Address : "<<manages>>"
+
+Order *-- OrderItem : "1..* contains"
+Order o-- Address : "1 snapshot"
+
+note right of CheckoutActivity
+  <b>View:</b>
+  - Hiển thị danh sách sản phẩm đặt mua, địa chỉ nhận hàng, voucher.
+  - Tính toán tổng tiền theo thời gian thực (UI math).
+  - Điều hướng tới OrderDetailActivity sau khi hoàn tất.
+end note
+
+note right of CheckoutViewModel
+  <b>ViewModel:</b>
+  - Tổng hợp dữ liệu từ Cart, Books, Address và Voucher.
+  - Tạo Order entity snapshot và gọi OrderRepository xử lý Transaction.
+  - Tự động xóa giỏ hàng (CartRepository) sau khi đặt hàng thành công.
+end note
+
+note right of OrderRepository
+  <b>Repository:</b>
+  - Thực thi Firestore Transaction:
+    kiểm tra tồn kho -> giảm stock -> tạo order document.
+end note
+
+@enduml

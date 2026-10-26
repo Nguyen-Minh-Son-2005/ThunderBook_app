@@ -1,0 +1,144 @@
+
+==================== TABLE 0 ====================
+--- ROW 0 (4 cells) ---
+  [Cell 0]:
+Mã Use case
+  [Cell 1]:
+UC1
+  [Cell 2]:
+Tên Use case
+  [Cell 3]:
+Đăng ký
+--- ROW 1 (4 cells) ---
+  [Cell 0]:
+Tác nhân
+  [Cell 1]:
+User
+--- ROW 2 (4 cells) ---
+  [Cell 0]:
+Mô tả
+  [Cell 1]:
+Use Case này cho phép khách hàng mới tạo lập tài khoản cá nhân trên hệ thống Shofy để thực hiện mua sắm và lưu trữ thông tin
+--- ROW 3 (4 cells) ---
+  [Cell 0]:
+Sự kiện kích hoạt
+  [Cell 1]:
+Khách hàng nhấn chọn nút "Đăng ký" trên thanh điều hướng hoặc liên kết trên form đăng nhập.
+--- ROW 4 (4 cells) ---
+  [Cell 0]:
+Tiền điều kiện
+  [Cell 1]:
+Khách hàng chưa đăng nhập vào hệ thống
+--- ROW 5 (4 cells) ---
+  [Cell 0]:
+Luồng sự kiện chính
+  [Cell 1]:
+
+
+--- ROW 6 (4 cells) ---
+  [Cell 0]:
+Luồng sự kiện rẽ nhánh
+  [Cell 1]:
+ 
+
+--- ROW 7 (4 cells) ---
+  [Cell 0]:
+Hậu điều kiện
+  [Cell 1]:
+Bản ghi tài khoản mới được tạo lập thành công trong cơ sở dữ liệu Supabase.
+
+==================== TABLE 1 ====================
+--- ROW 0 (4 cells) ---
+  [Cell 0]:
+Mã Use case
+  [Cell 1]:
+UC2
+  [Cell 2]:
+Tên Use case
+  [Cell 3]:
+Đăng nhập
+--- ROW 1 (4 cells) ---
+  [Cell 0]:
+Tác nhân
+  [Cell 1]:
+User, Admin
+--- ROW 2 (4 cells) ---
+  [Cell 0]:
+Mô tả
+  [Cell 1]:
+Use Case này cho phép khách hàng mới tạo lập tài khoản cá nhân trên hệ thống Shofy để thực hiện mua sắm và lưu trữ thông tin
+--- ROW 3 (4 cells) ---
+  [Cell 0]:
+Sự kiện kích hoạt
+  [Cell 1]:
+Use Case này cho phép người dùng (Khách hàng hoặc Admin) đăng nhập vào hệ thống bằng tài khoản đã được đăng ký trước đó để sử dụng các tính năng cá nhân hoặc quản trị.
+--- ROW 4 (4 cells) ---
+  [Cell 0]:
+Tiền điều kiện
+  [Cell 1]:
+Người dùng đã có tài khoản hợp lệ trên hệ thống
+--- ROW 5 (4 cells) ---
+  [Cell 0]:
+Luồng sự kiện chính
+  [Cell 1]:
+
+
+--- ROW 6 (4 cells) ---
+  [Cell 0]:
+Luồng sự kiện rẽ nhánh
+  [Cell 1]:
+ 
+
+--- ROW 7 (4 cells) ---
+  [Cell 0]:
+Hậu điều kiện
+  [Cell 1]:
+Phiên đăng nhập (session) được thiết lập, người dùng được cấp quyền tương ứng.
+
+==================== TABLE 2 ====================
+--- ROW 0 (4 cells) ---
+  [Cell 0]:
+Mã Use case
+  [Cell 1]:
+UC3
+  [Cell 2]:
+Tên Use case
+  [Cell 3]:
+Cập nhật thông tin cá nhân
+--- ROW 1 (4 cells) ---
+  [Cell 0]:
+Tác nhân
+  [Cell 1]:
+User
+--- ROW 2 (4 cells) ---
+  [Cell 0]:
+Mô tả
+  [Cell 1]:
+Use Case này cho phép khách hàng sửa đổi các thông tin cá nhân của mình bao gồm: Họ tên, Số điện thoại, Ảnh đại diện, và Địa chỉ nhận hàng mặc định.
+--- ROW 3 (4 cells) ---
+  [Cell 0]:
+Sự kiện kích hoạt
+  [Cell 1]:
+Khách hàng chọn mục "Thông tin tài khoản" trong trang quản lý cá nhân
+--- ROW 4 (4 cells) ---
+  [Cell 0]:
+Tiền điều kiện
+  [Cell 1]:
+Khách hàng đã đăng nhập thành công vào hệ thống
+--- ROW 5 (4 cells) ---
+  [Cell 0]:
+Luồng sự kiện chính
+  [Cell 1]:
+
+
+--- ROW 6 (4 cells) ---
+  [Cell 0]:
+Luồng sự kiện rẽ nhánh
+  [Cell 1]:
+ 
+
+--- ROW 7 (4 cells) ---
+  [Cell 0]:
+Hậu điều kiện
+  [Cell 1]:
+Các thông tin mới được lưu và đồng bộ thành công vào hồ sơ người dùng trong Supabase.

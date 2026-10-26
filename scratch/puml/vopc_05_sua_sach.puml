@@ -1,0 +1,160 @@
+@startuml vopc_05_sua_sach
+title Biểu đồ lớp tham gia (VOPC) - UC5: Sửa thông tin sách (Edit Book)
+
+skinparam classAttributeIconSize 0
+skinparam defaultFontName "Segoe UI", Arial, sans-serif
+skinparam roundcorner 8
+skinparam linetype ortho
+skinparam nodesep 50
+skinparam ranksep 50
+
+skinparam class {
+    BackgroundColor<<boundary>> #E8F8F5
+    BorderColor<<boundary>> #1ABC9C
+    BackgroundColor<<control>> #EBF5FB
+    BorderColor<<control>> #2980B9
+    BackgroundColor<<entity>> #FEF9E7
+    BorderColor<<entity>> #F39C12
+    BackgroundColor<<utility>> #F4ECF7
+    BorderColor<<utility>> #8E44AD
+    BackgroundColor<<interface>> #F5EEF8
+    BorderColor<<interface>> #9B59B6
+}
+
+class AddEditBookActivity <<boundary>> {
+    - viewModel: AdminAddEditBookViewModel
+    - etTitle: TextInputEditText
+    - etDescription: TextInputEditText
+    - etPrice: TextInputEditText
+    - etSalePrice: TextInputEditText
+    - etStock: TextInputEditText
+    - actAuthor: AutoCompleteTextView
+    - actPublisher: AutoCompleteTextView
+    - cgCategories: ChipGroup
+    - ivCoverPreview: ImageView
+    - swFeatured: SwitchCompat
+    - swActive: SwitchCompat
+    - btnSave: MaterialButton
+    - btnDelete: MaterialButton
+    - editingBookId: String
+    - uploadedCoverUrl: String
+    - pendingImageUri: Uri
+    --
+    # onAdminAccessGranted(savedInstanceState: Bundle): void
+    - populateForm(book: Book): void
+    - saveBook(): void
+    - confirmDelete(): void
+    - observeViewModel(): void
+}
+
+class AdminAddEditBookViewModel <<control>> {
+    - bookRepository: AdminBookRepository
+    - loadedBook: MediatorLiveData<Book>
+    - saveSuccess: SingleLiveEvent<Boolean>
+    - errorMessage: SingleLiveEvent<String>
+    - isLoading: MutableLiveData<Boolean>
+    --
+    + loadBookForEdit(bookId: String): void
+    + saveBook(bookId: String, title: String, description: String,\n  coverImageUrl: String, authorIds: List<String>, publisherId: String,\n  categoryIds: List<String>, price: double, salePrice: double,\n  stock: int, isFeatured: boolean, isActive: boolean): void
+    + deleteBook(bookId: String): void
+    + getLoadedBook(): LiveData<Book>
+    + getSaveSuccess(): LiveData<Boolean>
+    + getErrorMessage(): LiveData<String>
+    + getIsLoading(): LiveData<Boolean>
+}
+
+class AdminBookRepository <<control>> {
+    - booksRef: CollectionReference
+    --
+    + getBookById(bookId: String): LiveData<Book>
+    + updateBook(book: Book, callback: FirebaseCallback<Void>): void
+    + softDeleteBook(bookId: String, callback: FirebaseCallback<Void>): void
+    + toggleActive(bookId: String, isActive: boolean, callback: FirebaseCallback<Void>): void
+}
+
+class Book <<entity>> {
+    - bookId: String
+    - title: String
+    - description: String
+    - coverImageUrl: String
+    - authorIds: List<String>
+    - publisherId: String
+    - categoryIds: List<String>
+    - price: double
+    - salePrice: double
+    - stock: int
+    - soldCount: int
+    - viewCount: int
+    - rating: double
+    - ratingCount: int
+    - isFeatured: boolean
+    - isActive: boolean
+    --
+    + Book()
+    + getBookId(): String
+    + setBookId(bookId: String): void
+    + getTitle(): String
+    + setTitle(title: String): void
+    + getPrice(): double
+    + setPrice(price: double): void
+    + getSalePrice(): double
+    + setSalePrice(salePrice: double): void
+    + getStock(): int
+    + setStock(stock: int): void
+    + isFeatured(): boolean
+    + setFeatured(featured: boolean): void
+    + isActive(): boolean
+    + setActive(active: boolean): void
+}
+
+class Category <<entity>> {
+    - categoryId: String
+    - name: String
+    - imageUrl: String
+    - isActive: boolean
+    --
+    + getCategoryId(): String
+    + getName(): String
+}
+
+class Author <<entity>> {
+    - authorId: String
+    - name: String
+    - avatarUrl: String
+    --
+    + getAuthorId(): String
+    + getName(): String
+}
+
+class Publisher <<entity>> {
+    - publisherId: String
+    - name: String
+    - address: String
+    --
+    + getPublisherId(): String
+    + getName(): String
+}
+
+class ImageUtils <<utility>> {
+    + {static} uploadImage(context: Context, imageUri: Uri, \n  folderName: String, listener: OnUploadCompleteListener): void
+    + {static} loadImage(imageView: ImageView, url: String): void
+}
+
+interface FirebaseCallback<T> <<interface>> {
+    + onSuccess(result: T): void
+    + onFailure(e: Exception): void
+}
+
+' Relationships
+AddEditBookActivity ..> AdminAddEditBookViewModel : observes & calls
+AddEditBookActivity ..> ImageUtils : uses
+AdminAddEditBookViewModel --> AdminBookRepository : calls
+
+AdminBookRepository ..> Book : queries & updates
+AdminBookRepository ..> FirebaseCallback : triggers
+
+Book "0..*" o-- "1..*" Category : categorized by
+Book "0..*" o-- "1..*" Author : written by
+Book "0..*" o-- "1" Publisher : published by
+
+@enduml

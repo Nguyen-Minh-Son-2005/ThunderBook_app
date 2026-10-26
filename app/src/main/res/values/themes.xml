@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme -->
+    <style name="Theme.BookApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Màu chính (Toolbar, Button, các widget Material) -->
+        <item name="colorPrimary">@color/primary</item>
+        <!-- Màu status bar trên cùng -->
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <!-- Màu nhấn (TextInputLayout focus, Switch, v.v.) -->
+        <item name="colorAccent">@color/accent_price</item>
+
+        <!-- Nền mặc định của toàn app -->
+        <item name="android:windowBackground">@color/background</item>
+        <!-- Màu chữ mặc định -->
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <!-- Màu chữ hint (placeholder) mặc định -->
+        <item name="android:textColorHint">@color/text_hint</item>
+    </style>
+
+    <!-- ===== TEXT STYLES ===== -->
+    <style name="Text">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="Text.Heading1">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.Heading2">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.Body">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Text.Caption">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Text.Price">
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CircleImageViewStyle">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- Custom DatePicker Theme -->
+    <style name="CustomDatePickerTheme" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="android:datePickerStyle">@style/CustomDatePickerStyle</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorAccent">@color/primary</item>
+    </style>
+
+    <style name="CustomDatePickerStyle" parent="android:Widget.Material.Light.DatePicker">
+        <item name="android:datePickerMode">spinner</item>
+        <item name="android:calendarViewShown">false</item>
+    </style>
+</resources>

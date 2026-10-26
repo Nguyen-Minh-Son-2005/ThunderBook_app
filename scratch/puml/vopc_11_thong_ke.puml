@@ -1,0 +1,167 @@
+@startuml vopc_11_thong_ke
+title Sơ đồ VOPC - UC11: Thống kê doanh thu (Revenue Statistics - Admin)
+
+skinparam handwritten false
+skinparam monochrome false
+skinparam shadowing false
+skinparam defaultFontName "Arial"
+skinparam defaultFontSize 12
+skinparam roundCorner 8
+
+skinparam class {
+    BackgroundColor #FFFFFF
+    ArrowColor #2C3E50
+    BorderColor #34495E
+    HeaderBackgroundColor #EAEDED
+    BorderThickness 1.2
+}
+
+skinparam classStereotype {
+    FontSize 10
+    FontStyle italic
+}
+
+abstract class AdminBaseActivity <<boundary>> #E8F8F5 {
+    # checkAdminAccess(): void
+    # {abstract} onAdminAccessGranted(savedInstanceState: Bundle): void
+}
+
+class StatisticActivity <<boundary>> #E8F8F5 {
+    - tvRevenue: TextView
+    - tvOrderCount: TextView
+    - tvAov: TextView
+    - lineChart: LineChart
+    - chipGroupPeriod: ChipGroup
+    - rvTopBooks: RecyclerView
+    - rvTopCustomers: RecyclerView
+    - topBooksAdapter: AdminStatRankAdapter
+    - topCustomersAdapter: AdminStatRankAdapter
+    - viewModel: AdminStatisticViewModel
+    --
+    # onAdminAccessGranted(savedInstanceState: Bundle): void
+    - setupPeriodChips(): void
+    - setupChart(): void
+    - updateChart(chartResult: ChartResult): void
+    - setupRecyclerViews(): void
+}
+
+class AdminStatisticViewModel <<control>> #FEF9E7 {
+    - orderRepository: AdminOrderRepository
+    - bookRepository: AdminBookRepository
+    - userRepository: AdminUserRepository
+    - revenue: MutableLiveData<Double>
+    - orderCount: MutableLiveData<Integer>
+    - averageOrderValue: MutableLiveData<Double>
+    - chartRevenue: MutableLiveData<ChartResult>
+    - topBooks: MediatorLiveData<List<AdminRankItem>>
+    - topCustomers: MediatorLiveData<List<AdminRankItem>>
+    --
+    + getRevenue(): LiveData<Double>
+    + getOrderCount(): LiveData<Integer>
+    + getAverageOrderValue(): LiveData<Double>
+    + getChartRevenue(): LiveData<ChartResult>
+    + getTopBooks(): LiveData<List<AdminRankItem>>
+    + getTopCustomers(): LiveData<List<AdminRankItem>>
+    + loadRevenue(period: Period): void
+    + loadTopBooks(limit: int): void
+    + loadTopCustomers(limit: int): void
+    - calculateDateRange(period: Period): Date[]
+}
+
+enum Period {
+    DAY
+    WEEK
+    MONTH
+    YEAR
+}
+
+class ChartResult #F9EBEA {
+    - totalRevenue: double
+    - entries: List<Entry>
+    - labels: List<String>
+    --
+    + ChartResult(totalRevenue: double, entries: List<Entry>, labels: List<String>)
+    + getTotalRevenue(): double
+    + getEntries(): List<Entry>
+    + getLabels(): List<String>
+}
+
+class AdminRankItem #F9EBEA {
+    - avatarUrl: String
+    - name: String
+    - valueLabel: String
+    --
+    + AdminRankItem(avatarUrl: String, name: String, valueLabel: String)
+    + getAvatarUrl(): String
+    + getName(): String
+    + getValueLabel(): String
+}
+
+class AdminOrderRepository #F4F6F6 {
+    - ordersRef: CollectionReference
+    --
+    + getOrdersInRange(fromDate: Date, toDate: Date): LiveData<List<Order>>
+    + getRevenueInRange(fromDate: Date, toDate: Date): LiveData<Double>
+    + observeAllOrders(): LiveData<List<Order>>
+    + getOrderById(orderId: String): LiveData<Order>
+    + countAllOrders(): LiveData<Integer>
+}
+
+class AdminBookRepository #F4F6F6 {
+    - booksRef: CollectionReference
+    --
+    + getTopSellingBooks(limit: int): LiveData<List<Book>>
+    + countActiveBooks(): LiveData<Integer>
+}
+
+class Order <<entity>> #EBF5FB {
+    - orderId: String
+    - userId: String
+    - orderStatus: String
+    - finalTotal: double
+    - createdAt: Timestamp
+    - shippingAddress: Address
+    - items: List<OrderItem>
+    --
+    + getOrderId(): String
+    + getUserId(): String
+    + getOrderStatus(): String
+    + getFinalTotal(): double
+    + getCreatedAt(): Timestamp
+    + getShippingAddress(): Address
+    + getItems(): List<OrderItem>
+}
+
+class Book <<entity>> #EBF5FB {
+    - bookId: String
+    - title: String
+    - coverImageUrl: String
+    - price: double
+    - soldCount: int
+    - stock: int
+    --
+    + getBookId(): String
+    + getTitle(): String
+    + getCoverImageUrl(): String
+    + getPrice(): double
+    + getSoldCount(): int
+    + getStock(): int
+}
+
+' Relationships
+StatisticActivity --|> AdminBaseActivity
+StatisticActivity ..> AdminStatisticViewModel : observes / interacts
+AdminStatisticViewModel --> AdminOrderRepository : uses
+AdminStatisticViewModel --> AdminBookRepository : uses
+
+AdminStatisticViewModel +-- Period
+AdminStatisticViewModel +-- ChartResult
+AdminStatisticViewModel ..> AdminRankItem : maps & creates
+
+AdminOrderRepository ..> Order : queries
+AdminBookRepository ..> Book : queries
+
+StatisticActivity ..> ChartResult : renders
+StatisticActivity ..> AdminRankItem : displays
+
+@enduml

@@ -1,0 +1,125 @@
+@startuml seq_11_thong_ke
+title Sơ đồ tuần tự - UC11: Thống kê doanh thu (Revenue Statistics - Admin)
+
+autonumber
+skinparam handwritten false
+skinparam monochrome false
+skinparam shadowing false
+skinparam defaultFontName "Arial"
+skinparam defaultFontSize 12
+skinparam roundCorner 8
+
+skinparam sequence {
+    ArrowColor #2C3E50
+    ActorBorderColor #2980B9
+    ActorBackgroundColor #EBF5FB
+    LifeLineBorderColor #7F8C8D
+    LifeLineBackgroundColor #F4F6F6
+    ParticipantBorderColor #34495E
+    ParticipantBackgroundColor #EAECEE
+    ParticipantFontColor #2C3E50
+    ParticipantFontSize 13
+    ParticipantFontStyle bold
+    GroupBorderColor #7F8C8D
+    GroupBackgroundColor #F8F9F9
+    GroupHeaderFontColor #2C3E50
+    DividerBorderColor #BDC3C7
+    DividerBackgroundColor #EAEDED
+    DividerFontColor #2C3E50
+}
+
+actor "Quản trị viên" as Admin
+boundary "StatisticActivity" as View
+control "AdminStatisticViewModel" as ViewModel
+participant "AdminOrderRepository" as OrderRepo
+participant "AdminBookRepository" as BookRepo
+database "Cloud Firestore" as Firestore
+
+== 1. Khởi tạo màn hình & Tải dữ liệu mặc định (Kỳ: Tuần) ==
+
+Admin -> View : Mở màn hình Thống kê doanh thu
+activate View
+
+View -> ViewModel : loadRevenue(Period.WEEK)
+activate ViewModel
+View -> ViewModel : loadTopBooks(10)
+View -> ViewModel : loadTopCustomers(10)
+
+group Tải và tổng hợp doanh thu theo kỳ
+    ViewModel -> ViewModel : calculateDateRange(Period.WEEK)\n-> [fromDate, toDate]
+    ViewModel -> OrderRepo : getOrdersInRange(fromDate, toDate)
+    activate OrderRepo
+
+    OrderRepo -> Firestore : orders.whereGreaterThanOrEqualTo("createdAt", from)\n.whereLessThanOrEqualTo("createdAt", to).get()
+    activate Firestore
+    Firestore --> OrderRepo : QuerySnapshot (Orders)
+    deactivate Firestore
+
+    OrderRepo -> OrderRepo : Lọc danh sách: orderStatus == "delivered"
+    OrderRepo --> ViewModel : LiveData<List<Order>> (deliveredOrders)
+    deactivate OrderRepo
+
+    ViewModel -> ViewModel : Tính tổng doanh thu (totalRevenue),\nsố đơn hàng (orderCount),\ngiá trị trung bình đơn (AOV)
+    ViewModel -> ViewModel : Gom doanh thu theo các thứ trong tuần (T2-CN)\n-> Tạo ChartResult(total, entries, labels)
+    ViewModel --> View : Cập nhật LiveData (revenue, orderCount,\naverageOrderValue, chartRevenue)
+    View -> View : Hiển thị 3 chỉ số lên TextViews\nVẽ biểu đồ LineChart (MPAndroidChart)
+end
+
+group Tải danh sách Top 10 Sách bán chạy
+    ViewModel -> BookRepo : getTopSellingBooks(10)
+    activate BookRepo
+    BookRepo -> Firestore : books.whereGreaterThan("soldCount", 0)\n.orderBy("soldCount", DESC).limit(10).get()
+    activate Firestore
+    Firestore --> BookRepo : QuerySnapshot (Books)
+    deactivate Firestore
+    BookRepo --> ViewModel : LiveData<List<Book>>
+    deactivate BookRepo
+    ViewModel -> ViewModel : Ánh xạ List<Book> -> List<AdminRankItem>\n(name = title, valueLabel = "Đã bán " + soldCount)
+    ViewModel --> View : Quan sát topBooks (MediatorLiveData)
+    View -> View : Cập nhật RecyclerView Top Sách bán chạy
+end
+
+group Tải danh sách Top 10 Khách hàng mua nhiều nhất
+    ViewModel -> OrderRepo : observeAllOrders()
+    activate OrderRepo
+    OrderRepo -> Firestore : orders.orderBy("createdAt", DESC)\n.addSnapshotListener()
+    activate Firestore
+    Firestore --> OrderRepo : QuerySnapshot (Tất cả đơn hàng)
+    deactivate Firestore
+    OrderRepo --> ViewModel : LiveData<List<Order>>
+    deactivate OrderRepo
+    ViewModel -> ViewModel : Gom nhóm client-side theo userId,\nđếm số đơn, sắp xếp giảm dần\n-> Ánh xạ List<AdminRankItem>
+    ViewModel --> View : Quan sát topCustomers (MediatorLiveData)
+    View -> View : Cập nhật RecyclerView Top Khách hàng
+end
+
+deactivate ViewModel
+
+== 2. Thay đổi kỳ thống kê (Ngày / Tuần / Tháng / Năm) ==
+
+Admin -> View : Chọn Chip kỳ thời gian (ví dụ: MONTH)
+View -> ViewModel : loadRevenue(Period.MONTH)
+activate ViewModel
+
+ViewModel -> ViewModel : calculateDateRange(Period.MONTH)\n-> [ngày 1 đầu tháng, hiện tại]
+ViewModel -> OrderRepo : getOrdersInRange(fromDate, toDate)
+activate OrderRepo
+
+OrderRepo -> Firestore : orders.whereGreaterThanOrEqualTo("createdAt", from)\n.whereLessThanOrEqualTo("createdAt", to).get()
+activate Firestore
+Firestore --> OrderRepo : QuerySnapshot (Orders)
+deactivate Firestore
+
+OrderRepo -> OrderRepo : Lọc các đơn có orderStatus == "delivered"
+OrderRepo --> ViewModel : LiveData<List<Order>>
+deactivate OrderRepo
+
+ViewModel -> ViewModel : Tính toán lại tổng doanh thu, số đơn, AOV\nGom doanh thu theo từng ngày trong tháng\n-> ChartResult mới
+ViewModel --> View : Cập nhật LiveData (revenue, orderCount,\naverageOrderValue, chartRevenue)
+deactivate ViewModel
+
+View -> View : Cập nhật số liệu hiển thị trên thẻ\nCập nhật dữ liệu và vẽ lại LineChart
+View --> Admin : Hiển thị biểu đồ và thống kê mới
+deactivate View
+
+@enduml

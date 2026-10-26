@@ -1,0 +1,160 @@
+@startuml seq_12_quan_ly_tac_gia_nxb
+title Sơ đồ tuần tự - UC12: Quản lý tác giả & Nhà xuất bản (Admin)
+
+autonumber
+skinparam handwritten false
+skinparam monochrome false
+skinparam shadowing false
+skinparam defaultFontName "Arial"
+skinparam defaultFontSize 12
+skinparam roundCorner 8
+
+skinparam sequence {
+    ArrowColor #2C3E50
+    ActorBorderColor #2980B9
+    ActorBackgroundColor #EBF5FB
+    LifeLineBorderColor #7F8C8D
+    LifeLineBackgroundColor #F4F6F6
+    ParticipantBorderColor #34495E
+    ParticipantBackgroundColor #EAECEE
+    ParticipantFontColor #2C3E50
+    ParticipantFontSize 13
+    ParticipantFontStyle bold
+    GroupBorderColor #7F8C8D
+    GroupBackgroundColor #F8F9F9
+    GroupHeaderFontColor #2C3E50
+    DividerBorderColor #BDC3C7
+    DividerBackgroundColor #EAEDED
+    DividerFontColor #2C3E50
+}
+
+actor "Quản trị viên" as Admin
+boundary "ManageAuthor / PublisherActivity" as View
+boundary "AdminEntityFormDialog" as Dialog
+control "AdminAuthor / PublisherViewModel" as ViewModel
+participant "ImageUtils / Storage" as Storage
+participant "AdminAuthor / PublisherRepository" as EntityRepo
+participant "AdminBookRepository" as BookRepo
+database "Cloud Firestore" as Firestore
+
+== 1. Lắng nghe dữ liệu Realtime & Tìm kiếm ==
+
+Admin -> View : Mở màn hình Quản lý Tác giả / NXB
+activate View
+
+View -> ViewModel : Khởi tạo ViewModel
+activate ViewModel
+
+ViewModel -> EntityRepo : observeAllAuthors() / observeAllPublishers()
+activate EntityRepo
+
+EntityRepo -> Firestore : collection.orderBy("name", ASC).addSnapshotListener()
+activate Firestore
+Firestore --> EntityRepo : QuerySnapshot (Realtime danh sách)
+deactivate Firestore
+
+EntityRepo --> ViewModel : LiveData<List<Entity>>
+deactivate EntityRepo
+
+ViewModel -> ViewModel : Lưu vào cachedList\nÁp dụng filterByName(keyword)
+ViewModel --> View : Quan sát displayedAuthors / displayedPublishers\nCập nhật RecyclerView hiển thị danh sách
+deactivate ViewModel
+
+opt Quản trị viên nhập từ khóa tìm kiếm
+    Admin -> View : Nhập từ khóa vào ô tìm kiếm (et_search)
+    View -> ViewModel : search(keyword)
+    activate ViewModel
+    ViewModel -> ViewModel : Lọc cachedList theo tên (không query lại Firestore)
+    ViewModel --> View : Cập nhật LiveData danh sách hiển thị
+    deactivate ViewModel
+    View -> View : Cập nhật giao diện danh sách kết quả
+end
+
+== 2. Thêm mới / Chỉnh sửa Tác giả hoặc Nhà xuất bản ==
+
+Admin -> View : Nhấn nút Thêm mới (FAB) hoặc nút Sửa trên item
+View -> Dialog : newInstanceAdd() / newInstanceEdit(entity)
+activate Dialog
+Dialog --> Admin : Hiển thị Form nhập liệu (ảnh đại diện, tên)
+
+Admin -> Dialog : Chọn ảnh mới (tùy chọn), nhập tên và nhấn "Lưu"
+Dialog -> View : onSave(existingId, name, description, newImageUri)
+deactivate Dialog
+
+opt Quản trị viên có chọn ảnh mới
+    View -> Storage : uploadImage(context, imageUri, folderPath)
+    activate Storage
+    Storage --> View : onSuccess(downloadUrl)
+    deactivate Storage
+end
+
+View -> ViewModel : saveAuthor / savePublisher(id, name, imageUrl)
+activate ViewModel
+
+alt Thêm mới (id == null)
+    ViewModel -> EntityRepo : addAuthor(author) / addPublisher(publisher)
+    activate EntityRepo
+    EntityRepo -> Firestore : docRef = collection.document()\ndocRef.set(entity)
+    activate Firestore
+    Firestore --> EntityRepo : onSuccess()
+    deactivate Firestore
+    EntityRepo --> ViewModel : callback.onSuccess(null)
+    deactivate EntityRepo
+else Chỉnh sửa (id != null)
+    ViewModel -> EntityRepo : updateAuthor(author) / updatePublisher(publisher)
+    activate EntityRepo
+    EntityRepo -> Firestore : collection.document(id).set(entity)
+    activate Firestore
+    Firestore --> EntityRepo : onSuccess()
+    deactivate Firestore
+    EntityRepo --> ViewModel : callback.onSuccess(null)
+    deactivate EntityRepo
+end
+
+ViewModel -> ViewModel : saveSuccess.setValue(true)
+ViewModel --> View : Quan sát saveSuccess (LiveData)
+deactivate ViewModel
+View -> View : Toast("Đã lưu")
+View --> Admin : Thông báo lưu thành công (Realtime tự cập nhật list)
+
+== 3. Xóa Tác giả / NXB (Kiểm tra ràng buộc khóa ngoại) ==
+
+Admin -> View : Nhấn nút Xóa trên item và xác nhận Dialog
+View -> ViewModel : deleteAuthor(id) / deletePublisher(id)
+activate ViewModel
+
+ViewModel -> BookRepo : checkAuthorInUse(id) / checkPublisherInUse(id)
+activate BookRepo
+
+BookRepo -> Firestore : books.whereArrayContains("authorIds", id).limit(1).get()\n/ books.whereEqualTo("publisherId", id).limit(1).get()
+activate Firestore
+Firestore --> BookRepo : QuerySnapshot
+deactivate Firestore
+
+BookRepo --> ViewModel : callback.onSuccess(inUse: boolean)
+deactivate BookRepo
+
+alt Đang có sách sử dụng Tác giả / NXB này (inUse == true)
+    ViewModel -> ViewModel : errorMessage.setValue("Không thể xóa vì đang có sản phẩm...")
+    ViewModel --> View : Quan sát errorMessage (LiveData)
+    View -> View : Toast hiển thị thông báo lỗi ràng buộc
+    View --> Admin : Cảnh báo không được xóa
+else Không có sách nào sử dụng (inUse == false)
+    ViewModel -> EntityRepo : deleteAuthor(id) / deletePublisher(id)
+    activate EntityRepo
+    EntityRepo -> Firestore : collection.document(id).delete()
+    activate Firestore
+    Firestore --> EntityRepo : onSuccess()
+    deactivate Firestore
+    EntityRepo --> ViewModel : callback.onSuccess(null)
+    deactivate EntityRepo
+    ViewModel -> ViewModel : saveSuccess.setValue(true)
+    ViewModel --> View : Quan sát saveSuccess (LiveData)
+    View -> View : Toast("Đã xóa")
+    View --> Admin : Thông báo xóa thành công
+end
+
+deactivate ViewModel
+deactivate View
+
+@enduml

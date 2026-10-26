@@ -1,0 +1,127 @@
+@startuml seq_04_them_sach
+title Biểu đồ tuần tự - UC4: Thêm sách mới (Add Book)
+
+skinparam defaultFontName "Segoe UI", Arial, sans-serif
+skinparam sequenceMessageAlign center
+skinparam roundcorner 8
+skinparam maxMessageSize 200
+skinparam ParticipantPadding 12
+skinparam BoxPadding 10
+skinparam NoteBackgroundColor #FEFDE8
+skinparam NoteBorderColor #F1C40F
+
+skinparam sequence {
+    ArrowColor #2C3E50
+    ActorBorderColor #2980B9
+    LifeLineBorderColor #34495E
+    LifeLineBackgroundColor #ECF0F1
+    
+    ParticipantBorderColor #2980B9
+    ParticipantBackgroundColor #EBF5FB
+    ParticipantFontStyle bold
+    
+    DatabaseBorderColor #D35400
+    DatabaseBackgroundColor #FDEBD0
+}
+
+actor "Quản trị viên\n(Admin)" as Admin
+boundary "AddEditBookActivity\n(View)" as View
+control "AdminAddEditBookViewModel\n(ViewModel)" as ViewModel
+participant "ImageUtils\n(Utility)" as ImageUtils
+control "AdminCategoryRepository" as CategoryRepo
+control "AdminAuthorRepository" as AuthorRepo
+control "AdminPublisherRepository" as PublisherRepo
+control "AdminBookRepository" as BookRepo
+database "Firebase Storage\n(book_covers/)" as Storage
+database "Cloud Firestore\n(collection: books)" as Firestore
+
+autonumber 1 "<b>[00]</b>"
+
+== 1. Khởi tạo màn hình và tải danh mục lựa chọn ==
+Admin -> View: Mở màn hình "Thêm sách"
+activate View
+View -> ViewModel: Lấy instance ViewModelProvider
+activate ViewModel
+
+ViewModel -> CategoryRepo: observeAllCategories()
+activate CategoryRepo
+CategoryRepo -> Firestore: Query categories (orderBy: name ASC)
+CategoryRepo --> ViewModel: LiveData<List<Category>>
+deactivate CategoryRepo
+
+ViewModel -> AuthorRepo: observeAllAuthors()
+activate AuthorRepo
+AuthorRepo -> Firestore: Query authors (orderBy: name ASC)
+AuthorRepo --> ViewModel: LiveData<List<Author>>
+deactivate AuthorRepo
+
+ViewModel -> PublisherRepo: observeAllPublishers()
+activate PublisherRepo
+PublisherRepo -> Firestore: Query publishers (orderBy: name ASC)
+PublisherRepo --> ViewModel: LiveData<List<Publisher>>
+deactivate PublisherRepo
+
+ViewModel --> View: Cập nhật LiveData (categories, authors, publishers)
+View -> View: Hiển thị danh sách lên ChipGroup và AutoCompleteTextView
+View --> Admin: Hiển thị giao diện nhập thông tin sách
+deactivate ViewModel
+deactivate View
+
+== 2. Nhập dữ liệu và tải ảnh bìa lên Storage ==
+Admin -> View: Chọn ảnh bìa sách từ thư viện ảnh
+activate View
+View -> View: Hiển thị xem trước ảnh (ivCoverPreview)
+
+Admin -> View: Nhập tiêu đề, mô tả, giá, giá sale, tồn kho,\nchọn tác giả, NXB, thể loại, trạng thái
+Admin -> View: Nhấn nút "Lưu sách" (btnSave)
+
+opt Người dùng đã chọn ảnh bìa (pendingImageUri != null)
+    View -> ImageUtils: uploadImage(uri, "book_covers/", callback)
+    activate ImageUtils
+    ImageUtils -> Storage: putFile(pendingImageUri)
+    activate Storage
+    Storage --> ImageUtils: Upload thành công, trả về downloadUrl
+    deactivate Storage
+    ImageUtils --> View: onSuccess(downloadUrl)
+    deactivate ImageUtils
+    View -> View: Gán uploadedCoverUrl = downloadUrl
+end
+
+== 3. Kiểm tra tính hợp lệ và lưu sách vào Firestore ==
+View -> ViewModel: saveBook(null, title, description, uploadedCoverUrl,\nauthorIds, publisherId, categoryIds, price, salePrice, stock, isFeatured, isActive)
+activate ViewModel
+
+ViewModel -> ViewModel: Kiểm tra hợp lệ (title != null, authorIds != null,\npublisherId != null, categoryIds != null, price > 0, stock >= 0, salePrice < price)
+
+alt Dữ liệu không hợp lệ
+    ViewModel --> View: errorMessage.setValue("Thông báo lỗi cụ thể")
+    View --> Admin: Hiển thị Toast thông báo lỗi
+else Dữ liệu hợp lệ
+    ViewModel -> ViewModel: isLoading.setValue(true)
+    ViewModel -> ViewModel: Khởi tạo đối tượng Book(title, description, coverUrl, ...)
+    ViewModel -> BookRepo: addBook(book, callback)
+    activate BookRepo
+    
+    BookRepo -> Firestore: booksRef.document() (Tự sinh docId)
+    BookRepo -> BookRepo: Gán bookId = docId, soldCount = 0,\nviewCount = 0, rating = 0, ratingCount = 0
+    BookRepo -> Firestore: docRef.set(book)
+    activate Firestore
+    Firestore --> BookRepo: Ghi tài liệu thành công
+    deactivate Firestore
+    
+    BookRepo --> ViewModel: callback.onSuccess(null)
+    deactivate BookRepo
+    
+    ViewModel -> ViewModel: isLoading.setValue(false)
+    ViewModel -> ViewModel: saveSuccess.setValue(true)
+    
+    ViewModel --> View: saveSuccess LiveData thông báo thành công
+    View -> View: Hiển thị Toast "Đã lưu sách"
+    View -> View: setResult(RESULT_OK) & finish()
+    View --> Admin: Đóng màn hình thêm sách, quay về danh sách sách
+end
+
+deactivate ViewModel
+deactivate View
+
+@enduml

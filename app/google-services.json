@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "992792579834",
+    "project_id": "dbbookapp",
+    "storage_bucket": "dbbookapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:992792579834:android:a3b73f5ccdde7ea9138343",
+        "android_client_info": {
+          "package_name": "com.example.bookapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "992792579834-8cnuq97tl36qc3jtvsb1hp9fj4f9up4q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bookapp",
+            "certificate_hash": "081952e83b4a5bc713be10fca413949d74401675"
+          }
+        },
+        {
+          "client_id": "992792579834-au91tl5oisf8ud0rdmle0sq2mq7bv06n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdADXs92czrQGtUVcA9LjaCnkzZvVN-Bc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "992792579834-au91tl5oisf8ud0rdmle0sq2mq7bv06n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

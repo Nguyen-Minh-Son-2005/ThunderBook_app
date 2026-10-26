@@ -1,0 +1,128 @@
+@startuml seq_03_them_dia_chi
+title Sơ đồ tuần tự - UC3: Thêm địa chỉ giao hàng (Add Address)
+
+autonumber
+skinparam style strictuml
+skinparam defaultFontName "Segoe UI", Arial, sans-serif
+skinparam defaultFontSize 12
+skinparam roundcorner 6
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+
+skinparam sequence {
+    ArrowColor #1976D2
+    ActorBorderColor #1976D2
+    ActorBackgroundColor #E3F2FD
+    ParticipantBorderColor #1976D2
+    ParticipantBackgroundColor #F5F9FF
+    ParticipantFontSize 12
+    ParticipantFontStyle bold
+    LifeLineBorderColor #1976D2
+    LifeLineBackgroundColor #E3F2FD
+    GroupBorderColor #455A64
+    GroupBackgroundColor #ECEFF1
+    GroupHeaderFontSize 12
+    GroupFontStyle bold
+}
+
+actor "Người dùng" as User
+participant "view: AddEditAddressActivity\n<<boundary>>" as View
+participant "REST API\n(provinces.open-api.vn)" as Api
+participant "viewModel: AddEditAddressViewModel\n<<control>>" as ViewModel
+participant "address: Address\n<<entity>>" as AddressEntity
+participant "addressRepo: AddressRepository" as Repo
+database "Cloud Firestore\n(users/{uid}/addresses)" as Firestore
+
+== 1. Tải danh mục địa giới hành chính (Tỉnh / Huyện / Xã) ==
+
+User -> View : Mở màn hình Thêm/Sửa địa chỉ giao hàng
+activate View
+
+View -> Api : HTTP GET https://provinces.open-api.vn/api/p/
+activate Api
+Api --> View : Trả về JSON danh sách Tỉnh/Thành phố
+deactivate Api
+View -> View : Đổ dữ liệu vào Dropdown Tỉnh/Thành (actvProvince)
+
+opt Người dùng chọn Tỉnh/Thành phố
+    User -> View : Chọn Tỉnh/Thành phố từ Dropdown
+    View -> Api : HTTP GET api/p/{provinceCode}?depth=2
+    activate Api
+    Api --> View : Trả về JSON danh sách Quận/Huyện
+    deactivate Api
+    View -> View : Đổ dữ liệu vào Dropdown Quận/Huyện (actvDistrict)
+end
+
+opt Người dùng chọn Quận/Huyện
+    User -> View : Chọn Quận/Huyện từ Dropdown
+    View -> Api : HTTP GET api/d/{districtCode}?depth=2
+    activate Api
+    Api --> View : Trả về JSON danh sách Phường/Xã
+    deactivate Api
+    View -> View : Đổ dữ liệu vào Dropdown Phường/Xã (actvWard)
+end
+
+opt Mở ở chế độ sửa địa chỉ (editingAddressId != null)
+    View -> ViewModel : loadAddress(uid, editingAddressId)
+    activate ViewModel
+    ViewModel -> Repo : getAddress(uid, addressId)
+    activate Repo
+    Repo -> Firestore : collection("users").document(uid).collection("addresses").document(addressId).get()
+    activate Firestore
+    Firestore --> Repo : DocumentSnapshot addressDoc
+    deactivate Firestore
+    Repo --> ViewModel : [LiveData] Address
+    deactivate Repo
+    ViewModel -> ViewModel : _address.setValue(address)
+    ViewModel --> View : [LiveData] getAddress()
+    deactivate ViewModel
+    View -> View : Điền thông tin cũ vào các ô nhập liệu
+end
+
+== 2. Lưu thông tin địa chỉ giao hàng ==
+
+User -> View : Nhập Họ tên, Số điện thoại, Địa chỉ chi tiết
+User -> View : Nhấn nút "Lưu địa chỉ" (btnSave)
+
+View -> View : saveAddress()\nKiểm tra hợp lệ dữ liệu:\n- Không để trống tên, SĐT, Tỉnh, Huyện, Xã, Địa chỉ chi tiết\n- Regex SĐT Việt Nam: ^(0|\\+84)[3|5|7|8|9]\\d{8}$
+
+alt Dữ liệu không hợp lệ
+    View --> User : Hiển thị Toast thông báo lỗi / yêu cầu nhập đủ thông tin
+else Dữ liệu hợp lệ
+    View -> View : addressId = (editingAddressId != null ? editingAddressId : UUID.randomUUID().toString())
+    create AddressEntity
+    View -> AddressEntity : new Address(addressId, name, phone,\nprovince, district, ward, detailAddress)
+
+    View -> ViewModel : saveAddress(uid, address)
+    activate ViewModel
+
+    ViewModel -> Repo : saveAddress(uid, address, FirebaseCallback<Void>)
+    activate Repo
+
+    Repo -> Firestore : collection("users").document(uid)\n.collection("addresses").document(addressId).set(address)
+    activate Firestore
+
+    alt Lưu Firestore thất bại
+        Firestore --> Repo : addOnFailureListener(Exception e)
+        Repo --> ViewModel : callback.onFailure(e)
+        ViewModel -> ViewModel : _errorMessage.setValue(e.getMessage())
+        ViewModel --> View : [LiveData] getErrorMessage()
+        View --> User : Hiển thị Toast: "Không thể lưu địa chỉ"
+    else Lưu Firestore thành công
+        Firestore --> Repo : addOnSuccessListener()
+        deactivate Firestore
+
+        Repo --> ViewModel : callback.onSuccess(null)
+        deactivate Repo
+
+        ViewModel -> ViewModel : _saveSuccess.setValue(true)
+        ViewModel --> View : [LiveData] getSaveSuccess()
+        deactivate ViewModel
+
+        View --> User : Hiển thị Toast: "Đã lưu địa chỉ"
+        View -> View : finish() (Đóng Activity và quay lại màn hình trước)
+    end
+end
+deactivate View
+
+@enduml

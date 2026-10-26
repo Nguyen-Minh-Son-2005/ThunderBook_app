@@ -1,0 +1,154 @@
+@startuml vopc_08_them_voucher
+title Sơ đồ lớp tham gia (VOPC) - UC8: Thêm voucher
+
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+skinparam Shadowing false
+skinparam DefaultFontName "Arial"
+skinparam DefaultFontSize 12
+
+skinparam class {
+    BackgroundColor #FFFFFF
+    BorderColor #2C3E50
+    ArrowColor #2C3E50
+}
+
+skinparam class<<boundary>> {
+    BackgroundColor #E8F5E9
+    BorderColor #2E7D32
+    HeaderBackgroundColor #C8E6C9
+}
+
+skinparam class<<control>> {
+    BackgroundColor #FFF3E0
+    BorderColor #E65100
+    HeaderBackgroundColor #FFE0B2
+}
+
+skinparam class<<entity>> {
+    BackgroundColor #E3F2FD
+    BorderColor #1565C0
+    HeaderBackgroundColor #BBDEFB
+}
+
+skinparam class<<utility>> {
+    BackgroundColor #EDE7F6
+    BorderColor #512DA8
+    HeaderBackgroundColor #D1C4E9
+}
+
+skinparam class<<interface>> {
+    BackgroundColor #F3E5F5
+    BorderColor #7B1FA2
+    HeaderBackgroundColor #E1BEE7
+}
+
+class AddEditVoucherActivity <<boundary>> {
+    - viewModel: AdminAddEditVoucherViewModel
+    - etCode: TextInputEditText
+    - etValue: TextInputEditText
+    - etStartDate: TextInputEditText
+    - etEndDate: TextInputEditText
+    - cgType: ChipGroup
+    - swActive: SwitchCompat
+    - editingVoucherId: String
+    - selectedStartDate: Date
+    - selectedEndDate: Date
+    + onAdminAccessGranted(savedInstanceState: Bundle): void
+    - bindViews(): void
+    - setupToolbar(toolbar: Toolbar, title: String): void
+    - setupDeleteAction(): void
+    - confirmDelete(): void
+    - setupDatePickers(): void
+    - showDatePicker(isStartDate: boolean): void
+    - observeViewModel(): void
+    - populateForm(voucher: Voucher): void
+    - saveVoucher(): void
+}
+
+class DatePickerDialog <<boundary>> {
+    + DatePickerDialog(context: Context, theme: int, listener: OnDateSetListener, year: int, month: int, day: int)
+    + show(): void
+}
+
+class AdminAddEditVoucherViewModel <<control>> {
+    - repository: AdminVoucherRepository
+    - loadedVoucher: MutableLiveData<Voucher>
+    - saveSuccess: SingleLiveEvent<Boolean>
+    - deleteSuccess: SingleLiveEvent<Boolean>
+    - errorMessage: SingleLiveEvent<String>
+    + getLoadedVoucher(): LiveData<Voucher>
+    + loadVoucherForEdit(voucherId: String): void
+    + deleteVoucher(voucherId: String): void
+    + getSaveSuccess(): LiveData<Boolean>
+    + getDeleteSuccess(): LiveData<Boolean>
+    + getErrorMessage(): LiveData<String>
+    + saveVoucher(voucherId: String, code: String, type: String, value: double, startDate: Date, endDate: Date, isActive: boolean): void
+}
+
+class AdminVoucherRepository {
+    - vouchersRef: CollectionReference
+    - fromDoc(doc: DocumentSnapshot): Voucher
+    - toMap(voucher: Voucher): Map<String, Object>
+    + observeAllVouchers(): LiveData<List<Voucher>>
+    + getVoucherById(voucherId: String): LiveData<Voucher>
+    + addVoucher(voucher: Voucher, callback: FirebaseCallback<Void>): void
+    + updateVoucher(voucher: Voucher, callback: FirebaseCallback<Void>): void
+    + toggleActive(voucherId: String, isActive: boolean, callback: FirebaseCallback<Void>): void
+    + deleteVoucher(voucherId: String, callback: FirebaseCallback<Void>): void
+    + sortByExpiringFirst(source: List<Voucher>): List<Voucher>
+    + sortByValueDesc(source: List<Voucher>): List<Voucher>
+    + filterByCode(source: List<Voucher>, keyword: String): List<Voucher>
+}
+
+class Voucher <<entity>> {
+    - voucherId: String
+    - code: String
+    - kind: String
+    - value: double
+    - startDate: Timestamp
+    - endDate: Timestamp
+    - active: boolean
+    + Voucher()
+    + Voucher(voucherId: String, code: String, kind: String, value: double, startDate: Timestamp, endDate: Timestamp, active: boolean)
+    + getVoucherId(): String
+    + setVoucherId(voucherId: String): void
+    + getCode(): String
+    + setCode(code: String): void
+    + getKind(): String
+    + setKind(kind: String): void
+    + getValue(): double
+    + setValue(value: double): void
+    + getStartDate(): Timestamp
+    + setStartDate(startDate: Timestamp): void
+    + getEndDate(): Timestamp
+    + setEndDate(endDate: Timestamp): void
+    + isActive(): boolean
+    + setActive(active: boolean): void
+    + calculateDiscount(orderTotal: double): double
+}
+
+class "SingleLiveEvent<T>" as SingleLiveEvent <<utility>> {
+    - mPending: AtomicBoolean
+    + observe(owner: LifecycleOwner, observer: Observer<T>): void
+    + setValue(t: T): void
+    + call(): void
+}
+
+interface "FirebaseCallback<T>" as FirebaseCallback <<interface>> {
+    + onSuccess(result: T): void
+    + onFailure(e: Exception): void
+}
+
+' Relationships
+AddEditVoucherActivity --> AdminAddEditVoucherViewModel : sử dụng
+AddEditVoucherActivity ..> DatePickerDialog : mở chọn ngày
+AddEditVoucherActivity ..> Voucher : hiển thị thông tin
+AdminAddEditVoucherViewModel --> AdminVoucherRepository : gọi xử lý dữ liệu
+AdminAddEditVoucherViewModel *-- SingleLiveEvent : thông báo sự kiện 1 lần
+AdminAddEditVoucherViewModel ..> Voucher : khởi tạo & truyền
+AdminAddEditVoucherViewModel ..> FirebaseCallback : nhận phản hồi
+AdminVoucherRepository ..> Voucher : ánh xạ & lưu trữ
+AdminVoucherRepository ..> FirebaseCallback : phản hồi kết quả
+
+@enduml

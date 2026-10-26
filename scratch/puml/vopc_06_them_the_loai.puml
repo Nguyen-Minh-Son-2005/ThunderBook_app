@@ -1,0 +1,143 @@
+@startuml vopc_06_them_the_loai
+title Biểu đồ lớp tham gia (VOPC) - UC6: Thêm thể loại mới (Add Category)
+
+skinparam classAttributeIconSize 0
+skinparam defaultFontName "Segoe UI", Arial, sans-serif
+skinparam roundcorner 8
+skinparam linetype ortho
+skinparam nodesep 50
+skinparam ranksep 50
+
+skinparam class {
+    BackgroundColor<<boundary>> #E8F8F5
+    BorderColor<<boundary>> #1ABC9C
+    BackgroundColor<<control>> #EBF5FB
+    BorderColor<<control>> #2980B9
+    BackgroundColor<<entity>> #FEF9E7
+    BorderColor<<entity>> #F39C12
+    BackgroundColor<<utility>> #F4ECF7
+    BorderColor<<utility>> #8E44AD
+    BackgroundColor<<interface>> #F5EEF8
+    BorderColor<<interface>> #9B59B6
+}
+
+class ManageCategoryActivity <<boundary>> {
+    - viewModel: AdminCategoryViewModel
+    - adapter: AdminCategoryAdapter
+    - emptyState: View
+    - tvResultCount: TextView
+    --
+    # onAdminAccessGranted(savedInstanceState: Bundle): void
+    - setupSearch(): void
+    - setupRecyclerView(): void
+    - openForm(existing: Category): void
+    - confirmDelete(category: Category): void
+    - onListChanged(categories: List<Category>): void
+    - showError(message: String): void
+}
+
+class AdminEntityFormDialog <<boundary>> {
+    - listener: OnSaveListener
+    - pendingImageUri: Uri
+    - ivAvatar: ImageView
+    - etName: TextInputEditText
+    - etDescription: TextInputEditText
+    --
+    + {static} newInstanceAdd(title: String, showDescription: boolean, hint: String): AdminEntityFormDialog
+    + {static} newInstanceEdit(...): AdminEntityFormDialog
+    + setOnSaveListener(listener: OnSaveListener): void
+    + onCreateDialog(savedInstanceState: Bundle): Dialog
+}
+
+interface "AdminEntityFormDialog.OnSaveListener" as OnSaveListener <<interface>> {
+    + onSave(existingId: String, name: String, description: String, newImageUri: Uri): void
+}
+
+class AdminCategoryAdapter <<boundary>> {
+    - items: List<Category>
+    - listener: OnCategoryActionListener
+    --
+    + setItems(newItems: List<Category>): void
+    + onCreateViewHolder(parent: ViewGroup, viewType: int): CategoryViewHolder
+    + onBindViewHolder(holder: CategoryViewHolder, position: int): void
+    + getItemCount(): int
+}
+
+interface "AdminCategoryAdapter.OnCategoryActionListener" as OnCategoryActionListener <<interface>> {
+    + onEditClick(category: Category): void
+    + onDeleteClick(category: Category): void
+}
+
+class AdminCategoryViewModel <<control>> {
+    - repository: AdminCategoryRepository
+    - allCategories: LiveData<List<Category>>
+    - displayedCategories: MediatorLiveData<List<Category>>
+    - cachedList: List<Category>
+    - currentKeyword: String
+    - saveSuccess: MutableLiveData<Boolean>
+    - errorMessage: MutableLiveData<String>
+    --
+    + AdminCategoryViewModel()
+    + getDisplayedCategories(): LiveData<List<Category>>
+    + getSaveSuccess(): LiveData<Boolean>
+    + getErrorMessage(): LiveData<String>
+    + search(keyword: String): void
+    + saveCategory(categoryId: String, name: String, imageUrl: String): void
+    + deleteCategory(categoryId: String): void
+    - applyFilter(): void
+}
+
+class AdminCategoryRepository <<control>> {
+    - categoriesRef: CollectionReference
+    --
+    + observeAllCategories(): LiveData<List<Category>>
+    + addCategory(category: Category, callback: FirebaseCallback<Void>): void
+    + updateCategory(category: Category, callback: FirebaseCallback<Void>): void
+    + deleteCategory(categoryId: String, callback: FirebaseCallback<Void>): void
+    + filterByName(source: List<Category>, keyword: String): List<Category>
+}
+
+class Category <<entity>> {
+    - categoryId: String
+    - name: String
+    - imageUrl: String
+    - isActive: boolean
+    --
+    + Category()
+    + Category(categoryId: String, name: String, imageUrl: String, isActive: boolean)
+    + getCategoryId(): String
+    + setCategoryId(categoryId: String): void
+    + getName(): String
+    + setName(name: String): void
+    + getImageUrl(): String
+    + setImageUrl(imageUrl: String): void
+    + isActive(): boolean
+    + setActive(active: boolean): void
+}
+
+class ImageUtils <<utility>> {
+    + {static} uploadImage(context: Context, imageUri: Uri, \n  folderName: String, listener: OnUploadCompleteListener): void
+}
+
+interface FirebaseCallback<T> <<interface>> {
+    + onSuccess(result: T): void
+    + onFailure(e: Exception): void
+}
+
+' Relationships
+ManageCategoryActivity ..> AdminCategoryViewModel : observes & calls
+ManageCategoryActivity ..> AdminEntityFormDialog : displays
+ManageCategoryActivity ..> AdminCategoryAdapter : uses
+ManageCategoryActivity ..> ImageUtils : uses
+ManageCategoryActivity ..|> OnSaveListener : implements callback
+ManageCategoryActivity ..|> OnCategoryActionListener : implements callback
+
+AdminEntityFormDialog +-- OnSaveListener
+AdminCategoryAdapter +-- OnCategoryActionListener
+
+AdminCategoryViewModel --> AdminCategoryRepository : calls
+AdminCategoryRepository ..> Category : manages
+AdminCategoryRepository ..> FirebaseCallback : triggers
+AdminCategoryAdapter o-- Category : displays
+
+@enduml

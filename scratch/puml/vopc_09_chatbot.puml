@@ -1,0 +1,210 @@
+@startuml vopc_09_chatbot
+title Sơ đồ lớp tham gia (VOPC) - UC9: Trò chuyện với AI Chatbot
+
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+skinparam Shadowing false
+skinparam DefaultFontName "Arial"
+skinparam DefaultFontSize 12
+
+skinparam class {
+    BackgroundColor #FFFFFF
+    BorderColor #2C3E50
+    ArrowColor #2C3E50
+}
+
+skinparam class<<boundary>> {
+    BackgroundColor #E8F5E9
+    BorderColor #2E7D32
+    HeaderBackgroundColor #C8E6C9
+}
+
+skinparam class<<control>> {
+    BackgroundColor #FFF3E0
+    BorderColor #E65100
+    HeaderBackgroundColor #FFE0B2
+}
+
+skinparam class<<entity>> {
+    BackgroundColor #E3F2FD
+    BorderColor #1565C0
+    HeaderBackgroundColor #BBDEFB
+}
+
+skinparam class<<utility>> {
+    BackgroundColor #EDE7F6
+    BorderColor #512DA8
+    HeaderBackgroundColor #D1C4E9
+}
+
+skinparam class<<interface>> {
+    BackgroundColor #F3E5F5
+    BorderColor #7B1FA2
+    HeaderBackgroundColor #E1BEE7
+}
+
+class ChatBotActivity <<boundary>> {
+    - rvChatMessages: RecyclerView
+    - etMessageInput: EditText
+    - ibSendMessage: ImageButton
+    - ibBack: ImageButton
+    - ibClearChat: ImageButton
+    - chatViewModel: ChatViewModel
+    - chatAdapter: ChatAdapter
+    - messageList: List<ChatMessage>
+    + onCreate(savedInstanceState: Bundle): void
+    - bindViews(): void
+    - setupRecyclerView(): void
+    - setupViewModel(): void
+    - setupListeners(): void
+    - setupQuickPrompts(): void
+    - sendQuickPrompt(prompt: String): void
+    - handleSendMessage(): void
+    - openBookDetail(book: Book): void
+}
+
+class ChatAdapter <<boundary>> {
+    - context: Context
+    - messageList: List<ChatMessage>
+    - onBookClickListener: OnBookClickListener
+    + getItemViewType(position: int): int
+    + onCreateViewHolder(parent: ViewGroup, viewType: int): RecyclerView.ViewHolder
+    + onBindViewHolder(holder: RecyclerView.ViewHolder, position: int): void
+    + getItemCount(): int
+}
+
+class ChatBookSuggestionAdapter <<boundary>> {
+    - bookList: List<Book>
+    - listener: OnBookClickListener
+    + onCreateViewHolder(parent: ViewGroup, viewType: int): BookViewHolder
+    + onBindViewHolder(holder: BookViewHolder, position: int): void
+    + getItemCount(): int
+}
+
+interface "ChatAdapter.OnBookClickListener" as OnBookClickListener <<interface>> {
+    + onBookClick(book: Book): void
+}
+
+class ChatViewModel <<control>> {
+    - repository: ChatRepository
+    - messagesLiveData: MutableLiveData<List<ChatMessage>>
+    - isTypingLiveData: MutableLiveData<Boolean>
+    - errorMessageLiveData: MutableLiveData<String>
+    - sessionId: String
+    + ChatViewModel()
+    + loadChatHistory(): void
+    + sendMessage(userText: String): void
+    + clearHistory(): void
+    + getMessages(): LiveData<List<ChatMessage>>
+    + getIsTyping(): LiveData<Boolean>
+    + getErrorMessage(): LiveData<String>
+    - initWelcomeMessage(): void
+}
+
+class ChatRepository {
+    - httpClient: OkHttpClient
+    - executorService: ExecutorService
+    - mainHandler: Handler
+    - conversationHistory: List<JSONObject>
+    - bookEmbeddingCache: Map<String, double[]>
+    + ChatRepository()
+    + sendMessage(userId: String, sessionId: String, userMessage: String, callback: ChatCallback): void
+    + loadChatHistory(userId: String, callback: HistoryCallback): void
+    + saveChatMessage(userId: String, message: ChatMessage): void
+    + clearChatHistory(userId: String, onComplete: Runnable): void
+    - buildGeminiPayload(): JSONObject
+    - callGeminiApi(payload: JSONObject): JSONObject
+    - executeFirestoreTool(functionName: String, args: JSONObject, turnBooks: List<Book>): JSONObject
+    - executeSearchBooks(args: JSONObject, turnBooks: List<Book>): JSONObject
+    - executeCheckStock(args: JSONObject): JSONObject
+    - executeGetBookDetail(args: JSONObject): JSONObject
+    - calculateCosineSimilarity(vecA: double[], vecB: double[]): double
+}
+
+class ChatMessage <<entity>> {
+    + {static} TYPE_USER: int = 0
+    + {static} TYPE_BOT: int = 1
+    - messageId: String
+    - text: String
+    - senderType: int
+    - timestamp: long
+    - suggestedBooks: List<Book>
+    - isLoading: boolean
+    + ChatMessage()
+    + ChatMessage(text: String, senderType: int)
+    + ChatMessage(text: String, senderType: int, suggestedBooks: List<Book>)
+    + {static} createLoadingMessage(): ChatMessage
+    + getMessageId(): String
+    + setMessageId(messageId: String): void
+    + getText(): String
+    + setText(text: String): void
+    + getSenderType(): int
+    + setSenderType(senderType: int): void
+    + getTimestamp(): long
+    + setTimestamp(timestamp: long): void
+    + getSuggestedBooks(): List<Book>
+    + setSuggestedBooks(suggestedBooks: List<Book>): void
+    + isLoading(): boolean
+    + setLoading(loading: boolean): void
+    + isUser(): boolean
+    + hasSuggestedBooks(): boolean
+}
+
+class Book <<entity>> {
+    - bookId: String
+    - title: String
+    - author: String
+    - price: double
+    - salePrice: double
+    - coverImageUrl: String
+    - stock: int
+    - rating: double
+    - categoryIds: List<String>
+    + getBookId(): String
+    + setBookId(bookId: String): void
+    + getTitle(): String
+    + setTitle(title: String): void
+    + getAuthor(): String
+    + setAuthor(author: String): void
+    + getPrice(): double
+    + setPrice(price: double): void
+    + getSalePrice(): double
+    + setSalePrice(salePrice: double): void
+    + getCoverImageUrl(): String
+    + setCoverImageUrl(coverImageUrl: String): void
+    + getStock(): int
+    + setStock(stock: int): void
+}
+
+interface "ChatRepository.ChatCallback" as ChatCallback <<interface>> {
+    + onSuccess(botResponse: ChatMessage): void
+    + onError(errorMessage: String): void
+}
+
+interface "ChatRepository.HistoryCallback" as HistoryCallback <<interface>> {
+    + onLoaded(history: List<ChatMessage>): void
+}
+
+' Relationships
+ChatBotActivity --> ChatViewModel : sử dụng
+ChatBotActivity --> ChatAdapter : khởi tạo & lắng nghe
+ChatBotActivity ..> ChatMessage : hiển thị
+ChatAdapter *-- ChatBookSuggestionAdapter : chứa danh sách gợi ý
+ChatAdapter +-- OnBookClickListener
+ChatAdapter --> OnBookClickListener : thông báo
+ChatBotActivity ..|> OnBookClickListener : thực thi
+ChatAdapter o-- ChatMessage : hiển thị dữ liệu
+ChatBookSuggestionAdapter o-- Book : hiển thị thẻ sách
+
+ChatViewModel --> ChatRepository : gọi xử lý AI & Firestore
+ChatViewModel ..> ChatMessage : quản lý trạng thái tin nhắn
+ChatViewModel ..> ChatCallback : nhận phản hồi AI
+ChatViewModel ..> HistoryCallback : nạp lịch sử
+
+ChatRepository ..> ChatMessage : nạp / lưu tin nhắn
+ChatRepository ..> Book : tra cứu từ database & gợi ý
+ChatRepository +-- ChatCallback
+ChatRepository +-- HistoryCallback
+ChatMessage o-- Book : chứa danh sách sách gợi ý
+
+@enduml

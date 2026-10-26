@@ -1,0 +1,204 @@
+Total paragraphs: 72
+Total tables: 18
+
+--- PARAGRAPHS ---
+[0]  3.2.2 Mô tả Use Case Đăng ký ── (Người thực hiện: Trang)
+[4]  3.2.3 Mô tả Use Case Đăng nhập ── (Người thực hiện: Hường)
+[6]  3.2.4 Mô tả Use Case Cập nhật thông tin cá nhân ── (Người thực hiện: Hường)
+[12]  3.2.5 Mô tả Use Case Quên mật khẩu ── (Người thực hiện: Hường)
+[18]  3.2.6 Mô tả Use Case Giỏ hàng (Thêm/Sửa/Xóa) ── (Người thực hiện: Đức)
+[21]  3.2.7 Mô tả Use Case Đặt hàng và Thanh toán (Checkout) ── (Người thực hiện: Đức)
+[28]  3.2.8 Mô tả Use Case Theo dõi & Hủy đơn hàng ── (Người thực hiện: Đức)
+[33]  3.2.9 Mô tả Use Case Đánh giá sản phẩm – Bùi Đại Nghĩa
+[38]  3.2.10 Mô tả Use Case Trợ lý ảo thông minh AI Chatbot – Bùi Đại Nghĩa
+[46]  3.2.11 Mô tả Use Case Thống kê doanh thu (Admin) – Bùi Đại Nghĩa
+[52]  3.2.12 Mô tả Use Case Quản lý Sản phẩm (Admin) ── (Người thực hiện: Trang)
+[58]  3.2.13 Mô tả Use Case Quản lý Đơn hàng (Admin) ── (Người thực hiện: Trang)
+[60] 3.2.14 Mô tả Use Case Đổi mật khẩu
+[62] 3.2.15 Mô tả Use Case Quản lý khuyến mại
+[64] 3.2.16 Mô tả Use Case Quản lý danh sách yêu thích
+[66] 3.2.17 Mô tả Use Case Theo dõi đơn hàng
+[68] 3.2.18 Mô tả Use Case Đặt hàng
+[70] 3.2.19  Mô tả Use Case Hủy đơn hàng - Đức
+
+--- TABLES ---
+
+=== TABLE 0 (8 rows, 4 cols) ===
+Row 0: Mã Use case | UC1 | Tên Use case | Đăng ký
+Row 1: Tác nhân | User | User | User
+Row 2: Mô tả | Use Case này cho phép khách hàng mới tạo lập tài khoản cá nhân trên hệ thống Shofy để thực hiện mua sắm và lưu trữ thông tin | Use Case này cho phép khách hàng mới tạo lập tài khoản cá nhân trên hệ thống Shofy để thực hiện mua sắm và lưu trữ thông tin | Use Case này cho phép khách hàng mới tạo lập tài khoản cá nhân trên hệ thống Shofy để thực hiện mua sắm và lưu trữ thông tin
+Row 3: Sự kiện kích hoạt | Khách hàng nhấn chọn nút "Đăng ký" trên thanh điều hướng hoặc liên kết trên form đăng nhập. | Khách hàng nhấn chọn nút "Đăng ký" trên thanh điều hướng hoặc liên kết trên form đăng nhập. | Khách hàng nhấn chọn nút "Đăng ký" trên thanh điều hướng hoặc liên kết trên form đăng nhập.
+Row 4: Tiền điều kiện | Khách hàng chưa đăng nhập vào hệ thống | Khách hàng chưa đăng nhập vào hệ thống | Khách hàng chưa đăng nhập vào hệ thống
+Row 5: Luồng sự kiện chính |  |  | 
+Row 6: Luồng sự kiện rẽ nhánh |  |  | 
+Row 7: Hậu điều kiện | Bản ghi tài khoản mới được tạo lập thành công trong cơ sở dữ liệu Supabase. | Bản ghi tài khoản mới được tạo lập thành công trong cơ sở dữ liệu Supabase. | Bản ghi tài khoản mới được tạo lập thành công trong cơ sở dữ liệu Supabase.
+
+=== TABLE 1 (8 rows, 4 cols) ===
+Row 0: Mã Use case | UC2 | Tên Use case | Đăng nhập
+Row 1: Tác nhân | User, Admin | User, Admin | User, Admin
+Row 2: Mô tả | Use Case này cho phép khách hàng mới tạo lập tài khoản cá nhân trên hệ thống Shofy để thực hiện mua sắm và lưu trữ thông tin | Use Case này cho phép khách hàng mới tạo lập tài khoản cá nhân trên hệ thống Shofy để thực hiện mua sắm và lưu trữ thông tin | Use Case này cho phép khách hàng mới tạo lập tài khoản cá nhân trên hệ thống Shofy để thực hiện mua sắm và lưu trữ thông tin
+Row 3: Sự kiện kích hoạt | Use Case này cho phép người dùng (Khách hàng hoặc Admin) đăng nhập vào hệ thống bằng tài khoản đã được đăng ký trước đó để sử dụng các tính năng cá nhân hoặc quản trị. | Use Case này cho phép người dùng (Khách hàng hoặc Admin) đăng nhập vào hệ thống bằng tài khoản đã được đăng ký trước đó để sử dụng các tính năng cá nhân hoặc quản trị. | Use Case này cho phép người dùng (Khách hàng hoặc Admin) đăng nhập vào hệ thống bằng tài khoản đã được đăng ký trước đó để sử dụng các tính năng cá nhân hoặc quản trị.
+Row 4: Tiền điều kiện | Người dùng đã có tài khoản hợp lệ trên hệ thống | Người dùng đã có tài khoản hợp lệ trên hệ thống | Người dùng đã có tài khoản hợp lệ trên hệ thống
+Row 5: Luồng sự kiện chính |  |  | 
+Row 6: Luồng sự kiện rẽ nhánh |  |  | 
+Row 7: Hậu điều kiện | Phiên đăng nhập (session) được thiết lập, người dùng được cấp quyền tương ứng. | Phiên đăng nhập (session) được thiết lập, người dùng được cấp quyền tương ứng. | Phiên đăng nhập (session) được thiết lập, người dùng được cấp quyền tương ứng.
+
+=== TABLE 2 (8 rows, 4 cols) ===
+Row 0: Mã Use case | UC3 | Tên Use case | Cập nhật thông tin cá nhân
+Row 1: Tác nhân | User | User | User
+Row 2: Mô tả | Use Case này cho phép khách hàng sửa đổi các thông tin cá nhân của mình bao gồm: Họ tên, Số điện thoại, Ảnh đại diện, và Địa chỉ nhận hàng mặc định. | Use Case này cho phép khách hàng sửa đổi các thông tin cá nhân của mình bao gồm: Họ tên, Số điện thoại, Ảnh đại diện, và Địa chỉ nhận hàng mặc định. | Use Case này cho phép khách hàng sửa đổi các thông tin cá nhân của mình bao gồm: Họ tên, Số điện thoại, Ảnh đại diện, và Địa chỉ nhận hàng mặc định.
+Row 3: Sự kiện kích hoạt | Khách hàng chọn mục "Thông tin tài khoản" trong trang quản lý cá nhân | Khách hàng chọn mục "Thông tin tài khoản" trong trang quản lý cá nhân | Khách hàng chọn mục "Thông tin tài khoản" trong trang quản lý cá nhân
+Row 4: Tiền điều kiện | Khách hàng đã đăng nhập thành công vào hệ thống | Khách hàng đã đăng nhập thành công vào hệ thống | Khách hàng đã đăng nhập thành công vào hệ thống
+Row 5: Luồng sự kiện chính |  |  | 
+Row 6: Luồng sự kiện rẽ nhánh |  |  | 
+Row 7: Hậu điều kiện | Các thông tin mới được lưu và đồng bộ thành công vào hồ sơ người dùng trong Supabase. | Các thông tin mới được lưu và đồng bộ thành công vào hồ sơ người dùng trong Supabase. | Các thông tin mới được lưu và đồng bộ thành công vào hồ sơ người dùng trong Supabase.
+
+=== TABLE 3 (8 rows, 4 cols) ===
+Row 0: Mã Use case | UC4 | Tên Use case | Quên mật khẩu
+Row 1: Tác nhân | User | User | User
+Row 2: Mô tả | Use Case này hỗ trợ khách hàng thiết lập lại mật khẩu mới cho tài khoản của mình thông qua xác thực email khi không nhớ mật khẩu cũ. | Use Case này hỗ trợ khách hàng thiết lập lại mật khẩu mới cho tài khoản của mình thông qua xác thực email khi không nhớ mật khẩu cũ. | Use Case này hỗ trợ khách hàng thiết lập lại mật khẩu mới cho tài khoản của mình thông qua xác thực email khi không nhớ mật khẩu cũ.
+Row 3: Sự kiện kích hoạt | Khách hàng nhấn vào liên kết "Quên mật khẩu" trên Form đăng nhập. | Khách hàng nhấn vào liên kết "Quên mật khẩu" trên Form đăng nhập. | Khách hàng nhấn vào liên kết "Quên mật khẩu" trên Form đăng nhập.
+Row 4: Tiền điều kiện | Người dùng đã đăng ký tài khoản với một email đang hoạt động. | Người dùng đã đăng ký tài khoản với một email đang hoạt động. | Người dùng đã đăng ký tài khoản với một email đang hoạt động.
+Row 5: Luồng sự kiện chính |  |  | 
+Row 6: Luồng sự kiện rẽ nhánh |  |  | 
+Row 7: Hậu điều kiện | Mật khẩu tài khoản được cập nhật mới thành công trong cơ sở dữ liệu. | Mật khẩu tài khoản được cập nhật mới thành công trong cơ sở dữ liệu. | Mật khẩu tài khoản được cập nhật mới thành công trong cơ sở dữ liệu.
+
+=== TABLE 4 (8 rows, 4 cols) ===
+Row 0: Mã Use case | UC5 | Tên Use case | Quản lý giỏ hàng
+Row 1: Tác nhân | User | User | User
+Row 2: Mô tả | Use Case này cho phép khách hàng thực hiện các thao tác quản lý sản phẩm muốn mua như thêm vào giỏ, điều chỉnh số lượng hoặc xóa sản phẩm khỏi giỏ hàng. | Use Case này cho phép khách hàng thực hiện các thao tác quản lý sản phẩm muốn mua như thêm vào giỏ, điều chỉnh số lượng hoặc xóa sản phẩm khỏi giỏ hàng. | Use Case này cho phép khách hàng thực hiện các thao tác quản lý sản phẩm muốn mua như thêm vào giỏ, điều chỉnh số lượng hoặc xóa sản phẩm khỏi giỏ hàng.
+Row 3: Sự kiện kích hoạt | Khách hàng nhấn vào nút "Thêm vào giỏ hàng" tại trang sản phẩm hoặc truy cập trang giỏ hàng. | Khách hàng nhấn vào nút "Thêm vào giỏ hàng" tại trang sản phẩm hoặc truy cập trang giỏ hàng. | Khách hàng nhấn vào nút "Thêm vào giỏ hàng" tại trang sản phẩm hoặc truy cập trang giỏ hàng.
+Row 4: Tiền điều kiện | Khách hàng đã đăng nhập tài khoản | Khách hàng đã đăng nhập tài khoản | Khách hàng đã đăng nhập tài khoản
+Row 5: Luồng sự kiện chính |  |  | 
+Row 6: Luồng sự kiện rẽ nhánh |  |  | 
+Row 7: Hậu điều kiện | Thông tin giỏ hàng được cập nhật thành công vào cơ sở dữ liệu Supabase. | Thông tin giỏ hàng được cập nhật thành công vào cơ sở dữ liệu Supabase. | Thông tin giỏ hàng được cập nhật thành công vào cơ sở dữ liệu Supabase.
+
+=== TABLE 5 (8 rows, 4 cols) ===
+Row 0: Mã Use case | UC6 | Tên Use case | Đặt hàng và Thanh toán
+Row 1: Tác nhân | User | User | User
+Row 2: Mô tả | Use Case này cho phép khách hàng mua các sản phẩm đang có trong giỏ hàng, lựa chọn phương thức giao hàng, áp dụng mã giảm giá và thanh toán tiền hàng. | Use Case này cho phép khách hàng mua các sản phẩm đang có trong giỏ hàng, lựa chọn phương thức giao hàng, áp dụng mã giảm giá và thanh toán tiền hàng. | Use Case này cho phép khách hàng mua các sản phẩm đang có trong giỏ hàng, lựa chọn phương thức giao hàng, áp dụng mã giảm giá và thanh toán tiền hàng.
+Row 3: Sự kiện kích hoạt | Khách hàng nhấn nút "Thanh toán" trên trang giỏ hàng | Khách hàng nhấn nút "Thanh toán" trên trang giỏ hàng | Khách hàng nhấn nút "Thanh toán" trên trang giỏ hàng
+Row 4: Tiền điều kiện | Khách hàng đã đăng nhập, giỏ hàng có ít nhất một sản phẩm. | Khách hàng đã đăng nhập, giỏ hàng có ít nhất một sản phẩm. | Khách hàng đã đăng nhập, giỏ hàng có ít nhất một sản phẩm.
+Row 5: Luồng sự kiện chính |  |  | 
+Row 6: Luồng sự kiện rẽ nhánh |  |  | 
+Row 7: Hậu điều kiện | Mật khẩu tài khoản được cập nhật mới thành công trong cơ sở dữ liệu. | Mật khẩu tài khoản được cập nhật mới thành công trong cơ sở dữ liệu. | Mật khẩu tài khoản được cập nhật mới thành công trong cơ sở dữ liệu.
+
+=== TABLE 6 (8 rows, 4 cols) ===
+Row 0: Mã Use case | UC7 | Tên Use case | Theo dõi và hủy đơn hàng
+Row 1: Tác nhân | User | User | User
+Row 2: Mô tả | Use Case này cho phép khách hàng theo dõi trạng thái vận chuyển của các đơn hàng đã đặt và thực hiện hủy đơn hàng nếu đơn hàng đó chưa được Admin xử lý duyệt giao. | Use Case này cho phép khách hàng theo dõi trạng thái vận chuyển của các đơn hàng đã đặt và thực hiện hủy đơn hàng nếu đơn hàng đó chưa được Admin xử lý duyệt giao. | Use Case này cho phép khách hàng theo dõi trạng thái vận chuyển của các đơn hàng đã đặt và thực hiện hủy đơn hàng nếu đơn hàng đó chưa được Admin xử lý duyệt giao.
+Row 3: Sự kiện kích hoạt | Khách hàng nhấn chọn mục "Đơn hàng của tôi" hoặc "Lịch sử mua hàng" trong trang quản lý tài khoản. | Khách hàng nhấn chọn mục "Đơn hàng của tôi" hoặc "Lịch sử mua hàng" trong trang quản lý tài khoản. | Khách hàng nhấn chọn mục "Đơn hàng của tôi" hoặc "Lịch sử mua hàng" trong trang quản lý tài khoản.
+Row 4: Tiền điều kiện | Khách hàng đã đăng nhập tài khoản | Khách hàng đã đăng nhập tài khoản | Khách hàng đã đăng nhập tài khoản
+Row 5: Luồng sự kiện chính |  |  | 
+Row 6: Luồng sự kiện rẽ nhánh |  |  | 
+Row 7: Hậu điều kiện | Trạng thái đơn hàng được cập nhật thành "Đã hủy" trong cơ sở dữ liệu nếu có yêu cầu hủy đơn hợp lệ. | Trạng thái đơn hàng được cập nhật thành "Đã hủy" trong cơ sở dữ liệu nếu có yêu cầu hủy đơn hợp lệ. | Trạng thái đơn hàng được cập nhật thành "Đã hủy" trong cơ sở dữ liệu nếu có yêu cầu hủy đơn hợp lệ.
+
+=== TABLE 7 (8 rows, 4 cols) ===
+Row 0: Mã Use case | UC8 | Tên Use case | Đánh giá sản phẩm
+Row 1: Tác nhân | User | User | User
+Row 2: Mô tả | Use Case này cho phép khách hàng gửi đánh giá (chấm điểm bằng sao và viết bình luận phản hồi) cho các sản phẩm thời trang đã mua hoặc trải nghiệm trên website Shofy. | Use Case này cho phép khách hàng gửi đánh giá (chấm điểm bằng sao và viết bình luận phản hồi) cho các sản phẩm thời trang đã mua hoặc trải nghiệm trên website Shofy. | Use Case này cho phép khách hàng gửi đánh giá (chấm điểm bằng sao và viết bình luận phản hồi) cho các sản phẩm thời trang đã mua hoặc trải nghiệm trên website Shofy.
+Row 3: Sự kiện kích hoạt | Khách hàng nhấn nút "Viết đánh giá" tại trang chi tiết sản phẩm hoặc chi tiết đơn hàng đã giao thành công. | Khách hàng nhấn nút "Viết đánh giá" tại trang chi tiết sản phẩm hoặc chi tiết đơn hàng đã giao thành công. | Khách hàng nhấn nút "Viết đánh giá" tại trang chi tiết sản phẩm hoặc chi tiết đơn hàng đã giao thành công.
+Row 4: Tiền điều kiện | Khách hàng đã đăng nhập tài khoản cá nhân. | Khách hàng đã đăng nhập tài khoản cá nhân. | Khách hàng đã đăng nhập tài khoản cá nhân.
+Row 5: Luồng sự kiện chính |  |  | 
+Row 6: Luồng sự kiện rẽ nhánh |  |  | 
+Row 7: Hậu điều kiện | Đánh giá được lưu thành công vào cơ sở dữ liệu Supabase, hiển thị lên danh sách đánh giá của sản phẩm và điểm đánh giá trung bình của sản phẩm được cập nhật. | Đánh giá được lưu thành công vào cơ sở dữ liệu Supabase, hiển thị lên danh sách đánh giá của sản phẩm và điểm đánh giá trung bình của sản phẩm được cập nhật. | Đánh giá được lưu thành công vào cơ sở dữ liệu Supabase, hiển thị lên danh sách đánh giá của sản phẩm và điểm đánh giá trung bình của sản phẩm được cập nhật.
+
+=== TABLE 8 (8 rows, 4 cols) ===
+Row 0: Mã Use case | UC9 | Tên Use case | Trợ lý ảo thông minh AI Chatbot
+Row 1: Tác nhân | User | User | User
+Row 2: Mô tả | Use Case này cho phép khách hàng trò chuyện với trợ lý thời trang ảo AI Stylist 2.0 để nhận tư vấn phối đồ và gợi ý sản phẩm thời trang. Người dùng có thể gửi đính kèm một sản phẩm cụ thể để AI đánh giá và đưa ra lời khuyên phù hợp. | Use Case này cho phép khách hàng trò chuyện với trợ lý thời trang ảo AI Stylist 2.0 để nhận tư vấn phối đồ và gợi ý sản phẩm thời trang. Người dùng có thể gửi đính kèm một sản phẩm cụ thể để AI đánh giá và đưa ra lời khuyên phù hợp. | Use Case này cho phép khách hàng trò chuyện với trợ lý thời trang ảo AI Stylist 2.0 để nhận tư vấn phối đồ và gợi ý sản phẩm thời trang. Người dùng có thể gửi đính kèm một sản phẩm cụ thể để AI đánh giá và đưa ra lời khuyên phù hợp.
+Row 3: Sự kiện kích hoạt | Khách hàng click vào biểu tượng chatbot AI Stylist ở góc dưới bên phải màn hình. | Khách hàng click vào biểu tượng chatbot AI Stylist ở góc dưới bên phải màn hình. | Khách hàng click vào biểu tượng chatbot AI Stylist ở góc dưới bên phải màn hình.
+Row 4: Tiền điều kiện | Người dùng truy cập thành công vào website Shofy. | Người dùng truy cập thành công vào website Shofy. | Người dùng truy cập thành công vào website Shofy.
+Row 5: Luồng sự kiện chính |  |  | 
+Row 6: Luồng sự kiện rẽ nhánh |  |  | 
+Row 7: Hậu điều kiện | Nội dung cuộc hội thoại được lưu vào bộ nhớ tạm thời của phiên làm việc. | Nội dung cuộc hội thoại được lưu vào bộ nhớ tạm thời của phiên làm việc. | Nội dung cuộc hội thoại được lưu vào bộ nhớ tạm thời của phiên làm việc.
+
+=== TABLE 9 (8 rows, 4 cols) ===
+Row 0: Mã Use case | UC10 | Tên Use case | Thống kê doanh thu
+Row 1: Tác nhân | User | User | User
+Row 2: Mô tả | Use Case này cho phép Admin xem các số liệu thống kê kinh doanh và biểu đồ tăng trưởng doanh thu của website Shofy. | Use Case này cho phép Admin xem các số liệu thống kê kinh doanh và biểu đồ tăng trưởng doanh thu của website Shofy. | Use Case này cho phép Admin xem các số liệu thống kê kinh doanh và biểu đồ tăng trưởng doanh thu của website Shofy.
+Row 3: Sự kiện kích hoạt | Admin nhấn chọn mục "Dashboard" hoặc "Thống kê" trên menu quản trị. | Admin nhấn chọn mục "Dashboard" hoặc "Thống kê" trên menu quản trị. | Admin nhấn chọn mục "Dashboard" hoặc "Thống kê" trên menu quản trị.
+Row 4: Tiền điều kiện | Đã đăng nhập hệ thống với tài khoản Quản trị viên (Admin). | Đã đăng nhập hệ thống với tài khoản Quản trị viên (Admin). | Đã đăng nhập hệ thống với tài khoản Quản trị viên (Admin).
+Row 5: Luồng sự kiện chính |  |  | 
+Row 6: Luồng sự kiện rẽ nhánh |  |  | 
+Row 7: Hậu điều kiện | Các số liệu thống kê được truy xuất và hiển thị chính xác lên giao diện. | Các số liệu thống kê được truy xuất và hiển thị chính xác lên giao diện. | Các số liệu thống kê được truy xuất và hiển thị chính xác lên giao diện.
+
+=== TABLE 10 (8 rows, 4 cols) ===
+Row 0: Mã Use case | UC11 | Tên Use case | Quản lý sản phẩm
+Row 1: Tác nhân | Admin | Admin | Admin
+Row 2: Mô tả | Use Case này cho phép Admin thực hiện xem danh sách sản phẩm, thêm sản phẩm mới, chỉnh sửa thông tin hoặc xóa bỏ sản phẩm khỏi cơ sở dữ liệu của cửa hàng. | Use Case này cho phép Admin thực hiện xem danh sách sản phẩm, thêm sản phẩm mới, chỉnh sửa thông tin hoặc xóa bỏ sản phẩm khỏi cơ sở dữ liệu của cửa hàng. | Use Case này cho phép Admin thực hiện xem danh sách sản phẩm, thêm sản phẩm mới, chỉnh sửa thông tin hoặc xóa bỏ sản phẩm khỏi cơ sở dữ liệu của cửa hàng.
+Row 3: Sự kiện kích hoạt | Admin nhấn chọn mục "Quản lý sản phẩm" trên thanh menu quản trị. | Admin nhấn chọn mục "Quản lý sản phẩm" trên thanh menu quản trị. | Admin nhấn chọn mục "Quản lý sản phẩm" trên thanh menu quản trị.
+Row 4: Tiền điều kiện | Đã đăng nhập hệ thống với tư cách Quản trị viên (Admin). | Đã đăng nhập hệ thống với tư cách Quản trị viên (Admin). | Đã đăng nhập hệ thống với tư cách Quản trị viên (Admin).
+Row 5: Luồng sự kiện chính |  |  | 
+Row 6: Luồng sự kiện rẽ nhánh |  |  | 
+Row 7: Hậu điều kiện | Thông tin sản phẩm trong cơ sở dữ liệu Supabase thay đổi tương ứng theo thao tác của Admin. | Thông tin sản phẩm trong cơ sở dữ liệu Supabase thay đổi tương ứng theo thao tác của Admin. | Thông tin sản phẩm trong cơ sở dữ liệu Supabase thay đổi tương ứng theo thao tác của Admin.
+
+=== TABLE 11 (8 rows, 4 cols) ===
+Row 0: Mã Use case | UC12 | Tên Use case | Quản lý đơn hàng
+Row 1: Tác nhân | Admin | Admin | Admin
+Row 2: Mô tả | Use Case này cho phép Admin theo dõi danh sách toàn bộ các đơn hàng đặt mua của khách hàng, xem chi tiết từng đơn và cập nhật trạng thái vận chuyển/thanh toán của đơn hàng đó. | Use Case này cho phép Admin theo dõi danh sách toàn bộ các đơn hàng đặt mua của khách hàng, xem chi tiết từng đơn và cập nhật trạng thái vận chuyển/thanh toán của đơn hàng đó. | Use Case này cho phép Admin theo dõi danh sách toàn bộ các đơn hàng đặt mua của khách hàng, xem chi tiết từng đơn và cập nhật trạng thái vận chuyển/thanh toán của đơn hàng đó.
+Row 3: Sự kiện kích hoạt | Admin nhấn chọn mục "Quản lý đơn hàng" trên menu quản trị. | Admin nhấn chọn mục "Quản lý đơn hàng" trên menu quản trị. | Admin nhấn chọn mục "Quản lý đơn hàng" trên menu quản trị.
+Row 4: Tiền điều kiện | Đã đăng nhập hệ thống với tư cách Quản trị viên (Admin). | Đã đăng nhập hệ thống với tư cách Quản trị viên (Admin). | Đã đăng nhập hệ thống với tư cách Quản trị viên (Admin).
+Row 5: Luồng sự kiện chính |  |  | 
+Row 6: Luồng sự kiện rẽ nhánh |  |  | 
+Row 7: Hậu điều kiện | Trạng thái đơn hàng được cập nhật mới thành công trong cơ sở dữ liệu Supabase. | Trạng thái đơn hàng được cập nhật mới thành công trong cơ sở dữ liệu Supabase. | Trạng thái đơn hàng được cập nhật mới thành công trong cơ sở dữ liệu Supabase.
+
+=== TABLE 12 (8 rows, 4 cols) ===
+Row 0: Mã Use case | UC14 | Tên Use case | Đổi mật khẩu
+Row 1: Tác nhân | Khách hàng | Khách hàng | Khách hàng
+Row 2: Mô tả | Use Case này cho phép người dùng (Khách hàng hoặc Admin) đã đăng nhập tự thực hiện thay đổi mật khẩu hiện tại để tăng tính bảo mật cho tài khoản của mình. | Use Case này cho phép người dùng (Khách hàng hoặc Admin) đã đăng nhập tự thực hiện thay đổi mật khẩu hiện tại để tăng tính bảo mật cho tài khoản của mình. | Use Case này cho phép người dùng (Khách hàng hoặc Admin) đã đăng nhập tự thực hiện thay đổi mật khẩu hiện tại để tăng tính bảo mật cho tài khoản của mình.
+Row 3: Sự kiện kích hoạt | Người dùng chọn chức năng "Đổi mật khẩu" tại giao diện quản lý tài khoản. | Người dùng chọn chức năng "Đổi mật khẩu" tại giao diện quản lý tài khoản. | Người dùng chọn chức năng "Đổi mật khẩu" tại giao diện quản lý tài khoản.
+Row 4: Tiền điều kiện | Người dùng đã đăng nhập thành công vào hệ thống | Người dùng đã đăng nhập thành công vào hệ thống | Người dùng đã đăng nhập thành công vào hệ thống
+Row 5: Luồng sự kiện chính |  |  | 
+Row 6: Luồng sự kiện rẽ nhánh |  |  | 
+Row 7: Hậu điều kiện | Mật khẩu cũ được cập nhật thành mật khẩu mới trong cơ sở dữ liệu. | Mật khẩu cũ được cập nhật thành mật khẩu mới trong cơ sở dữ liệu. | Mật khẩu cũ được cập nhật thành mật khẩu mới trong cơ sở dữ liệu.
+
+=== TABLE 13 (8 rows, 4 cols) ===
+Row 0: Mã Use case | UC15 | Tên Use case | Quản lý khuyến mại
+Row 1: Tác nhân | Admin | Admin | Admin
+Row 2: Mô tả | Use Case này cho phép Admin quản lý các chương trình khuyến mại, mã giảm giá (vouchers/coupons) trên website bao gồm thêm, sửa đổi thông tin hoặc xóa bỏ mã giảm giá | Use Case này cho phép Admin quản lý các chương trình khuyến mại, mã giảm giá (vouchers/coupons) trên website bao gồm thêm, sửa đổi thông tin hoặc xóa bỏ mã giảm giá | Use Case này cho phép Admin quản lý các chương trình khuyến mại, mã giảm giá (vouchers/coupons) trên website bao gồm thêm, sửa đổi thông tin hoặc xóa bỏ mã giảm giá
+Row 3: Sự kiện kích hoạt | Admin nhấn chọn mục "Quản lý khuyến mại" trên dashboard quản trị. | Admin nhấn chọn mục "Quản lý khuyến mại" trên dashboard quản trị. | Admin nhấn chọn mục "Quản lý khuyến mại" trên dashboard quản trị.
+Row 4: Tiền điều kiện | Đã đăng nhập vào hệ thống bằng tài khoản Admin | Đã đăng nhập vào hệ thống bằng tài khoản Admin | Đã đăng nhập vào hệ thống bằng tài khoản Admin
+Row 5: Luồng sự kiện chính |  |  | 
+Row 6: Luồng sự kiện rẽ nhánh |  |  | 
+Row 7: Hậu điều kiện | Các mã giảm giá được lưu trữ, cập nhật hoặc gỡ bỏ thành công khỏi cơ sở dữ liệu Supabase. | Các mã giảm giá được lưu trữ, cập nhật hoặc gỡ bỏ thành công khỏi cơ sở dữ liệu Supabase. | Các mã giảm giá được lưu trữ, cập nhật hoặc gỡ bỏ thành công khỏi cơ sở dữ liệu Supabase.
+
+=== TABLE 14 (8 rows, 4 cols) ===
+Row 0: Mã Use case | UC16 | Tên Use case | Quản lý danh sách yêu thích
+Row 1: Tác nhân | Khách hàng | Khách hàng | Khách hàng
+Row 2: Mô tả | Use Case này cho phép khách hàng tương tác với danh sách Wishlist (Danh sách yêu thích) của mình, bao gồm việc thêm một sản phẩm thời trang bất kỳ vào danh sách yêu thích hoặc xóa bỏ sản phẩm khỏi danh sách đó. | Use Case này cho phép khách hàng tương tác với danh sách Wishlist (Danh sách yêu thích) của mình, bao gồm việc thêm một sản phẩm thời trang bất kỳ vào danh sách yêu thích hoặc xóa bỏ sản phẩm khỏi danh sách đó. | Use Case này cho phép khách hàng tương tác với danh sách Wishlist (Danh sách yêu thích) của mình, bao gồm việc thêm một sản phẩm thời trang bất kỳ vào danh sách yêu thích hoặc xóa bỏ sản phẩm khỏi danh sách đó.
+Row 3: Sự kiện kích hoạt | Khách hàng nhấn vào nút/biểu tượng hình Trái tim của sản phẩm trên trang chủ hoặc trang chi tiết. | Khách hàng nhấn vào nút/biểu tượng hình Trái tim của sản phẩm trên trang chủ hoặc trang chi tiết. | Khách hàng nhấn vào nút/biểu tượng hình Trái tim của sản phẩm trên trang chủ hoặc trang chi tiết.
+Row 4: Tiền điều kiện | Khách hàng đã đăng nhập tài khoản. | Khách hàng đã đăng nhập tài khoản. | Khách hàng đã đăng nhập tài khoản.
+Row 5: Luồng sự kiện chính |  |  | 
+Row 6: Luồng sự kiện rẽ nhánh | Không có luồng rẽ nhánh cho chức năng này. | Không có luồng rẽ nhánh cho chức năng này. | Không có luồng rẽ nhánh cho chức năng này.
+Row 7: Hậu điều kiện | Sản phẩm được cập nhật thành công vào danh sách Wishlist lưu trên DB Supabase của tài khoản đó. | Sản phẩm được cập nhật thành công vào danh sách Wishlist lưu trên DB Supabase của tài khoản đó. | Sản phẩm được cập nhật thành công vào danh sách Wishlist lưu trên DB Supabase của tài khoản đó.
+
+=== TABLE 15 (8 rows, 4 cols) ===
+Row 0: Mã Use case | UC17 | Tên Use case | Theo dõi đơn hàng
+Row 1: Tác nhân | Khách hàng | Khách hàng | Khách hàng
+Row 2: Mô tả | Use Case này giúp khách hàng theo dõi sát sao lộ trình vận chuyển và trạng thái chi tiết hiện tại của một đơn hàng cụ thể. | Use Case này giúp khách hàng theo dõi sát sao lộ trình vận chuyển và trạng thái chi tiết hiện tại của một đơn hàng cụ thể. | Use Case này giúp khách hàng theo dõi sát sao lộ trình vận chuyển và trạng thái chi tiết hiện tại của một đơn hàng cụ thể.
+Row 3: Sự kiện kích hoạt | Khách hàng nhấp vào mã đơn hàng hoặc nút "Theo dõi đơn hàng" trong danh sách lịch sử mua hàng. | Khách hàng nhấp vào mã đơn hàng hoặc nút "Theo dõi đơn hàng" trong danh sách lịch sử mua hàng. | Khách hàng nhấp vào mã đơn hàng hoặc nút "Theo dõi đơn hàng" trong danh sách lịch sử mua hàng.
+Row 4: Tiền điều kiện | Khách hàng đã đăng nhập tài khoản. | Khách hàng đã đăng nhập tài khoản. | Khách hàng đã đăng nhập tài khoản.
+Row 5: Luồng sự kiện chính |  |  | 
+Row 6: Luồng sự kiện rẽ nhánh |  |  | 
+Row 7: Hậu điều kiện | Thông tin lịch trình chi tiết được kết xuất chính xác lên màn hình của người dùng. | Thông tin lịch trình chi tiết được kết xuất chính xác lên màn hình của người dùng. | Thông tin lịch trình chi tiết được kết xuất chính xác lên màn hình của người dùng.
+
+=== TABLE 16 (8 rows, 4 cols) ===
+Row 0: Mã Use case | UC17 | Tên Use case | Đặt hàng
+Row 1: Tác nhân | Khách hàng | Khách hàng | Khách hàng
+Row 2: Mô tả | Use Case này thực hiện chuyển đổi các sản phẩm được chọn mua trong giỏ hàng hiện tại thành một đơn đặt hàng chính thức trong cơ sở dữ liệu của hệ thống. | Use Case này thực hiện chuyển đổi các sản phẩm được chọn mua trong giỏ hàng hiện tại thành một đơn đặt hàng chính thức trong cơ sở dữ liệu của hệ thống. | Use Case này thực hiện chuyển đổi các sản phẩm được chọn mua trong giỏ hàng hiện tại thành một đơn đặt hàng chính thức trong cơ sở dữ liệu của hệ thống.
+Row 3: Sự kiện kích hoạt | Khách hàng nhấp vào nút "Đặt hàng" (hoặc "Thanh toán") sau khi xác nhận các thông tin tại màn hình Checkout. | Khách hàng nhấp vào nút "Đặt hàng" (hoặc "Thanh toán") sau khi xác nhận các thông tin tại màn hình Checkout. | Khách hàng nhấp vào nút "Đặt hàng" (hoặc "Thanh toán") sau khi xác nhận các thông tin tại màn hình Checkout.
+Row 4: Tiền điều kiện | Khách hàng đã đăng nhập tài khoản, giỏ hàng có ít nhất một sản phẩm và thông tin thanh toán hợp lệ. | Khách hàng đã đăng nhập tài khoản, giỏ hàng có ít nhất một sản phẩm và thông tin thanh toán hợp lệ. | Khách hàng đã đăng nhập tài khoản, giỏ hàng có ít nhất một sản phẩm và thông tin thanh toán hợp lệ.
+Row 5: Luồng sự kiện chính |  |  | 
+Row 6: Luồng sự kiện rẽ nhánh |  |  | 
+Row 7: Hậu điều kiện | Đơn hàng mới được tạo lập thành công, số lượng tồn kho sản phẩm bị trừ đi và thông tin giỏ hàng hiện tại được xóa | Đơn hàng mới được tạo lập thành công, số lượng tồn kho sản phẩm bị trừ đi và thông tin giỏ hàng hiện tại được xóa | Đơn hàng mới được tạo lập thành công, số lượng tồn kho sản phẩm bị trừ đi và thông tin giỏ hàng hiện tại được xóa
+
+=== TABLE 17 (8 rows, 4 cols) ===
+Row 0: Mã Use case | UC19 | Tên Use case | Hủy đơn hàng
+Row 1: Tác nhân | Khách hàng | Khách hàng | Khách hàng
+Row 2: Mô tả | Use Case này cho phép khách hàng chủ động hủy đơn hàng đã đặt mua trước đó, với điều kiện đơn hàng đó chưa được Quản trị viên duyệt giao hàng. | Use Case này cho phép khách hàng chủ động hủy đơn hàng đã đặt mua trước đó, với điều kiện đơn hàng đó chưa được Quản trị viên duyệt giao hàng. | Use Case này cho phép khách hàng chủ động hủy đơn hàng đã đặt mua trước đó, với điều kiện đơn hàng đó chưa được Quản trị viên duyệt giao hàng.
+Row 3: Sự kiện kích hoạt | Khách hàng nhấn nút "Hủy đơn hàng" tại trang thông tin chi tiết đơn hàng của mình. | Khách hàng nhấn nút "Hủy đơn hàng" tại trang thông tin chi tiết đơn hàng của mình. | Khách hàng nhấn nút "Hủy đơn hàng" tại trang thông tin chi tiết đơn hàng của mình.
+Row 4: Tiền điều kiện | Khách hàng đã đăng nhập tài khoản, trạng thái của đơn hàng phải ở trạng thái "Chờ xác nhận" hoặc "Chờ thanh toán". | Khách hàng đã đăng nhập tài khoản, trạng thái của đơn hàng phải ở trạng thái "Chờ xác nhận" hoặc "Chờ thanh toán". | Khách hàng đã đăng nhập tài khoản, trạng thái của đơn hàng phải ở trạng thái "Chờ xác nhận" hoặc "Chờ thanh toán".
+Row 5: Luồng sự kiện chính |  |  | 
+Row 6: Luồng sự kiện rẽ nhánh |  |  | 
+Row 7: Hậu điều kiện | Trạng thái đơn hàng cập nhật thành "Đã hủy" trong cơ sở dữ liệu và số lượng sản phẩm được hoàn trả lại vào tồn kho của cửa hàng. | Trạng thái đơn hàng cập nhật thành "Đã hủy" trong cơ sở dữ liệu và số lượng sản phẩm được hoàn trả lại vào tồn kho của cửa hàng. | Trạng thái đơn hàng cập nhật thành "Đã hủy" trong cơ sở dữ liệu và số lượng sản phẩm được hoàn trả lại vào tồn kho của cửa hàng.

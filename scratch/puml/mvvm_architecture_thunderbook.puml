@@ -1,0 +1,82 @@
+@startuml mvvm_architecture_thunderbook
+!theme plain
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 12
+skinparam roundCorner 10
+skinparam shadowing true
+
+skinparam package {
+    BackgroundColor #F8F9FA
+    BorderColor #4A90E2
+    FontColor #1A252C
+    FontStyle bold
+    FontSize 14
+}
+
+skinparam rectangle {
+    FontColor #FFFFFF
+    FontStyle bold
+    BorderThickness 1.5
+}
+
+package "TẦNG GIAO DIỆN (UI LAYER - VIEW)" as UILayer #E8F4FD {
+    rectangle "Activity / Fragment\n(User: HomeFragment, BookDetailActivity, CheckoutActivity...)\n(Admin: AdminDashboardActivity, ManageBookActivity...)" as View #20639B {
+    }
+}
+
+package "TẦNG ĐIỀU PHỐI (VIEWMODEL LAYER)" as VMlayer #EAFBF1 {
+    rectangle "AndroidX ViewModel\n(HomeViewModel, CheckoutViewModel, ChatViewModel,\nAdminDashboardViewModel, AdminStatisticViewModel...)\n\n• Quản lý UI State theo vòng đời (Lifecycle-Aware)\n• Phát dữ liệu qua LiveData / SingleLiveEvent" as ViewModel #2D8B57 {
+    }
+}
+
+package "TẦNG DỮ LIỆU TRỪU TƯỢNG (REPOSITORY LAYER)" as RepoLayer #FFF8E7 {
+    rectangle "Repository (Single Source of Truth)\n(BookRepository, OrderRepository, UserRepository,\nChatRepository, AdminBookRepository...)\n\n• Điều phối nguồn dữ liệu\n• Firestore Transactions & Realtime Listeners" as Repository #D97706 {
+    }
+}
+
+package "TẦNG MÔ HÌNH DỮ LIỆU (MODEL LAYER)" as ModelLayer #F3E8FD {
+    rectangle "Model / Entity (POJOs)\n(Book, User, Order, Category, Voucher,\nAuthor, Publisher, Review, ChatMessage)" as Model #7C3AED {
+    }
+}
+
+package "NGUỒN DỮ LIỆU NGOÀI (DATA SOURCES & BACKEND)" as DataLayer #FEE2E2 {
+    rectangle "Google Firebase Services\n• Cloud Firestore (NoSQL Realtime Database)\n• Firebase Authentication (Email/Password, Google Sign-in)\n• Firebase Storage (Ảnh bìa sách, Avatar, Danh mục)\n\nGoogle Gemini API (Trợ lý AI Chatbot)" as DataSource #DC2626 {
+    }
+}
+
+' Quan hệ và luồng dữ liệu
+View -down-> ViewModel : 1. Gửi sự kiện người dùng\n(User Actions / Events)
+ViewModel -up-> View : 6. Cập nhật UI phản ứng\n(Observe LiveData / State)
+
+ViewModel -down-> Repository : 2. Yêu cầu dữ liệu\n(Fetch / Update Data)
+Repository -up-> ViewModel : 5. Trả về kết quả qua LiveData\n(Async Callbacks / LiveData)
+
+Repository -down-> DataSource : 3. Đọc / Ghi dữ liệu\n(Firestore Query / Storage Upload)
+DataSource -up-> Repository : 4. Dữ liệu thời gian thực / Kết quả AI\n(Realtime Snapshots / JSON)
+
+Repository .right.> Model : Ánh xạ Entity (toObject)
+ViewModel .right.> Model : Đóng gói dữ liệu
+
+note right of View
+    <b>Nguyên tắc View:</b>
+    Không chứa logic nghiệp vụ,
+    không gọi trực tiếp Firebase,
+    chỉ lắng nghe (observe) LiveData.
+end note
+
+note right of ViewModel
+    <b>Nguyên tắc ViewModel:</b>
+    Không tham chiếu đến Activity/Fragment
+    để tránh rò rỉ bộ nhớ (Memory Leak),
+    sống sót qua xoay màn hình.
+end note
+
+note right of Repository
+    <b>Nguyên tắc Repository:</b>
+    Là nơi DUY NHẤT truy vấn Firestore,
+    tách biệt hoàn toàn tầng UI
+    khỏi cơ sở dữ liệu vật lý.
+end note
+
+@enduml

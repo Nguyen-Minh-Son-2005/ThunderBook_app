@@ -1,0 +1,101 @@
+@startuml seq_08_them_voucher
+title Sơ đồ tuần tự - UC8: Thêm voucher (Admin)
+
+autonumber
+skinparam style strictuml
+skinparam BoxPadding 10
+skinparam ParticipantPadding 10
+skinparam Shadowing false
+skinparam DefaultFontName "Arial"
+skinparam DefaultFontSize 13
+
+skinparam Sequence {
+    ArrowColor #2C3E50
+    ActorBorderColor #1A73E8
+    ActorBackgroundColor #E8F0FE
+    LifeLineBorderColor #7F8C8D
+    LifeLineBackgroundColor #F8F9FA
+    ParticipantBorderColor #34495E
+    ParticipantBackgroundColor #FFFFFF
+    GroupBorderColor #7F8C8D
+    GroupBackgroundColor #FAFAFA
+    GroupHeaderFontColor #2C3E50
+}
+
+actor "Quản trị viên\n(Admin)" as Admin #E8F0FE
+boundary "AddEditVoucherActivity" as View #E8F5E9
+boundary "DatePickerDialog" as DateDialog #E8F5E9
+control "AdminAddEditVoucherViewModel" as ViewModel #FFF3E0
+participant "AdminVoucherRepository" as Repo #EDE7F6
+database "Cloud Firestore" as Firestore #FCE4EC
+
+== 1. Nhập thông tin Voucher ==
+Admin -> View : Nhập mã voucher, chọn loại giảm giá (Percent / Fixed / Freeship)
+activate View
+opt Chọn loại Miễn phí vận chuyển (Freeship)
+    View -> View : Tự động gán giá trị 30.000đ và vô hiệu hóa ô nhập giá trị
+end
+
+Admin -> View : Chọn ngày bắt đầu / ngày kết thúc
+View -> DateDialog : showDatePicker(isStartDate)
+activate DateDialog
+DateDialog --> Admin : Hiển thị hộp thoại chọn ngày
+Admin -> DateDialog : Chọn ngày và xác nhận
+DateDialog --> View : Trả về ngày đã chọn (pickedDate)
+deactivate DateDialog
+View -> View : Định dạng và hiển thị ngày lên giao diện
+
+Admin -> View : Bật/Tắt trạng thái hoạt động (swActive) và nhấn "Lưu voucher"
+
+== 2. Chuyển tiếp yêu cầu sang ViewModel ==
+View -> View : saveVoucher() - đọc và chuẩn hóa dữ liệu nhập
+View -> ViewModel : saveVoucher(null, code, type, value,\n selectedStartDate, selectedEndDate, isActive)
+deactivate View
+activate ViewModel
+
+== 3. Kiểm tra tính hợp lệ tại ViewModel ==
+ViewModel -> ViewModel : Validate dữ liệu:\n- Mã không rỗng\n- Đã chọn ngày bắt đầu & kết thúc\n- Ngày kết thúc sau ngày bắt đầu\n- Giá trị > 0 (với %: <= 100)
+
+alt Dữ liệu không hợp lệ
+    ViewModel --> View : errorMessage.setValue("Lỗi thông tin nhập...")
+    activate View
+    View --> Admin : Hiển thị Toast cảnh báo lỗi
+    deactivate View
+else Dữ liệu hợp lệ
+    ViewModel -> ViewModel : Khởi tạo Voucher(code, kind, value, Timestamp(start), Timestamp(end), active)
+    ViewModel -> Repo : addVoucher(voucher, callback)
+    activate Repo
+
+    == 4. Kiểm tra trùng mã và lưu vào Cloud Firestore ==
+    Repo -> Repo : Chuẩn hóa mã: code.trim().toUpperCase()
+    Repo -> Firestore : vouchersRef.whereEqualTo("code", code).get()
+    activate Firestore
+    Firestore --> Repo : Trả về snapshots kết quả truy vấn
+    deactivate Firestore
+
+    alt Mã Voucher đã tồn tại (snapshots không rỗng)
+        Repo --> ViewModel : callback.onFailure("Mã Voucher đã tồn tại")
+        ViewModel --> View : errorMessage.setValue("Mã Voucher đã tồn tại")
+        activate View
+        View --> Admin : Hiển thị Toast "Mã Voucher đã tồn tại"
+        deactivate View
+    else Mã Voucher hợp lệ (chưa tồn tại)
+        Repo -> Firestore : docRef = vouchersRef.document()\nvoucher.setVoucherId(docRef.getId())
+        Repo -> Repo : toMap(voucher)
+        Repo -> Firestore : docRef.set(map)
+        activate Firestore
+        Firestore --> Repo : addOnSuccessListener()
+        deactivate Firestore
+        Repo --> ViewModel : callback.onSuccess(null)
+        deactivate Repo
+
+        ViewModel --> View : saveSuccess.setValue(true)
+        activate View
+        View --> Admin : Hiển thị Toast "Đã lưu voucher"
+        View -> View : finish() - đóng màn hình và quay về danh sách
+        deactivate View
+    end
+end
+deactivate ViewModel
+
+@enduml

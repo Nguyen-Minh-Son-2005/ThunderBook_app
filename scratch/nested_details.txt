@@ -1,0 +1,64 @@
+Table 0 rows: 8
+
+Row 0: num cells=4
+  Cell 0 text len=11, nested tables=0
+    Text: 'Mã Use case'
+  Cell 1 text len=3, nested tables=0
+    Text: 'UC1'
+  Cell 2 text len=12, nested tables=0
+    Text: 'Tên Use case'
+  Cell 3 text len=7, nested tables=0
+    Text: 'Đăng ký'
+
+Row 1: num cells=4
+  Cell 0 text len=8, nested tables=0
+    Text: 'Tác nhân'
+  Cell 1 text len=4, nested tables=0
+    Text: 'User'
+
+Row 2: num cells=4
+  Cell 0 text len=5, nested tables=0
+    Text: 'Mô tả'
+  Cell 1 text len=124, nested tables=0
+    Text: 'Use Case này cho phép khách hàng mới tạo lập tài khoản cá nhân trên hệ thống Shofy để thực hiện mua sắm và lưu trữ thông tin'
+
+Row 3: num cells=4
+  Cell 0 text len=17, nested tables=0
+    Text: 'Sự kiện kích hoạt'
+  Cell 1 text len=91, nested tables=0
+    Text: 'Khách hàng nhấn chọn nút "Đăng ký" trên thanh điều hướng hoặc liên kết trên form đăng nhập.'
+
+Row 4: num cells=4
+  Cell 0 text len=14, nested tables=0
+    Text: 'Tiền điều kiện'
+  Cell 1 text len=38, nested tables=0
+    Text: 'Khách hàng chưa đăng nhập vào hệ thống'
+
+Row 5: num cells=4
+  Cell 0 text len=19, nested tables=0
+    Text: 'Luồng sự kiện chính'
+  Cell 1 text len=1, nested tables=1
+    Nested table 0: 6 rows, 3 cols
+      NRow 0: STT | Thực hiện bởi | Hành động
+      NRow 1: 1 | Người dùng | Chọn mục "Đăng ký tài khoản" trên trang web.
+      NRow 2: 2 | Hệ thống | Hiển thị Form đăng ký yêu cầu các trường thông tin: Họ tên, Email, Mật khẩu, và Nhập lại mật khẩu.
+      NRow 3: 3 | Người dùng | Điền đầy đủ thông tin vào form và nhấn nút "Đăng ký".
+      NRow 4: 4 | Hệ thống | Kiểm tra tính hợp lệ của dữ liệu (email đúng định dạng, mật khẩu đủ độ dài và trùng khớp).
+      NRow 5: 5 | Hệ thống | Lưu tài khoản mới vào cơ sở dữ liệu Supabase, hiển thị thông báo "Đăng ký tài khoản thành công" và chuyển hướng người dùng sang giao diện đăng nhập.
+
+Row 6: num cells=4
+  Cell 0 text len=22, nested tables=0
+    Text: 'Luồng sự kiện rẽ nhánh'
+  Cell 1 text len=2, nested tables=1
+    Nested table 0: 5 rows, 3 cols
+      NRow 0: STT | Thực hiện bởi | Hành động
+      NRow 1: 1a | Người dùng | Nhập mật khẩu xác nhận không trùng khớp hoặc điền thiếu thông tin bắt buộc.
+      NRow 2:  | Hệ thống | Hiển thị thông báo lỗi cụ thể (ví dụ: "Mật khẩu xác nhận không khớp") và giữ nguyên form để nhập lại.
+      NRow 3: 2a | Người dùng | Nhập địa chỉ Email đã được tài khoản khác sử dụng trên hệ thống trước đó.
+      NRow 4:  | Hệ thống | Hiển thị thông báo lỗi: "Email này đã được sử dụng để đăng ký tài khoản khác."
+
+Row 7: num cells=4
+  Cell 0 text len=13, nested tables=0
+    Text: 'Hậu điều kiện'
+  Cell 1 text len=75, nested tables=0
+    Text: 'Bản ghi tài khoản mới được tạo lập thành công trong cơ sở dữ liệu Supabase.'

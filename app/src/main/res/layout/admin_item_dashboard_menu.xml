@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_menu_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/spacing_xs"
+    android:background="@drawable/ripple_item"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingVertical="@dimen/spacing_sm">
+
+    <FrameLayout
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:background="@drawable/bg_stat_icon_circle">
+
+        <ImageView
+            android:id="@+id/iv_menu_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_book"
+            app:tint="@color/primary"
+            xmlns:app="http://schemas.android.com/apk/res-auto" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_menu_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xxs"
+        android:gravity="center"
+        android:text="Quản lý sách"
+        android:textColor="@color/text_primary"
+        android:textSize="12sp" />
+</LinearLayout>

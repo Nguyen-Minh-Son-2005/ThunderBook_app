@@ -1,0 +1,110 @@
+@startuml seq_07_sua_the_loai
+title Sơ đồ tuần tự - UC7: Sửa thể loại (Admin)
+
+autonumber
+skinparam style strictuml
+skinparam BoxPadding 10
+skinparam ParticipantPadding 10
+skinparam Shadowing false
+skinparam DefaultFontName "Arial"
+skinparam DefaultFontSize 13
+
+skinparam Sequence {
+    ArrowColor #2C3E50
+    ActorBorderColor #1A73E8
+    ActorBackgroundColor #E8F0FE
+    LifeLineBorderColor #7F8C8D
+    LifeLineBackgroundColor #F8F9FA
+    ParticipantBorderColor #34495E
+    ParticipantBackgroundColor #FFFFFF
+    GroupBorderColor #7F8C8D
+    GroupBackgroundColor #FAFAFA
+    GroupHeaderFontColor #2C3E50
+}
+
+actor "Quản trị viên\n(Admin)" as Admin #E8F0FE
+boundary "ManageCategoryActivity" as View #E8F5E9
+boundary "AdminCategoryAdapter" as Adapter #E8F5E9
+boundary "AdminEntityFormDialog" as Dialog #E8F5E9
+participant "ImageUtils" as ImageUtil #EDE7F6
+control "AdminCategoryViewModel" as ViewModel #FFF3E0
+participant "AdminCategoryRepository" as Repo #EDE7F6
+database "Firebase Storage" as Storage #FCE4EC
+database "Cloud Firestore" as Firestore #FCE4EC
+
+== 1. Mở biểu mẫu chỉnh sửa thể loại ==
+Admin -> Adapter : Nhấn biểu tượng "Sửa" trên item thể loại
+activate Adapter
+Adapter -> View : onEditClick(category)
+deactivate Adapter
+activate View
+
+View -> Dialog : newInstanceEdit("thể loại", false, null,\n categoryId, name, null, imageUrl)
+activate Dialog
+View -> Dialog : show(fragmentManager, "category_form")
+Dialog --> Admin : Hiển thị Dialog với dữ liệu hiện tại pre-filled
+deactivate Dialog
+
+== 2. Chỉnh sửa và lưu dữ liệu ==
+Admin -> Dialog : Chỉnh sửa tên / Chọn ảnh mới từ thư viện và nhấn "Lưu"
+activate Dialog
+Dialog -> View : onSave(id, name, description, newImageUri)
+deactivate Dialog
+
+alt Admin chọn tải lên ảnh mới (newImageUri != null)
+    View -> ImageUtil : uploadImage(context, newImageUri, STORAGE_CATEGORY_IMAGES, callback)
+    activate ImageUtil
+    ImageUtil -> Storage : Tải ảnh lên Storage (putFile)
+    activate Storage
+    Storage --> ImageUtil : Trả về downloadUrl
+    deactivate Storage
+    ImageUtil --> View : onSuccess(downloadUrl)
+    deactivate ImageUtil
+    View -> ViewModel : saveCategory(id, name, downloadUrl)
+else Không đổi ảnh (giữ nguyên imageUrl hiện tại)
+    View -> ViewModel : saveCategory(id, name, existingImageUrl)
+end
+
+activate ViewModel
+== 3. Xử lý nghiệp vụ tại ViewModel ==
+ViewModel -> ViewModel : Kiểm tra tính hợp lệ\n(name != null && !name.trim().isEmpty())
+
+alt Tên thể loại không hợp lệ (để trống)
+    ViewModel --> View : errorMessage.setValue("Vui lòng nhập tên thể loại")
+    View --> Admin : Hiển thị Toast thông báo lỗi
+else Dữ liệu hợp lệ
+    ViewModel -> ViewModel : Tạo đối tượng Category(id, name, imageUrl)
+    ViewModel -> Repo : updateCategory(category, callback)
+    activate Repo
+
+    == 4. Cập nhật dữ liệu vào Cloud Firestore ==
+    Repo -> Firestore : categoriesRef.document(categoryId).set(category)
+    activate Firestore
+    Firestore --> Repo : addOnSuccessListener()
+    deactivate Firestore
+    Repo --> ViewModel : callback.onSuccess(null)
+    deactivate Repo
+
+    ViewModel --> View : saveSuccess.setValue(true)
+    deactivate ViewModel
+
+    View --> Admin : Hiển thị Toast "Đã lưu"
+
+    == 5. Tự động cập nhật danh sách qua Realtime Listener ==
+    Firestore -> Repo : SnapshotListener kích hoạt (dữ liệu thay đổi)
+    activate Repo
+    Repo --> ViewModel : observeAllCategories() cập nhật LiveData
+    deactivate Repo
+    activate ViewModel
+    ViewModel --> View : displayedCategories MediatorLiveData cập nhật
+    deactivate ViewModel
+    View -> Adapter : setItems(categories)
+    activate Adapter
+    Adapter --> View : notifyDataSetChanged()
+    deactivate Adapter
+    View --> Admin : Giao diện danh sách thể loại cập nhật tự động
+end
+
+deactivate View
+
+@enduml

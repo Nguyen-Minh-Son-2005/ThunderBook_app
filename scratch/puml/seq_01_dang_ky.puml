@@ -1,0 +1,100 @@
+@startuml seq_01_dang_ky
+title Sơ đồ tuần tự - UC1: Đăng ký tài khoản (Register)
+
+autonumber
+skinparam style strictuml
+skinparam defaultFontName "Segoe UI", Arial, sans-serif
+skinparam defaultFontSize 12
+skinparam roundcorner 6
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+
+skinparam sequence {
+    ArrowColor #1976D2
+    ActorBorderColor #1976D2
+    ActorBackgroundColor #E3F2FD
+    ParticipantBorderColor #1976D2
+    ParticipantBackgroundColor #F5F9FF
+    ParticipantFontSize 12
+    ParticipantFontStyle bold
+    LifeLineBorderColor #1976D2
+    LifeLineBackgroundColor #E3F2FD
+    GroupBorderColor #455A64
+    GroupBackgroundColor #ECEFF1
+    GroupHeaderFontSize 12
+    GroupFontStyle bold
+}
+
+actor "Người dùng" as User
+participant "view: RegisterActivity\n<<boundary>>" as View
+participant "viewModel: RegisterViewModel\n<<control>>" as ViewModel
+participant "user: User\n<<entity>>" as UserEntity
+participant "userRepository: UserRepository" as Repo
+participant "FirebaseAuth" as Auth
+database "Cloud Firestore\n(collection: users)" as Firestore
+
+User -> View : 1. Nhập thông tin đăng ký\n(fullName, email, phone, password, confirmPassword)
+activate View
+
+User -> View : 2. Nhấn nút "Đăng ký"
+View -> View : doRegister()\nKiểm tra hợp lệ Client-side\n(Regex email, SĐT 10 số, pass 6-12 ký tự,\nchứa chữ hoa & ký tự đặc biệt, khớp xác nhận)
+
+alt Dữ liệu không hợp lệ
+    View --> User : Hiển thị lỗi trên các ô nhập liệu (setError)
+else Dữ liệu hợp lệ
+    View -> View : setLoading(true)\n(Hiện ProgressBar, disable nút)
+    View -> ViewModel : register(fullName, email, phone, password)
+    activate ViewModel
+
+    ViewModel -> Auth : createUserWithEmailAndPassword(email, password)
+    activate Auth
+
+    alt Firebase Auth thất bại (Email đã tồn tại / lỗi mạng)
+        Auth --> ViewModel : addOnFailureListener(Exception e)
+        ViewModel -> ViewModel : _errorMessage.setValue(e.getMessage())
+        ViewModel --> View : [LiveData] getErrorMessage()
+        View -> View : setLoading(false)
+        View --> User : Hiển thị Toast: "Đăng ký thất bại, vui lòng kiểm tra lại"
+    else Firebase Auth thành công
+        Auth --> ViewModel : addOnSuccessListener(AuthResult authResult)
+        deactivate Auth
+
+        ViewModel -> ViewModel : Lấy firebaseUser = authResult.getUser()\nuid = firebaseUser.getUid()
+        
+        create UserEntity
+        ViewModel -> UserEntity : new User(uid, fullName, email, phone,\navatarUrl="", role="user", gender="male", birthday=null)
+        
+        ViewModel -> Repo : createUser(newUser, FirebaseCallback<Void>)
+        activate Repo
+
+        Repo -> Firestore : collection("users").document(uid).set(newUser)
+        activate Firestore
+
+        alt Lưu Firestore thất bại
+            Firestore --> Repo : addOnFailureListener(Exception e)
+            Repo --> ViewModel : callback.onFailure(e)
+            ViewModel -> ViewModel : _errorMessage.setValue("Lỗi lưu thông tin: " + e.getMessage())
+            ViewModel --> View : [LiveData] getErrorMessage()
+            View -> View : setLoading(false)
+            View --> User : Hiển thị Toast thông báo lỗi
+        else Lưu Firestore thành công
+            Firestore --> Repo : addOnSuccessListener()
+            deactivate Firestore
+
+            Repo --> ViewModel : callback.onSuccess(null)
+            deactivate Repo
+
+            ViewModel -> ViewModel : _registerSuccess.setValue(true)
+            ViewModel --> View : [LiveData] getRegisterSuccess()
+            deactivate ViewModel
+
+            View -> View : setLoading(false)
+            View --> User : Hiển thị Toast: "Đăng ký thành công!"
+            View -> View : Điều hướng chuyển sang HomeActivity (Intent)
+            View -> View : finish()
+        end
+    end
+end
+deactivate View
+
+@enduml

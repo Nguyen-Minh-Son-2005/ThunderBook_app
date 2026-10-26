@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- item_search_keyword: chip for rv_recent_searches / rv_popular_keywords -->
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_keyword"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp"
+    android:background="@drawable/bg_input_field"
+    android:paddingHorizontal="12dp"
+    android:paddingVertical="7dp"
+    android:text="Đắc Nhân Tâm"
+    android:textColor="@color/text_primary"
+    android:textSize="12sp" />

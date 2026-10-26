@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File này CHỈ chứa các style MỚI dùng cho 9 màn hình bổ sung.
+  Cách dùng: copy nội dung bên trong <resources> này, dán thêm vào cuối file
+  res/values/styles.xml gốc của bạn (không ghi đè file cũ) - vì Android không
+  cho phép 2 file cùng khai báo trùng tên resources trong cùng 1 module.
+-->
+<resources>
+
+    <style name="OrderStepLineDone">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@color/status_success</item>
+    </style>
+
+    <style name="OrderStepLineTodo">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@color/divider</item>
+    </style>
+
+    <style name="OrderStepLabel">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+</resources>

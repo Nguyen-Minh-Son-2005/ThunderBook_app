@@ -1,0 +1,1558 @@
+<w:tbl xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16du="http://schemas.microsoft.com/office/word/2023/wordml/word16du" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16sdtfl="http://schemas.microsoft.com/office/word/2024/wordml/sdtformatlock" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">
+  <w:tblPr>
+    <w:tblW w:w="8784" w:type="dxa"/>
+    <w:tblBorders>
+      <w:top w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+      <w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+      <w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+      <w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+      <w:insideH w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+      <w:insideV w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+    </w:tblBorders>
+    <w:tblLayout w:type="fixed"/>
+    <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+  </w:tblPr>
+  <w:tblGrid>
+    <w:gridCol w:w="1271"/>
+    <w:gridCol w:w="2719"/>
+    <w:gridCol w:w="2280"/>
+    <w:gridCol w:w="2514"/>
+  </w:tblGrid>
+  <w:tr w:rsidR="00D12623" w:rsidRPr="00937EAC" w14:paraId="517333FF" w14:textId="77777777" w:rsidTr="008C4233">
+    <w:trPr>
+      <w:trHeight w:val="557"/>
+    </w:trPr>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="1271" w:type="dxa"/>
+        <w:tcMar>
+          <w:top w:w="0" w:type="dxa"/>
+          <w:left w:w="100" w:type="dxa"/>
+          <w:bottom w:w="0" w:type="dxa"/>
+          <w:right w:w="100" w:type="dxa"/>
+        </w:tcMar>
+      </w:tcPr>
+      <w:p w14:paraId="606A214D" w14:textId="77777777" w:rsidR="00D12623" w:rsidRPr="00937EAC" w:rsidRDefault="00D12623" w:rsidP="00937EAC">
+        <w:pPr>
+          <w:spacing w:line="360" w:lineRule="auto"/>
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+        </w:pPr>
+        <w:r w:rsidRPr="00937EAC">
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+          <w:t>Mã Use case</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="2719" w:type="dxa"/>
+        <w:tcMar>
+          <w:top w:w="0" w:type="dxa"/>
+          <w:left w:w="100" w:type="dxa"/>
+          <w:bottom w:w="0" w:type="dxa"/>
+          <w:right w:w="100" w:type="dxa"/>
+        </w:tcMar>
+      </w:tcPr>
+      <w:p w14:paraId="628C7A10" w14:textId="77777777" w:rsidR="00D12623" w:rsidRPr="00937EAC" w:rsidRDefault="00D12623" w:rsidP="00937EAC">
+        <w:pPr>
+          <w:spacing w:line="360" w:lineRule="auto"/>
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+        </w:pPr>
+        <w:r w:rsidRPr="00937EAC">
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+          <w:t>UC1</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="2280" w:type="dxa"/>
+        <w:tcMar>
+          <w:top w:w="0" w:type="dxa"/>
+          <w:left w:w="100" w:type="dxa"/>
+          <w:bottom w:w="0" w:type="dxa"/>
+          <w:right w:w="100" w:type="dxa"/>
+        </w:tcMar>
+      </w:tcPr>
+      <w:p w14:paraId="423391A7" w14:textId="77777777" w:rsidR="00D12623" w:rsidRPr="00937EAC" w:rsidRDefault="00D12623" w:rsidP="00937EAC">
+        <w:pPr>
+          <w:spacing w:line="360" w:lineRule="auto"/>
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+        </w:pPr>
+        <w:r w:rsidRPr="00937EAC">
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+          <w:t>Tên Use case</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="2514" w:type="dxa"/>
+        <w:tcMar>
+          <w:top w:w="0" w:type="dxa"/>
+          <w:left w:w="100" w:type="dxa"/>
+          <w:bottom w:w="0" w:type="dxa"/>
+          <w:right w:w="100" w:type="dxa"/>
+        </w:tcMar>
+      </w:tcPr>
+      <w:p w14:paraId="4F678557" w14:textId="7B310059" w:rsidR="00D12623" w:rsidRPr="00937EAC" w:rsidRDefault="00D12623" w:rsidP="00937EAC">
+        <w:pPr>
+          <w:spacing w:line="360" w:lineRule="auto"/>
+          <w:ind w:right="583"/>
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+        </w:pPr>
+        <w:r w:rsidRPr="00937EAC">
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+          <w:t>Đăng ký</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+  </w:tr>
+  <w:tr w:rsidR="00D12623" w:rsidRPr="00937EAC" w14:paraId="6C92709C" w14:textId="77777777" w:rsidTr="008C4233">
+    <w:trPr>
+      <w:trHeight w:val="405"/>
+    </w:trPr>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="1271" w:type="dxa"/>
+        <w:tcMar>
+          <w:top w:w="0" w:type="dxa"/>
+          <w:left w:w="100" w:type="dxa"/>
+          <w:bottom w:w="0" w:type="dxa"/>
+          <w:right w:w="100" w:type="dxa"/>
+        </w:tcMar>
+      </w:tcPr>
+      <w:p w14:paraId="4B9E8BDD" w14:textId="77777777" w:rsidR="00D12623" w:rsidRPr="00937EAC" w:rsidRDefault="00D12623" w:rsidP="00937EAC">
+        <w:pPr>
+          <w:spacing w:line="360" w:lineRule="auto"/>
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+        </w:pPr>
+        <w:r w:rsidRPr="00937EAC">
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+          <w:t>Tác nhân</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="7513" w:type="dxa"/>
+        <w:gridSpan w:val="3"/>
+        <w:tcMar>
+          <w:top w:w="0" w:type="dxa"/>
+          <w:left w:w="100" w:type="dxa"/>
+          <w:bottom w:w="0" w:type="dxa"/>
+          <w:right w:w="100" w:type="dxa"/>
+        </w:tcMar>
+      </w:tcPr>
+      <w:p w14:paraId="1C68690A" w14:textId="0C740F05" w:rsidR="00D12623" w:rsidRPr="00937EAC" w:rsidRDefault="00D12623" w:rsidP="00937EAC">
+        <w:pPr>
+          <w:spacing w:line="360" w:lineRule="auto"/>
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+        </w:pPr>
+        <w:r w:rsidRPr="00937EAC">
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+          <w:t>User</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+  </w:tr>
+  <w:tr w:rsidR="00D12623" w:rsidRPr="00937EAC" w14:paraId="6F702652" w14:textId="77777777" w:rsidTr="008C4233">
+    <w:trPr>
+      <w:trHeight w:val="742"/>
+    </w:trPr>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="1271" w:type="dxa"/>
+        <w:tcMar>
+          <w:top w:w="0" w:type="dxa"/>
+          <w:left w:w="100" w:type="dxa"/>
+          <w:bottom w:w="0" w:type="dxa"/>
+          <w:right w:w="100" w:type="dxa"/>
+        </w:tcMar>
+      </w:tcPr>
+      <w:p w14:paraId="48F6F18E" w14:textId="77777777" w:rsidR="00D12623" w:rsidRPr="00937EAC" w:rsidRDefault="00D12623" w:rsidP="00937EAC">
+        <w:pPr>
+          <w:spacing w:line="360" w:lineRule="auto"/>
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+        </w:pPr>
+        <w:r w:rsidRPr="00937EAC">
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+          <w:t>Mô tả</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="7513" w:type="dxa"/>
+        <w:gridSpan w:val="3"/>
+        <w:tcMar>
+          <w:top w:w="0" w:type="dxa"/>
+          <w:left w:w="100" w:type="dxa"/>
+          <w:bottom w:w="0" w:type="dxa"/>
+          <w:right w:w="100" w:type="dxa"/>
+        </w:tcMar>
+      </w:tcPr>
+      <w:p w14:paraId="449DA92E" w14:textId="30371DF4" w:rsidR="00D12623" w:rsidRPr="00937EAC" w:rsidRDefault="00D12623" w:rsidP="00937EAC">
+        <w:pPr>
+          <w:spacing w:line="360" w:lineRule="auto"/>
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+        </w:pPr>
+        <w:r w:rsidRPr="00937EAC">
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+          <w:t>Use Case này cho phép khách hàng mới tạo lập tài khoản cá nhân trên hệ thống Shofy để thực hiện mua sắm và lưu trữ thông tin</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+  </w:tr>
+  <w:tr w:rsidR="00D12623" w:rsidRPr="00937EAC" w14:paraId="02658CBB" w14:textId="77777777" w:rsidTr="008C4233">
+    <w:trPr>
+      <w:trHeight w:val="1122"/>
+    </w:trPr>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="1271" w:type="dxa"/>
+        <w:tcMar>
+          <w:top w:w="0" w:type="dxa"/>
+          <w:left w:w="100" w:type="dxa"/>
+          <w:bottom w:w="0" w:type="dxa"/>
+          <w:right w:w="100" w:type="dxa"/>
+        </w:tcMar>
+      </w:tcPr>
+      <w:p w14:paraId="3C7B051C" w14:textId="7A175857" w:rsidR="00D12623" w:rsidRPr="00937EAC" w:rsidRDefault="00D12623" w:rsidP="00937EAC">
+        <w:pPr>
+          <w:spacing w:line="360" w:lineRule="auto"/>
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+        </w:pPr>
+        <w:r w:rsidRPr="00937EAC">
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+          <w:t>Sự kiện kích hoạt</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="7513" w:type="dxa"/>
+        <w:gridSpan w:val="3"/>
+        <w:tcMar>
+          <w:top w:w="0" w:type="dxa"/>
+          <w:left w:w="100" w:type="dxa"/>
+          <w:bottom w:w="0" w:type="dxa"/>
+          <w:right w:w="100" w:type="dxa"/>
+        </w:tcMar>
+      </w:tcPr>
+      <w:p w14:paraId="567FDD9C" w14:textId="48ACC194" w:rsidR="00D12623" w:rsidRPr="00937EAC" w:rsidRDefault="00D12623" w:rsidP="00937EAC">
+        <w:pPr>
+          <w:spacing w:line="360" w:lineRule="auto"/>
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+        </w:pPr>
+        <w:r w:rsidRPr="00937EAC">
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+          <w:t>Khách hàng nhấn chọn nút "Đăng ký" trên thanh điều hướng hoặc liên kết trên form đăng nhập.</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+  </w:tr>
+  <w:tr w:rsidR="00D12623" w:rsidRPr="00937EAC" w14:paraId="4F8AC518" w14:textId="77777777" w:rsidTr="008C4233">
+    <w:trPr>
+      <w:trHeight w:val="405"/>
+    </w:trPr>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="1271" w:type="dxa"/>
+        <w:tcMar>
+          <w:top w:w="0" w:type="dxa"/>
+          <w:left w:w="100" w:type="dxa"/>
+          <w:bottom w:w="0" w:type="dxa"/>
+          <w:right w:w="100" w:type="dxa"/>
+        </w:tcMar>
+      </w:tcPr>
+      <w:p w14:paraId="0CD49A5C" w14:textId="77777777" w:rsidR="00D12623" w:rsidRPr="00937EAC" w:rsidRDefault="00D12623" w:rsidP="00937EAC">
+        <w:pPr>
+          <w:spacing w:line="360" w:lineRule="auto"/>
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+        </w:pPr>
+        <w:r w:rsidRPr="00937EAC">
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+          <w:t>Tiền điều kiện</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="7513" w:type="dxa"/>
+        <w:gridSpan w:val="3"/>
+        <w:tcMar>
+          <w:top w:w="0" w:type="dxa"/>
+          <w:left w:w="100" w:type="dxa"/>
+          <w:bottom w:w="0" w:type="dxa"/>
+          <w:right w:w="100" w:type="dxa"/>
+        </w:tcMar>
+      </w:tcPr>
+      <w:p w14:paraId="53326648" w14:textId="2C5DA056" w:rsidR="00D12623" w:rsidRPr="00937EAC" w:rsidRDefault="00D12623" w:rsidP="00937EAC">
+        <w:pPr>
+          <w:spacing w:line="360" w:lineRule="auto"/>
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+        </w:pPr>
+        <w:r w:rsidRPr="00937EAC">
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+          <w:t>Khách hàng chưa đăng nhập vào hệ thống</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+  </w:tr>
+  <w:tr w:rsidR="00D12623" w:rsidRPr="009E0F42" w14:paraId="413CFB06" w14:textId="77777777" w:rsidTr="008C4233">
+    <w:trPr>
+      <w:trHeight w:val="2111"/>
+    </w:trPr>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="1271" w:type="dxa"/>
+        <w:tcMar>
+          <w:top w:w="0" w:type="dxa"/>
+          <w:left w:w="100" w:type="dxa"/>
+          <w:bottom w:w="0" w:type="dxa"/>
+          <w:right w:w="100" w:type="dxa"/>
+        </w:tcMar>
+      </w:tcPr>
+      <w:p w14:paraId="19B7F852" w14:textId="77777777" w:rsidR="00D12623" w:rsidRPr="00937EAC" w:rsidRDefault="00D12623" w:rsidP="00937EAC">
+        <w:pPr>
+          <w:spacing w:line="360" w:lineRule="auto"/>
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+        </w:pPr>
+        <w:r w:rsidRPr="00937EAC">
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+          <w:t>Luồng sự kiện chính</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="7513" w:type="dxa"/>
+        <w:gridSpan w:val="3"/>
+        <w:tcMar>
+          <w:top w:w="0" w:type="dxa"/>
+          <w:left w:w="100" w:type="dxa"/>
+          <w:bottom w:w="0" w:type="dxa"/>
+          <w:right w:w="100" w:type="dxa"/>
+        </w:tcMar>
+      </w:tcPr>
+      <w:p w14:paraId="41BE2A05" w14:textId="77777777" w:rsidR="00D12623" w:rsidRPr="00937EAC" w:rsidRDefault="00D12623" w:rsidP="00937EAC">
+        <w:pPr>
+          <w:spacing w:line="360" w:lineRule="auto"/>
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+        </w:pPr>
+      </w:p>
+      <w:tbl>
+        <w:tblPr>
+          <w:tblStyle w:val="TableGrid"/>
+          <w:tblW w:w="0" w:type="auto"/>
+          <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+        </w:tblPr>
+        <w:tblGrid>
+          <w:gridCol w:w="600"/>
+          <w:gridCol w:w="1843"/>
+          <w:gridCol w:w="4860"/>
+        </w:tblGrid>
+        <w:tr w:rsidR="009C328F" w:rsidRPr="00937EAC" w14:paraId="17A79925" w14:textId="77777777" w:rsidTr="009C328F">
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="600" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="0E98917F" w14:textId="6655DCC3" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="009C328F">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                </w:rPr>
+                <w:t>STT</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="1843" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="0E12689E" w14:textId="0703208D" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="009C328F">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                </w:rPr>
+                <w:t>Thực hiện bởi</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="4860" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="734420B4" w14:textId="1E04706E" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="009C328F">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                </w:rPr>
+                <w:t>Hành động</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+        </w:tr>
+        <w:tr w:rsidR="009C328F" w:rsidRPr="009E0F42" w14:paraId="797C1FC7" w14:textId="77777777" w:rsidTr="009C328F">
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="600" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="13AAEEBF" w14:textId="2B59F013" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="009C328F">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                </w:rPr>
+                <w:t>1</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="1843" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="1F95C1BF" w14:textId="345BC0A6" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="009C328F">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                </w:rPr>
+                <w:t>Người dùng</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="4860" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="4F36843E" w14:textId="3EFA7F8A" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="009C328F">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+                <w:t>Chọn mục "Đăng ký tài khoản" trên trang web.</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+        </w:tr>
+        <w:tr w:rsidR="009C328F" w:rsidRPr="009E0F42" w14:paraId="2D0B510C" w14:textId="77777777" w:rsidTr="009C328F">
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="600" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="29DC0CA8" w14:textId="2AFBA5CE" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="009C328F">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                </w:rPr>
+                <w:t>2</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="1843" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="79DE4A24" w14:textId="13148D0E" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="009C328F">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                </w:rPr>
+                <w:t>Hệ thống</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="4860" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="5FCF415C" w14:textId="167414ED" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="009C328F">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+                <w:t>Hiển thị Form đăng ký yêu cầu các trường thông tin: Họ tên, Email, Mật khẩu, và Nhập lại mật khẩu.</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+        </w:tr>
+        <w:tr w:rsidR="009C328F" w:rsidRPr="009E0F42" w14:paraId="2BFB2D0E" w14:textId="77777777" w:rsidTr="009C328F">
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="600" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="2630FF0B" w14:textId="7E537C78" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="009C328F">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                </w:rPr>
+                <w:t>3</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="1843" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="40B51FFD" w14:textId="63DB0685" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="009C328F">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                </w:rPr>
+                <w:t>Người dùng</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="4860" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="7F990253" w14:textId="64961121" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="009C328F">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+                <w:t>Điền đầy đủ thông tin vào form và nhấn nút "Đăng ký".</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+        </w:tr>
+        <w:tr w:rsidR="009C328F" w:rsidRPr="009E0F42" w14:paraId="0937197B" w14:textId="77777777" w:rsidTr="009C328F">
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="600" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="5DFC3226" w14:textId="6C1BFFA5" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="009C328F">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                </w:rPr>
+                <w:t>4</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="1843" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="2F1CC142" w14:textId="092B42EC" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="009C328F">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                </w:rPr>
+                <w:t>Hệ thống</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="4860" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="7D2ED890" w14:textId="5BB31373" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="009C328F">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+                <w:t>Kiểm tra tính hợp lệ của dữ liệu (email đúng định dạng, mật khẩu đủ độ dài và trùng khớp).</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+        </w:tr>
+        <w:tr w:rsidR="009C328F" w:rsidRPr="009E0F42" w14:paraId="79802D4C" w14:textId="77777777" w:rsidTr="009C328F">
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="600" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="21D93F41" w14:textId="7FFE1A0F" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="009C328F">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                </w:rPr>
+                <w:lastRenderedPageBreak/>
+                <w:t>5</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="1843" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="265C639A" w14:textId="523AB83F" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="009C328F">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                </w:rPr>
+                <w:t>Hệ thống</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="4860" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="4165CD42" w14:textId="31BB1A09" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="009C328F">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+                <w:t>Lưu tài khoản mới vào cơ sở dữ liệu Supabase, hiển thị thông báo "Đăng ký tài khoản thành công" và chuyển hướng người dùng sang giao diện đăng nhập.</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+        </w:tr>
+      </w:tbl>
+      <w:p w14:paraId="10A5BC7E" w14:textId="77777777" w:rsidR="00D12623" w:rsidRPr="00937EAC" w:rsidRDefault="00D12623" w:rsidP="00937EAC">
+        <w:pPr>
+          <w:spacing w:line="360" w:lineRule="auto"/>
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+            <w:lang w:val="vi-VN"/>
+          </w:rPr>
+        </w:pPr>
+      </w:p>
+    </w:tc>
+  </w:tr>
+  <w:tr w:rsidR="00D12623" w:rsidRPr="009E0F42" w14:paraId="6E9408D3" w14:textId="77777777" w:rsidTr="008C4233">
+    <w:trPr>
+      <w:trHeight w:val="1875"/>
+    </w:trPr>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="1271" w:type="dxa"/>
+        <w:tcMar>
+          <w:top w:w="0" w:type="dxa"/>
+          <w:left w:w="100" w:type="dxa"/>
+          <w:bottom w:w="0" w:type="dxa"/>
+          <w:right w:w="100" w:type="dxa"/>
+        </w:tcMar>
+      </w:tcPr>
+      <w:p w14:paraId="5B76F96F" w14:textId="77777777" w:rsidR="00D12623" w:rsidRPr="009E0F42" w:rsidRDefault="00D12623" w:rsidP="00937EAC">
+        <w:pPr>
+          <w:spacing w:line="360" w:lineRule="auto"/>
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+            <w:lang w:val="vi-VN"/>
+          </w:rPr>
+        </w:pPr>
+        <w:r w:rsidRPr="009E0F42">
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+            <w:lang w:val="vi-VN"/>
+          </w:rPr>
+          <w:lastRenderedPageBreak/>
+          <w:t>Luồng sự kiện rẽ nhánh</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="7513" w:type="dxa"/>
+        <w:gridSpan w:val="3"/>
+        <w:tcMar>
+          <w:top w:w="0" w:type="dxa"/>
+          <w:left w:w="100" w:type="dxa"/>
+          <w:bottom w:w="0" w:type="dxa"/>
+          <w:right w:w="100" w:type="dxa"/>
+        </w:tcMar>
+      </w:tcPr>
+      <w:p w14:paraId="7E4BF282" w14:textId="77777777" w:rsidR="00D12623" w:rsidRPr="009E0F42" w:rsidRDefault="00D12623" w:rsidP="00937EAC">
+        <w:pPr>
+          <w:spacing w:line="360" w:lineRule="auto"/>
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+            <w:lang w:val="vi-VN"/>
+          </w:rPr>
+        </w:pPr>
+        <w:r w:rsidRPr="009E0F42">
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+            <w:lang w:val="vi-VN"/>
+          </w:rPr>
+          <w:t xml:space="preserve"> </w:t>
+        </w:r>
+      </w:p>
+      <w:tbl>
+        <w:tblPr>
+          <w:tblStyle w:val="TableGrid"/>
+          <w:tblW w:w="0" w:type="auto"/>
+          <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+        </w:tblPr>
+        <w:tblGrid>
+          <w:gridCol w:w="600"/>
+          <w:gridCol w:w="1701"/>
+          <w:gridCol w:w="5002"/>
+        </w:tblGrid>
+        <w:tr w:rsidR="009C328F" w:rsidRPr="00937EAC" w14:paraId="2B9D1D69" w14:textId="77777777" w:rsidTr="009C328F">
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="600" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="286FB105" w14:textId="3A278630" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="00937EAC">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="101010"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                </w:rPr>
+                <w:t>STT</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="1701" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="5FE6CD8E" w14:textId="1953AAE5" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="00937EAC">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="101010"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                </w:rPr>
+                <w:t>Thực hiện bởi</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="5002" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="34689807" w14:textId="39CFC34C" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="00937EAC">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="101010"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                </w:rPr>
+                <w:t>Hành động</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+        </w:tr>
+        <w:tr w:rsidR="009C328F" w:rsidRPr="009E0F42" w14:paraId="49E89AE9" w14:textId="77777777" w:rsidTr="009C328F">
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="600" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="457E08F4" w14:textId="7284059C" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="00937EAC">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="101010"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                </w:rPr>
+                <w:t>1a</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="1701" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="0F2A613E" w14:textId="4DD82B0E" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="00937EAC">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="101010"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                </w:rPr>
+                <w:t>Người dùng</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="5002" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="67E150E0" w14:textId="78F89BD0" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="00937EAC">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="101010"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+                <w:t>Nhập mật khẩu xác nhận không trùng khớp hoặc điền thiếu thông tin bắt buộc.</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+        </w:tr>
+        <w:tr w:rsidR="009C328F" w:rsidRPr="009E0F42" w14:paraId="1ED7E4B0" w14:textId="77777777" w:rsidTr="009C328F">
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="600" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="7B8BA7F2" w14:textId="77777777" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="1701" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="37B6DDCF" w14:textId="747E71B2" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="00937EAC">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="101010"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                </w:rPr>
+                <w:t>Hệ thống</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="5002" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="7D682171" w14:textId="31DCB2AD" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="00937EAC">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="101010"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+                <w:t>Hiển thị thông báo lỗi cụ thể (ví dụ: "Mật khẩu xác nhận không khớp") và giữ nguyên form để nhập lại.</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+        </w:tr>
+        <w:tr w:rsidR="009C328F" w:rsidRPr="009E0F42" w14:paraId="586DFEFA" w14:textId="77777777" w:rsidTr="009C328F">
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="600" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="5B6CF87F" w14:textId="7ABF57CF" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="00937EAC">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="101010"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                </w:rPr>
+                <w:t>2a</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="1701" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="7E8601B1" w14:textId="19988C8C" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="00937EAC">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="101010"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                </w:rPr>
+                <w:t>Người dùng</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="5002" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="75FBD02B" w14:textId="0C54A384" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="00937EAC">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="101010"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+                <w:t>Nhập địa chỉ Email đã được tài khoản khác sử dụng trên hệ thống trước đó.</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+        </w:tr>
+        <w:tr w:rsidR="009C328F" w:rsidRPr="009E0F42" w14:paraId="082C0925" w14:textId="77777777" w:rsidTr="009C328F">
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="600" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="0EDB9251" w14:textId="77777777" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="1701" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="1888EA92" w14:textId="2611AB76" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="00937EAC">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="101010"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                </w:rPr>
+                <w:t>Hệ thống</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+          <w:tc>
+            <w:tcPr>
+              <w:tcW w:w="5002" w:type="dxa"/>
+              <w:vAlign w:val="center"/>
+            </w:tcPr>
+            <w:p w14:paraId="579B9EE8" w14:textId="0EEBA3AA" w:rsidR="009C328F" w:rsidRPr="00937EAC" w:rsidRDefault="009C328F" w:rsidP="00937EAC">
+              <w:pPr>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="000000"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+              </w:pPr>
+              <w:r w:rsidRPr="00937EAC">
+                <w:rPr>
+                  <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                  <w:color w:val="101010"/>
+                  <w:sz w:val="28"/>
+                  <w:szCs w:val="28"/>
+                  <w:lang w:val="vi-VN"/>
+                </w:rPr>
+                <w:t>Hiển thị thông báo lỗi: "Email này đã được sử dụng để đăng ký tài khoản khác."</w:t>
+              </w:r>
+            </w:p>
+          </w:tc>
+        </w:tr>
+      </w:tbl>
+      <w:p w14:paraId="2497CCAF" w14:textId="77777777" w:rsidR="00D12623" w:rsidRPr="00937EAC" w:rsidRDefault="00D12623" w:rsidP="00937EAC">
+        <w:pPr>
+          <w:spacing w:line="360" w:lineRule="auto"/>
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+            <w:lang w:val="vi-VN"/>
+          </w:rPr>
+        </w:pPr>
+      </w:p>
+    </w:tc>
+  </w:tr>
+  <w:tr w:rsidR="00D12623" w:rsidRPr="00937EAC" w14:paraId="3157D119" w14:textId="77777777" w:rsidTr="008C4233">
+    <w:trPr>
+      <w:trHeight w:val="1035"/>
+    </w:trPr>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="1271" w:type="dxa"/>
+        <w:tcMar>
+          <w:top w:w="0" w:type="dxa"/>
+          <w:left w:w="100" w:type="dxa"/>
+          <w:bottom w:w="0" w:type="dxa"/>
+          <w:right w:w="100" w:type="dxa"/>
+        </w:tcMar>
+      </w:tcPr>
+      <w:p w14:paraId="402369C8" w14:textId="77777777" w:rsidR="00D12623" w:rsidRPr="00937EAC" w:rsidRDefault="00D12623" w:rsidP="00937EAC">
+        <w:pPr>
+          <w:spacing w:line="360" w:lineRule="auto"/>
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+        </w:pPr>
+        <w:r w:rsidRPr="00937EAC">
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+          <w:t>Hậu điều kiện</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="7513" w:type="dxa"/>
+        <w:gridSpan w:val="3"/>
+        <w:tcMar>
+          <w:top w:w="0" w:type="dxa"/>
+          <w:left w:w="100" w:type="dxa"/>
+          <w:bottom w:w="0" w:type="dxa"/>
+          <w:right w:w="100" w:type="dxa"/>
+        </w:tcMar>
+      </w:tcPr>
+      <w:p w14:paraId="2DF8801E" w14:textId="191CB61D" w:rsidR="00D12623" w:rsidRPr="00937EAC" w:rsidRDefault="00D12623" w:rsidP="00937EAC">
+        <w:pPr>
+          <w:keepNext/>
+          <w:spacing w:line="360" w:lineRule="auto"/>
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+        </w:pPr>
+        <w:r w:rsidRPr="00937EAC">
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+            <w:color w:val="000000"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+          </w:rPr>
+          <w:t>Bản ghi tài khoản mới được tạo lập thành công trong cơ sở dữ liệu Supabase.</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+  </w:tr>
+</w:tbl>

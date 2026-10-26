@@ -1,0 +1,117 @@
+@startuml vopc_01_dang_ky
+title Biểu đồ lớp tham gia (VOPC) - UC1: Đăng ký tài khoản (Register)
+
+skinparam classAttributeIconSize 0
+skinparam defaultFontName "Segoe UI", Arial, sans-serif
+skinparam defaultFontSize 12
+skinparam roundcorner 6
+skinparam shadowing false
+
+skinparam class {
+    BackgroundColor #FFFFFF
+    ArrowColor #1976D2
+    BorderColor #1976D2
+    HeaderBackgroundColor #E3F2FD
+}
+
+skinparam stereotype {
+    CBackgroundColor #BBDEFB
+}
+
+class RegisterActivity <<boundary>> {
+    - etFullName: TextInputEditText
+    - etEmail: TextInputEditText
+    - etPhone: TextInputEditText
+    - etPassword: TextInputEditText
+    - etConfirmPassword: TextInputEditText
+    - btnRegister: Button
+    - pbRegister: ProgressBar
+    - viewModel: RegisterViewModel
+    # onCreate(savedInstanceState: Bundle): void
+    - doRegister(): void
+    - setLoading(loading: boolean): void
+}
+
+class RegisterViewModel <<control>> {
+    - userRepository: UserRepository
+    - _registerSuccess: MutableLiveData<Boolean>
+    - _errorMessage: MutableLiveData<String>
+    + getRegisterSuccess(): LiveData<Boolean>
+    + getErrorMessage(): LiveData<String>
+    + register(fullName: String, email: String, phone: String, password: String): void
+}
+
+class UserRepository {
+    + createUser(user: User, callback: FirebaseCallback<Void>): void
+    + getUser(uid: String): LiveData<User>
+    + updateUser(uid: String, updates: Map<String, Object>, callback: FirebaseCallback<Void>): void
+}
+
+class User <<entity>> {
+    - userId: String
+    - fullName: String
+    - email: String
+    - phone: String
+    - avatarUrl: String
+    - role: String
+    - gender: String
+    - birthday: Timestamp
+    + User()
+    + User(userId: String, fullName: String, email: String, phone: String, avatarUrl: String, role: String, gender: String, birthday: Timestamp)
+    + getUserId(): String
+    + setUserId(userId: String): void
+    + getFullName(): String
+    + setFullName(fullName: String): void
+    + getEmail(): String
+    + setEmail(email: String): void
+    + getPhone(): String
+    + setPhone(phone: String): void
+    + getRole(): String
+    + setRole(role: String): void
+    + isAdmin(): boolean
+}
+
+interface FirebaseCallback<T> {
+    + onSuccess(result: T): void
+    + onFailure(e: Exception): void
+}
+
+class FirebaseAuth {
+    + createUserWithEmailAndPassword(email: String, password: String): Task<AuthResult>
+}
+
+class HomeActivity <<boundary>> {
+    # onCreate(savedInstanceState: Bundle): void
+}
+
+' Relationships
+RegisterActivity ..> RegisterViewModel : "<<observes & invokes>>"
+RegisterActivity ..> HomeActivity : "<<navigates to>>"
+RegisterViewModel --> UserRepository : "uses"
+RegisterViewModel ..> FirebaseAuth : "authenticates via"
+RegisterViewModel ..> User : "<<creates>>"
+UserRepository ..> User : "<<persists>>"
+UserRepository ..> FirebaseCallback : "<<triggers>>"
+
+note right of RegisterActivity
+  <b>View (Activity):</b>
+  - Kiểm tra tính hợp lệ dữ liệu đăng ký (Regex email, SĐT, độ dài mật khẩu).
+  - Lắng nghe LiveData từ ViewModel để cập nhật UI.
+  - Chuyển tiếp sang HomeActivity khi đăng ký thành công.
+end note
+
+note right of RegisterViewModel
+  <b>ViewModel:</b>
+  - Điều phối tạo tài khoản Firebase Auth.
+  - Tạo đối tượng User với vai trò mặc định "user".
+  - Gọi UserRepository để ghi dữ liệu vào Firestore.
+end note
+
+note right of UserRepository
+  <b>Repository:</b>
+  - Lớp duy nhất tương tác với Firestore
+    collection "users".
+  - Trả kết quả bất đồng bộ qua FirebaseCallback.
+end note
+
+@enduml

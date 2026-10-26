@@ -1,0 +1,205 @@
+@startuml vopc_12_quan_ly_tac_gia_nxb
+title Sơ đồ VOPC - UC12: Quản lý tác giả & Nhà xuất bản (Admin)
+
+skinparam handwritten false
+skinparam monochrome false
+skinparam shadowing false
+skinparam defaultFontName "Arial"
+skinparam defaultFontSize 12
+skinparam roundCorner 8
+
+skinparam class {
+    BackgroundColor #FFFFFF
+    ArrowColor #2C3E50
+    BorderColor #34495E
+    HeaderBackgroundColor #EAEDED
+    BorderThickness 1.2
+}
+
+skinparam classStereotype {
+    FontSize 10
+    FontStyle italic
+}
+
+abstract class AdminBaseActivity <<boundary>> #E8F8F5 {
+    # checkAdminAccess(): void
+    # {abstract} onAdminAccessGranted(savedInstanceState: Bundle): void
+}
+
+class ManageAuthorActivity <<boundary>> #E8F8F5 {
+    - viewModel: AdminAuthorViewModel
+    - adapter: AdminAuthorAdapter
+    - tvResultCount: TextView
+    - emptyState: View
+    --
+    # onAdminAccessGranted(savedInstanceState: Bundle): void
+    - setupSearch(): void
+    - setupRecyclerView(): void
+    - openForm(existing: Author): void
+    - confirmDelete(author: Author): void
+    - onListChanged(list: List<Author>): void
+}
+
+class ManagePublisherActivity <<boundary>> #E8F8F5 {
+    - viewModel: AdminPublisherViewModel
+    - adapter: AdminPublisherAdapter
+    - tvResultCount: TextView
+    - emptyState: View
+    --
+    # onAdminAccessGranted(savedInstanceState: Bundle): void
+    - setupSearch(): void
+    - setupRecyclerView(): void
+    - openForm(existing: Publisher): void
+    - confirmDelete(publisher: Publisher): void
+    - onListChanged(list: List<Publisher>): void
+}
+
+class AdminEntityFormDialog <<boundary>> #E8F8F5 {
+    - listener: OnSaveListener
+    - pendingImageUri: Uri
+    - ivAvatar: ImageView
+    --
+    + {static} newInstanceAdd(title: String, showDescription: boolean, hint: String): AdminEntityFormDialog
+    + {static} newInstanceEdit(title: String, showDescription: boolean, hint: String, id: String, name: String, desc: String, imageUrl: String): AdminEntityFormDialog
+    + setOnSaveListener(listener: OnSaveListener): void
+    + onCreateDialog(savedInstanceState: Bundle): Dialog
+}
+
+interface OnSaveListener {
+    + onSave(existingId: String, name: String, description: String, newImageUri: Uri): void
+}
+
+class AdminAuthorViewModel <<control>> #FEF9E7 {
+    - repository: AdminAuthorRepository
+    - bookRepository: AdminBookRepository
+    - allAuthors: LiveData<List<Author>>
+    - displayedAuthors: MediatorLiveData<List<Author>>
+    - cachedList: List<Author>
+    - currentKeyword: String
+    - sortByBookCountEnabled: boolean
+    - saveSuccess: MutableLiveData<Boolean>
+    - errorMessage: MutableLiveData<String>
+    --
+    + getDisplayedAuthors(): LiveData<List<Author>>
+    + getSaveSuccess(): LiveData<Boolean>
+    + getErrorMessage(): LiveData<String>
+    + search(keyword: String): void
+    + setSortByBookCount(enabled: boolean): void
+    + saveAuthor(authorId: String, name: String, imageUrl: String): void
+    + deleteAuthor(authorId: String): void
+    - applyFilter(): void
+}
+
+class AdminPublisherViewModel <<control>> #FEF9E7 {
+    - repository: AdminPublisherRepository
+    - bookRepository: AdminBookRepository
+    - allPublishers: LiveData<List<Publisher>>
+    - displayedPublishers: MediatorLiveData<List<Publisher>>
+    - cachedList: List<Publisher>
+    - currentKeyword: String
+    - saveSuccess: MutableLiveData<Boolean>
+    - errorMessage: MutableLiveData<String>
+    --
+    + getDisplayedPublishers(): LiveData<List<Publisher>>
+    + getSaveSuccess(): LiveData<Boolean>
+    + getErrorMessage(): LiveData<String>
+    + search(keyword: String): void
+    + savePublisher(publisherId: String, name: String, imageUrl: String): void
+    + deletePublisher(publisherId: String): void
+    - applyFilter(): void
+}
+
+class AdminAuthorRepository #F4F6F6 {
+    - authorsRef: CollectionReference
+    --
+    + observeAllAuthors(): LiveData<List<Author>>
+    + addAuthor(author: Author, callback: FirebaseCallback<Void>): void
+    + updateAuthor(author: Author, callback: FirebaseCallback<Void>): void
+    + deleteAuthor(authorId: String, callback: FirebaseCallback<Void>): void
+    + sortByBookCount(source: List<Author>): List<Author>
+    + filterByName(source: List<Author>, keyword: String): List<Author>
+}
+
+class AdminPublisherRepository #F4F6F6 {
+    - publishersRef: CollectionReference
+    --
+    + observeAllPublishers(): LiveData<List<Publisher>>
+    + addPublisher(publisher: Publisher, callback: FirebaseCallback<Void>): void
+    + updatePublisher(publisher: Publisher, callback: FirebaseCallback<Void>): void
+    + deletePublisher(publisherId: String, callback: FirebaseCallback<Void>): void
+    + filterByName(source: List<Publisher>, keyword: String): List<Publisher>
+}
+
+class AdminBookRepository #F4F6F6 {
+    - booksRef: CollectionReference
+    --
+    + checkAuthorInUse(authorId: String, callback: FirebaseCallback<Boolean>): void
+    + checkPublisherInUse(publisherId: String, callback: FirebaseCallback<Boolean>): void
+}
+
+class Author <<entity>> #EBF5FB {
+    - authorId: String
+    - name: String
+    - avatarUrl: String
+    - bio: String
+    - bookCount: int
+    --
+    + Author()
+    + Author(authorId: String, name: String, avatarUrl: String, bio: String, bookCount: int)
+    + getAuthorId(): String
+    + getName(): String
+    + getAvatarUrl(): String
+    + getBio(): String
+    + getBookCount(): int
+}
+
+class Publisher <<entity>> #EBF5FB {
+    - publisherId: String
+    - name: String
+    - logoUrl: String
+    - description: String
+    --
+    + Publisher()
+    + Publisher(publisherId: String, name: String, logoUrl: String, description: String)
+    + getPublisherId(): String
+    + getName(): String
+    + getLogoUrl(): String
+    + getDescription(): String
+}
+
+class ImageUtils #F4F6F6 {
+    + {static} uploadImage(context: Context, imageUri: Uri, folderPath: String, listener: OnUploadCompleteListener): void
+}
+
+interface "FirebaseCallback<T>" as FirebaseCallback<T> {
+    + onSuccess(result: T): void
+    + onFailure(e: Exception): void
+}
+
+' Inheritance
+ManageAuthorActivity --|> AdminBaseActivity
+ManagePublisherActivity --|> AdminBaseActivity
+
+' UI & Dialog
+ManageAuthorActivity ..> AdminAuthorViewModel : observes / interacts
+ManagePublisherActivity ..> AdminPublisherViewModel : observes / interacts
+ManageAuthorActivity ..> AdminEntityFormDialog : displays
+ManagePublisherActivity ..> AdminEntityFormDialog : displays
+AdminEntityFormDialog +-- OnSaveListener
+ManageAuthorActivity ..> ImageUtils : uses
+ManagePublisherActivity ..> ImageUtils : uses
+
+' ViewModel to Repositories
+AdminAuthorViewModel --> AdminAuthorRepository : uses
+AdminAuthorViewModel --> AdminBookRepository : uses
+AdminPublisherViewModel --> AdminPublisherRepository : uses
+AdminPublisherViewModel --> AdminBookRepository : uses
+
+' Repositories to Entities & Callbacks
+AdminAuthorRepository ..> Author : CRUD
+AdminPublisherRepository ..> Publisher : CRUD
+AdminAuthorRepository ..> FirebaseCallback : uses
+AdminPublisherRepository ..> FirebaseCallback : uses
+AdminBookRepository ..> FirebaseCallback : uses
+
+@enduml

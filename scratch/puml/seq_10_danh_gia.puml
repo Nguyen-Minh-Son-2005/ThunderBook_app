@@ -1,0 +1,120 @@
+@startuml seq_10_danh_gia
+title Sơ đồ tuần tự - UC10: Đánh giá sản phẩm (Write Review)
+
+autonumber
+skinparam handwritten false
+skinparam monochrome false
+skinparam shadowing false
+skinparam defaultFontName "Arial"
+skinparam defaultFontSize 12
+skinparam roundCorner 8
+
+skinparam sequence {
+    ArrowColor #2C3E50
+    ActorBorderColor #2980B9
+    ActorBackgroundColor #EBF5FB
+    LifeLineBorderColor #7F8C8D
+    LifeLineBackgroundColor #F4F6F6
+    ParticipantBorderColor #34495E
+    ParticipantBackgroundColor #EAECEE
+    ParticipantFontColor #2C3E50
+    ParticipantFontSize 13
+    ParticipantFontStyle bold
+    GroupBorderColor #7F8C8D
+    GroupBackgroundColor #F8F9F9
+    GroupHeaderFontColor #2C3E50
+    DividerBorderColor #BDC3C7
+    DividerBackgroundColor #EAEDED
+    DividerFontColor #2C3E50
+}
+
+actor "Người dùng" as User
+boundary "WriteReviewActivity" as View
+control "WriteReviewViewModel" as ViewModel
+participant "BookRepository" as BookRepo
+participant "UserRepository" as UserRepo
+participant "ReviewRepository" as ReviewRepo
+database "Cloud Firestore" as Firestore
+
+== 1. Khởi tạo màn hình & Tải thông tin sách ==
+
+User -> View : Mở màn hình đánh giá (truyền bookId, orderId)
+activate View
+
+View -> ViewModel : loadBook(bookId)
+activate ViewModel
+
+ViewModel -> BookRepo : getBook(bookId)
+activate BookRepo
+
+BookRepo -> Firestore : db.collection("books").document(bookId).get()
+activate Firestore
+Firestore --> BookRepo : DocumentSnapshot (Book data)
+deactivate Firestore
+
+BookRepo --> ViewModel : LiveData<Book>
+deactivate BookRepo
+
+ViewModel --> View : Quan sát _book (LiveData)\nHiển thị thông tin sách (ảnh bìa, tiêu đề)
+deactivate ViewModel
+
+== 2. Gửi đánh giá sản phẩm ==
+
+User -> View : Chọn số sao (1-5), nhập nội dung và bấm "Gửi đánh giá"
+View -> View : Vô hiệu hóa nút gửi để tránh bấm đúp
+
+View -> ViewModel : submitReview(uid, bookId, rating, comment, orderId)
+activate ViewModel
+
+ViewModel -> UserRepo : getUser(uid)
+activate UserRepo
+
+UserRepo -> Firestore : db.collection("users").document(uid).get()
+activate Firestore
+Firestore --> UserRepo : DocumentSnapshot (User data)
+deactivate Firestore
+
+UserRepo --> ViewModel : LiveData<User> (fullName, avatarUrl)
+deactivate UserRepo
+
+ViewModel -> ViewModel : Khởi tạo Review(reviewId, bookId, uid,\nfullName, avatarUrl, rating, comment, orderId, now)
+
+ViewModel -> ReviewRepo : addReview(review, callback)
+activate ReviewRepo
+
+ReviewRepo -> Firestore : db.runTransaction(...)
+activate Firestore
+
+note over ReviewRepo, Firestore
+  <b>Thực thi Firestore Transaction:</b>
+  1. Tạo reviewId = userId + "_" + bookId + "_" + orderId
+  2. Kiểm tra reviews/{reviewId} -> Nếu đã tồn tại ném lỗi ALREADY_EXISTS
+  3. Đọc books/{bookId} -> Lấy rating và ratingCount hiện tại
+  4. Tính rating mới: newRating = (rating * count + review.rating) / (count + 1)
+  5. Cập nhật books/{bookId}: rating = newRating, ratingCount = count + 1
+  6. Ghi tài liệu mới: reviews/{reviewId} = review
+end note
+
+alt Giao dịch thành công (Review được tạo)
+    Firestore --> ReviewRepo : onSuccess()
+    ReviewRepo --> ViewModel : callback.onSuccess(null)
+    ViewModel -> ViewModel : _submitSuccess.setValue(true)
+    ViewModel --> View : Quan sát _submitSuccess (LiveData)
+    View -> View : Toast("Cảm ơn bạn đã đánh giá!")
+    View -> View : finish()
+    View --> User : Đóng màn hình đánh giá
+else Giao dịch thất bại / Đã đánh giá trước đó
+    Firestore --> ReviewRepo : onFailure(exception)
+    deactivate Firestore
+    ReviewRepo --> ViewModel : callback.onFailure(e)
+    deactivate ReviewRepo
+    ViewModel -> ViewModel : _errorMessage.setValue(e.getMessage())
+    ViewModel --> View : Quan sát _errorMessage (LiveData)
+    deactivate ViewModel
+    View -> View : Kích hoạt lại nút gửi
+    View -> View : Toast hiển thị thông báo lỗi
+    View --> User : Hiển thị thông báo lỗi
+    deactivate View
+end
+
+@enduml

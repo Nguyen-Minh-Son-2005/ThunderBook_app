@@ -1,0 +1,141 @@
+@startuml seq_05_sua_sach
+title Biểu đồ tuần tự - UC5: Sửa thông tin sách (Edit Book)
+
+skinparam defaultFontName "Segoe UI", Arial, sans-serif
+skinparam sequenceMessageAlign center
+skinparam roundcorner 8
+skinparam maxMessageSize 200
+skinparam ParticipantPadding 12
+skinparam BoxPadding 10
+skinparam NoteBackgroundColor #FEFDE8
+skinparam NoteBorderColor #F1C40F
+
+skinparam sequence {
+    ArrowColor #2C3E50
+    ActorBorderColor #2980B9
+    LifeLineBorderColor #34495E
+    LifeLineBackgroundColor #ECF0F1
+    
+    ParticipantBorderColor #2980B9
+    ParticipantBackgroundColor #EBF5FB
+    ParticipantFontStyle bold
+    
+    DatabaseBorderColor #D35400
+    DatabaseBackgroundColor #FDEBD0
+}
+
+actor "Quản trị viên\n(Admin)" as Admin
+boundary "AddEditBookActivity\n(View)" as View
+control "AdminAddEditBookViewModel\n(ViewModel)" as ViewModel
+participant "ImageUtils\n(Utility)" as ImageUtils
+control "AdminBookRepository" as BookRepo
+database "Firebase Storage\n(book_covers/)" as Storage
+database "Cloud Firestore\n(collection: books)" as Firestore
+
+autonumber 1 "<b>[00]</b>"
+
+== 1. Tải thông tin sách cần sửa ==
+Admin -> View: Nhấn chọn sách từ danh sách (truyền EXTRA_BOOK_ID, isEditMode=true)
+activate View
+
+View -> View: Thiết lập giao diện "Sửa sách", hiển thị nút Xóa (btnDelete)
+View -> ViewModel: loadBookForEdit(editingBookId)
+activate ViewModel
+
+ViewModel -> BookRepo: getBookById(editingBookId)
+activate BookRepo
+BookRepo -> Firestore: booksRef.document(bookId).get()
+activate Firestore
+Firestore --> BookRepo: DocumentSnapshot (dữ liệu sách)
+deactivate Firestore
+BookRepo -> BookRepo: Chuyển đổi doc.toObject(Book.class)
+BookRepo --> ViewModel: Trả về LiveData<Book>
+deactivate BookRepo
+
+ViewModel -> ViewModel: loadedBook.setValue(book)
+ViewModel --> View: Cập nhật LiveData loadedBook
+View -> View: populateForm(book)\n(Điền tiêu đề, mô tả, giá, chọn chip thể loại, tác giả, NXB, hiển thị ảnh bìa)
+View --> Admin: Hiển thị form đã điền đầy đủ dữ liệu hiện tại
+deactivate ViewModel
+deactivate View
+
+== 2. Luồng Sửa thông tin sách và Lưu lại ==
+alt Người dùng chọn "Sửa thông tin & Lưu"
+    Admin -> View: Thay đổi các trường thông tin (giá, tồn kho, mô tả,...)
+    activate View
+    
+    opt Người dùng chọn tải lên ảnh bìa mới
+        Admin -> View: Chọn ảnh bìa mới từ thiết bị
+        View -> View: Hiển thị xem trước ảnh mới
+        Admin -> View: Nhấn nút "Lưu sách" (btnSave)
+        View -> ImageUtils: uploadImage(newUri, "book_covers/", callback)
+        activate ImageUtils
+        ImageUtils -> Storage: putFile(newUri)
+        activate Storage
+        Storage --> ImageUtils: Upload thành công, trả về downloadUrl mới
+        deactivate Storage
+        ImageUtils --> View: onSuccess(downloadUrl)
+        deactivate ImageUtils
+        View -> View: Gán uploadedCoverUrl = downloadUrl
+    else Giữ nguyên ảnh bìa cũ
+        Admin -> View: Nhấn nút "Lưu sách" (btnSave)
+    end
+    
+    View -> ViewModel: saveBook(editingBookId, title, description, uploadedCoverUrl,\nauthorIds, publisherId, categoryIds, price, salePrice, stock, isFeatured, isActive)
+    activate ViewModel
+    
+    ViewModel -> ViewModel: Kiểm tra hợp lệ dữ liệu nhập
+    ViewModel -> ViewModel: isLoading.setValue(true)
+    ViewModel -> ViewModel: Khởi tạo đối tượng Book với bookId = editingBookId
+    ViewModel -> BookRepo: updateBook(book, callback)
+    activate BookRepo
+    
+    BookRepo -> BookRepo: Tạo Map<String, Object> updates (chứa các trường cập nhật)
+    BookRepo -> Firestore: booksRef.document(bookId).update(updates)
+    activate Firestore
+    Firestore --> BookRepo: Cập nhật thành công
+    deactivate Firestore
+    
+    BookRepo --> ViewModel: callback.onSuccess(null)
+    deactivate BookRepo
+    
+    ViewModel -> ViewModel: isLoading.setValue(false)
+    ViewModel -> ViewModel: saveSuccess.setValue(true)
+    
+    ViewModel --> View: saveSuccess LiveData thông báo thành công
+    View -> View: Hiển thị Toast "Đã lưu sách"
+    View -> View: setResult(RESULT_OK) & finish()
+    View --> Admin: Đóng màn hình, cập nhật lại danh sách sách
+    deactivate ViewModel
+    deactivate View
+
+== 3. Luồng Xóa sách (Xóa mềm / Ẩn sách) ==
+else Người dùng chọn "Xóa sách"
+    Admin -> View: Nhấn nút "Xóa sách" (btnDelete)
+    activate View
+    View -> View: Hiển thị AlertDialog xác nhận "Bạn chắc chắn muốn ẩn sách này?"
+    Admin -> View: Nhấn xác nhận "Xóa"
+    
+    View -> ViewModel: deleteBook(editingBookId)
+    activate ViewModel
+    ViewModel -> BookRepo: softDeleteBook(editingBookId, callback)
+    activate BookRepo
+    
+    BookRepo -> BookRepo: toggleActive(bookId, false, callback)
+    BookRepo -> Firestore: booksRef.document(bookId).update("isActive", false)
+    activate Firestore
+    Firestore --> BookRepo: Cập nhật isActive = false thành công
+    deactivate Firestore
+    
+    BookRepo --> ViewModel: callback.onSuccess(null)
+    deactivate BookRepo
+    
+    ViewModel -> ViewModel: saveSuccess.setValue(true)
+    ViewModel --> View: saveSuccess LiveData thông báo thành công
+    View -> View: setResult(RESULT_OK) & finish()
+    View --> Admin: Đóng màn hình, sách đã được ẩn khỏi cửa hàng
+    deactivate ViewModel
+    deactivate View
+end
+
+@enduml

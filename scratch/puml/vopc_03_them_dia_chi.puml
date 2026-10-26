@@ -1,0 +1,138 @@
+@startuml vopc_03_them_dia_chi
+title Biểu đồ lớp tham gia (VOPC) - UC3: Thêm địa chỉ giao hàng (Add Address)
+
+skinparam classAttributeIconSize 0
+skinparam defaultFontName "Segoe UI", Arial, sans-serif
+skinparam defaultFontSize 12
+skinparam roundcorner 6
+skinparam shadowing false
+
+skinparam class {
+    BackgroundColor #FFFFFF
+    ArrowColor #1976D2
+    BorderColor #1976D2
+    HeaderBackgroundColor #E3F2FD
+}
+
+skinparam stereotype {
+    CBackgroundColor #BBDEFB
+}
+
+class AddEditAddressActivity <<boundary>> {
+    - etName: TextInputEditText
+    - etPhone: TextInputEditText
+    - etDetailAddress: TextInputEditText
+    - actvProvince: AutoCompleteTextView
+    - actvDistrict: AutoCompleteTextView
+    - actvWard: AutoCompleteTextView
+    - btnSave: Button
+    - editingAddressId: String
+    - viewModel: AddEditAddressViewModel
+    - client: OkHttpClient
+    - provinceList: List<LocationItem>
+    - districtList: List<LocationItem>
+    - wardList: List<LocationItem>
+    # onCreate(savedInstanceState: Bundle): void
+    - setupDropdownListeners(): void
+    - loadProvinces(): void
+    - loadDistricts(provinceCode: String): void
+    - loadWards(districtCode: String): void
+    - saveAddress(): void
+}
+
+class LocationItem {
+    - code: String
+    - name: String
+    + LocationItem(code: String, name: String)
+    + toString(): String
+}
+
+class AddEditAddressViewModel <<control>> {
+    - addressRepository: AddressRepository
+    - _address: MutableLiveData<Address>
+    - _saveSuccess: MutableLiveData<Boolean>
+    - _errorMessage: MutableLiveData<String>
+    + getAddress(): LiveData<Address>
+    + getSaveSuccess(): LiveData<Boolean>
+    + getErrorMessage(): LiveData<String>
+    + loadAddress(uid: String, addressId: String): void
+    + saveAddress(uid: String, address: Address): void
+}
+
+class AddressRepository {
+    + getAddresses(uid: String): LiveData<List<Address>>
+    + getAddress(uid: String, addressId: String): LiveData<Address>
+    + saveAddress(uid: String, address: Address, callback: FirebaseCallback<Void>): void
+    + deleteAddress(uid: String, addressId: String, callback: FirebaseCallback<Void>): void
+}
+
+class Address <<entity>> {
+    - addressId: String
+    - name: String
+    - phone: String
+    - province: String
+    - district: String
+    - ward: String
+    - detailAddress: String
+    + Address()
+    + Address(addressId: String, name: String, phone: String, province: String, district: String, ward: String, detailAddress: String)
+    + getAddressId(): String
+    + setAddressId(addressId: String): void
+    + getName(): String
+    + setName(name: String): void
+    + getPhone(): String
+    + setPhone(phone: String): void
+    + getProvince(): String
+    + setProvince(province: String): void
+    + getDistrict(): String
+    + setDistrict(district: String): void
+    + getWard(): String
+    + setWard(ward: String): void
+    + getDetailAddress(): String
+    + setDetailAddress(detailAddress: String): void
+    + getFullAddress(): String
+}
+
+interface FirebaseCallback<T> {
+    + onSuccess(result: T): void
+    + onFailure(e: Exception): void
+}
+
+class "provinces.open-api.vn\n<<REST API>>" as ProvinceApi {
+    + GET /api/p/
+    + GET /api/p/{code}?depth=2
+    + GET /api/d/{code}?depth=2
+}
+
+' Relationships
+AddEditAddressActivity ..> AddEditAddressViewModel : "<<observes & invokes>>"
+AddEditAddressActivity ..> ProvinceApi : "<<HTTP GET location data>>"
+AddEditAddressActivity +-- LocationItem : "contains inner class"
+AddEditAddressActivity ..> Address : "<<creates / validates>>"
+
+AddEditAddressViewModel --> AddressRepository : "uses"
+AddEditAddressViewModel ..> Address : "passes to repo"
+
+AddressRepository ..> Address : "<<persists / fetches>>"
+AddressRepository ..> FirebaseCallback : "<<triggers>>"
+
+note right of AddEditAddressActivity
+  <b>View:</b>
+  - Gọi REST API lấy dữ liệu hành chính động (Tỉnh -> Huyện -> Xã).
+  - Kiểm tra tính hợp lệ dữ liệu nhập (form validation, regex số điện thoại).
+  - Quan sát trạng thái lưu từ ViewModel và đóng màn hình khi thành công.
+end note
+
+note right of AddEditAddressViewModel
+  <b>ViewModel:</b>
+  - Quản lý trạng thái LiveData (_address, _saveSuccess, _errorMessage).
+  - Chuyển tiếp yêu cầu lưu/tải dữ liệu tới AddressRepository.
+end note
+
+note right of AddressRepository
+  <b>Repository:</b>
+  - Quản lý tương tác với Firestore subcollection:
+    users/{uid}/addresses
+end note
+
+@enduml

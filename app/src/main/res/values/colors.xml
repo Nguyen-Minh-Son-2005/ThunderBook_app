@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary - Blue -->
+    <color name="primary">#1976D2</color>
+    <color name="primary_dark">#0D47A1</color>
+    <color name="primary_light">#E3F2FD</color>
+    <color name="primary_variant">#42A5F5</color>
+
+    <!-- Accent -->
+    <color name="accent_price">#FF7A00</color>
+    <color name="accent_sale_bg">#FFF1E6</color>
+    <color name="star_rating">#FFB300</color>
+
+    <!-- Status -->
+    <color name="status_success">#16A34A</color>
+    <color name="status_success_bg">#E8F7EE</color>
+    <color name="status_error">#E53935</color>
+    <color name="status_error_bg">#FDECEA</color>
+    <color name="status_pending">#F59E0B</color>
+    <color name="status_pending_bg">#FEF6E7</color>
+
+    <!-- Neutrals -->
+    <color name="text_primary">#1A1D29</color>
+    <color name="text_secondary">#6B7280</color>
+    <color name="text_hint">#A0A6B1</color>
+    <color name="background">#F4F7FB</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="divider">#E5E9F0</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="overlay">#66000000</color>
+    <color name="error">#D32F2F</color>
+    <color name="surface_variant">#EAF2FB</color>
+    <color name="error_bg">#FFEBEE</color>
+    <color name="info_bg">#E1F5FE</color>
+    <color name="success_bg">#E8F5E9</color>
+    <color name="warning_bg">#FFF8E1</color>
+    <color name="ripple_light">#33000000</color>
+    <color name="warning">#FFC107</color>
+    <color name="success">#4CAF50</color>
+</resources>

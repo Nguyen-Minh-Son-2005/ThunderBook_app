@@ -1,0 +1,131 @@
+@startuml seq_06_them_the_loai
+title Biểu đồ tuần tự - UC6: Thêm thể loại mới (Add Category)
+
+skinparam defaultFontName "Segoe UI", Arial, sans-serif
+skinparam sequenceMessageAlign center
+skinparam roundcorner 8
+skinparam maxMessageSize 200
+skinparam ParticipantPadding 12
+skinparam BoxPadding 10
+skinparam NoteBackgroundColor #FEFDE8
+skinparam NoteBorderColor #F1C40F
+
+skinparam sequence {
+    ArrowColor #2C3E50
+    ActorBorderColor #2980B9
+    LifeLineBorderColor #34495E
+    LifeLineBackgroundColor #ECF0F1
+    
+    ParticipantBorderColor #2980B9
+    ParticipantBackgroundColor #EBF5FB
+    ParticipantFontStyle bold
+    
+    DatabaseBorderColor #D35400
+    DatabaseBackgroundColor #FDEBD0
+}
+
+actor "Quản trị viên\n(Admin)" as Admin
+boundary "ManageCategoryActivity\n(View)" as View
+boundary "AdminEntityFormDialog\n(Dialog)" as Dialog
+control "AdminCategoryViewModel\n(ViewModel)" as ViewModel
+participant "ImageUtils\n(Utility)" as ImageUtils
+control "AdminCategoryRepository\n(Repository)" as CategoryRepo
+database "Firebase Storage\n(category_images/)" as Storage
+database "Cloud Firestore\n(collection: categories)" as Firestore
+
+autonumber 1 "<b>[00]</b>"
+
+== 1. Khởi tạo màn hình và lắng nghe danh sách Realtime ==
+Admin -> View: Mở màn hình "Quản lý thể loại"
+activate View
+View -> ViewModel: Lấy instance ViewModelProvider
+activate ViewModel
+
+ViewModel -> CategoryRepo: observeAllCategories()
+activate CategoryRepo
+CategoryRepo -> Firestore: Đăng ký SnapshotListener (orderBy: name ASC)
+activate Firestore
+Firestore --> CategoryRepo: Trả về danh sách DocumentSnapshot
+deactivate Firestore
+
+CategoryRepo --> ViewModel: allCategories LiveData cập nhật
+ViewModel -> ViewModel: applyFilter() -> displayedCategories.setValue(list)
+ViewModel --> View: displayedCategories LiveData cập nhật
+View -> View: Hiển thị danh sách thể loại lên RecyclerView (AdminCategoryAdapter)
+View --> Admin: Hiển thị danh sách thể loại hiện có
+deactivate CategoryRepo
+deactivate ViewModel
+deactivate View
+
+== 2. Mở hộp thoại thêm thể loại ==
+Admin -> View: Nhấn nút Thêm mới FAB (+) (fab_add_category)
+activate View
+View -> Dialog: openForm(null) -> newInstanceAdd("thể loại", false, null)
+activate Dialog
+Dialog --> Admin: Hiển thị Dialog nhập tên & chọn ảnh thể loại
+
+== 3. Nhập dữ liệu và tải ảnh lên Storage ==
+Admin -> Dialog: Chọn ảnh đại diện thể loại & nhập tên thể loại
+Admin -> Dialog: Nhấn nút "Lưu" (btn_dialog_save)
+Dialog -> View: listener.onSave(null, name, null, newImageUri)
+Dialog -> Dialog: dismiss()
+deactivate Dialog
+
+opt Người dùng có chọn ảnh (newImageUri != null)
+    View -> ImageUtils: uploadImage(uri, "category_images/", callback)
+    activate ImageUtils
+    ImageUtils -> Storage: putFile(newImageUri)
+    activate Storage
+    Storage --> ImageUtils: Upload thành công, trả về downloadUrl
+    deactivate Storage
+    ImageUtils --> View: onSuccess(downloadUrl)
+    deactivate ImageUtils
+end
+
+== 4. Kiểm tra hợp lệ và lưu thể loại vào Firestore ==
+View -> ViewModel: saveCategory(null, name, downloadUrl)
+activate ViewModel
+
+ViewModel -> ViewModel: Kiểm tra hợp lệ (name != null && !name.trim().isEmpty())
+
+alt Tên thể loại trống
+    ViewModel --> View: errorMessage.setValue("Vui lòng nhập tên thể loại")
+    View --> Admin: Hiển thị Toast thông báo lỗi
+else Dữ liệu hợp lệ
+    ViewModel -> ViewModel: Khởi tạo đối tượng Category(name, imageUrl)
+    ViewModel -> CategoryRepo: addCategory(category, callback)
+    activate CategoryRepo
+    
+    CategoryRepo -> Firestore: categoriesRef.document() (Tự sinh docId)
+    CategoryRepo -> CategoryRepo: Gán categoryId = docId, isActive = true
+    CategoryRepo -> Firestore: docRef.set(category)
+    activate Firestore
+    Firestore --> CategoryRepo: Ghi tài liệu thành công
+    deactivate Firestore
+    
+    CategoryRepo --> ViewModel: callback.onSuccess(null)
+    deactivate CategoryRepo
+    
+    ViewModel -> ViewModel: saveSuccess.setValue(true)
+    ViewModel --> View: saveSuccess LiveData thông báo thành công
+    View -> View: Hiển thị Toast "Đã lưu"
+    
+    note over CategoryRepo, Firestore
+        Firestore SnapshotListener tự động kích hoạt khi có tài liệu mới được thêm,
+        CategoryRepo nhận danh sách mới và tự động cập nhật lên UI qua LiveData.
+    end note
+    
+    Firestore --> CategoryRepo: onSnapshotEvent (Dữ liệu mới)
+    activate CategoryRepo
+    CategoryRepo --> ViewModel: allCategories LiveData cập nhật
+    ViewModel -> ViewModel: applyFilter()
+    ViewModel --> View: displayedCategories LiveData cập nhật
+    View -> View: Adapter.setItems(newList) cập nhật RecyclerView
+    View --> Admin: Danh sách hiển thị thể loại mới vừa thêm
+    deactivate CategoryRepo
+end
+
+deactivate ViewModel
+deactivate View
+
+@enduml

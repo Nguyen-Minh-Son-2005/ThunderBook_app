@@ -1,0 +1,143 @@
+@startuml vopc_10_danh_gia
+title Sơ đồ VOPC - UC10: Đánh giá sản phẩm (Write Review)
+
+skinparam handwritten false
+skinparam monochrome false
+skinparam shadowing false
+skinparam defaultFontName "Arial"
+skinparam defaultFontSize 12
+skinparam roundCorner 8
+
+skinparam class {
+    BackgroundColor #FFFFFF
+    ArrowColor #2C3E50
+    BorderColor #34495E
+    HeaderBackgroundColor #EAEDED
+    BorderThickness 1.2
+}
+
+skinparam classStereotype {
+    FontSize 10
+    FontStyle italic
+}
+
+class WriteReviewActivity <<boundary>> #E8F8F5 {
+    - orderId: String
+    - bookId: String
+    - selectedRating: int
+    - ivBookCover: ImageView
+    - tvBookTitle: TextView
+    - tvRatingLabel: TextView
+    - etComment: EditText
+    - btnSubmit: Button
+    - viewModel: WriteReviewViewModel
+    --
+    # onCreate(savedInstanceState: Bundle): void
+    - bindViews(): void
+    - setupStarClicks(): void
+    - updateStarUI(): void
+    - submitReview(): void
+}
+
+class WriteReviewViewModel <<control>> #FEF9E7 {
+    - reviewRepository: ReviewRepository
+    - bookRepository: BookRepository
+    - userRepository: UserRepository
+    - _book: MutableLiveData<Book>
+    - _submitSuccess: MutableLiveData<Boolean>
+    - _errorMessage: MutableLiveData<String>
+    --
+    + getBook(): LiveData<Book>
+    + getSubmitSuccess(): LiveData<Boolean>
+    + getErrorMessage(): LiveData<String>
+    + loadBook(bookId: String): void
+    + submitReview(uid: String, bookId: String, rating: int, comment: String, orderId: String): void
+}
+
+class ReviewRepository #F4F6F6 {
+    + addReview(review: Review, callback: FirebaseCallback<Void>): void
+    + getReviewsByUser(uid: String): LiveData<List<Review>>
+    + getReviewsByBook(bookId: String, limit: int): LiveData<List<Review>>
+    + deleteReview(reviewId: String, callback: FirebaseCallback<Void>): void
+}
+
+class BookRepository #F4F6F6 {
+    + getBook(bookId: String): LiveData<Book>
+}
+
+class UserRepository #F4F6F6 {
+    + getUser(uid: String): LiveData<User>
+}
+
+class Review <<entity>> #EBF5FB {
+    - reviewId: String
+    - bookId: String
+    - userId: String
+    - userName: String
+    - userAvatar: String
+    - rating: double
+    - comment: String
+    - orderId: String
+    - createdAt: Timestamp
+    --
+    + Review()
+    + Review(reviewId: String, bookId: String, userId: String, userName: String, userAvatar: String, rating: double, comment: String, orderId: String, createdAt: Timestamp)
+    + getReviewId(): String
+    + getBookId(): String
+    + getUserId(): String
+    + getUserName(): String
+    + getUserAvatar(): String
+    + getRating(): double
+    + getComment(): String
+    + getOrderId(): String
+    + getCreatedAt(): Timestamp
+}
+
+class Book <<entity>> #EBF5FB {
+    - bookId: String
+    - title: String
+    - coverImageUrl: String
+    - rating: double
+    - ratingCount: int
+    --
+    + getBookId(): String
+    + getTitle(): String
+    + getCoverImageUrl(): String
+    + getRating(): double
+    + getRatingCount(): int
+}
+
+class User <<entity>> #EBF5FB {
+    - uid: String
+    - fullName: String
+    - avatarUrl: String
+    - email: String
+    --
+    + getUid(): String
+    + getFullName(): String
+    + getAvatarUrl(): String
+    + getEmail(): String
+}
+
+interface "FirebaseCallback<T>" as FirebaseCallback<T> {
+    + onSuccess(result: T): void
+    + onFailure(e: Exception): void
+}
+
+' Relationships
+WriteReviewActivity ..> WriteReviewViewModel : observes / interacts
+WriteReviewViewModel --> ReviewRepository : uses
+WriteReviewViewModel --> BookRepository : uses
+WriteReviewViewModel --> UserRepository : uses
+
+ReviewRepository ..> Review : persists / updates
+BookRepository ..> Book : queries
+UserRepository ..> User : queries
+
+ReviewRepository ..> FirebaseCallback : uses
+WriteReviewViewModel ..> FirebaseCallback : implements
+
+Review "0..*" --> "1" Book : references
+Review "0..*" --> "1" User : created by
+
+@enduml

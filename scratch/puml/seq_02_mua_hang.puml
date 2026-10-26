@@ -1,0 +1,149 @@
+@startuml seq_02_mua_hang
+title Sơ đồ tuần tự - UC2: Mua hàng (Checkout & Place Order)
+
+autonumber
+skinparam style strictuml
+skinparam defaultFontName "Segoe UI", Arial, sans-serif
+skinparam defaultFontSize 12
+skinparam roundcorner 6
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+
+skinparam sequence {
+    ArrowColor #1976D2
+    ActorBorderColor #1976D2
+    ActorBackgroundColor #E3F2FD
+    ParticipantBorderColor #1976D2
+    ParticipantBackgroundColor #F5F9FF
+    ParticipantFontSize 12
+    ParticipantFontStyle bold
+    LifeLineBorderColor #1976D2
+    LifeLineBackgroundColor #E3F2FD
+    GroupBorderColor #455A64
+    GroupBackgroundColor #ECEFF1
+    GroupHeaderFontSize 12
+    GroupFontStyle bold
+}
+
+actor "Người dùng" as User
+participant "view: CheckoutActivity\n<<boundary>>" as View
+participant "viewModel: CheckoutViewModel\n<<control>>" as ViewModel
+participant "orderRepo: OrderRepository" as OrderRepo
+participant "cartRepo: CartRepository" as CartRepo
+participant "addressRepo: AddressRepository" as AddressRepo
+participant "order: Order\n<<entity>>" as OrderEntity
+database "Cloud Firestore\n(orders, books, carts)" as Firestore
+
+== 1. Khởi tạo màn hình & Tải thông tin thanh toán ==
+
+User -> View : Mở màn hình Thanh toán (từ giỏ hàng kèm selectedBookIds)
+activate View
+
+View -> ViewModel : loadCheckoutItems(uid, selectedBookIds)
+activate ViewModel
+View -> ViewModel : loadDefaultAddress(uid)
+
+ViewModel -> Firestore : Lấy CartItems từ "carts/{uid}/items" & Book từ "books/{bookId}"
+activate Firestore
+Firestore --> ViewModel : Danh sách snapshot CartItem & Book
+deactivate Firestore
+
+ViewModel -> ViewModel : Tạo List<OrderItem>(bookId, title, coverImageUrl, priceAtAdd, quantity)
+ViewModel -> ViewModel : _orderItems.setValue(items)
+ViewModel --> View : [LiveData] getOrderItems()
+View -> View : Hiển thị danh sách sách & tính tạm tính (subtotal)
+
+ViewModel -> AddressRepo : getAddresses(uid)
+activate AddressRepo
+AddressRepo -> Firestore : Lấy danh sách địa chỉ từ "users/{uid}/addresses"
+activate Firestore
+Firestore --> AddressRepo : QuerySnapshot addresses
+deactivate Firestore
+AddressRepo --> ViewModel : [LiveData] List<Address>
+deactivate AddressRepo
+
+ViewModel -> ViewModel : _selectedAddress.setValue(addresses.get(0))
+ViewModel --> View : [LiveData] getSelectedAddress()
+View -> View : Hiển thị thông tin người nhận & địa chỉ mặc định
+
+== 2. Tùy chọn: Thay đổi Địa chỉ / Áp dụng Voucher ==
+
+opt Người dùng chọn địa chỉ khác hoặc mã giảm giá
+    User -> View : Chọn địa chỉ mới từ danh sách
+    View -> ViewModel : loadAddress(uid, addressId)
+    ViewModel -> AddressRepo : getAddress(uid, addressId)
+    AddressRepo --> ViewModel : [LiveData] Address
+    ViewModel -> ViewModel : _selectedAddress.setValue(address)
+
+    User -> View : Chọn mã Voucher giảm giá
+    View -> ViewModel : setSelectedVoucher(voucher)
+    ViewModel -> ViewModel : _selectedVoucher.setValue(voucher)
+    ViewModel --> View : [LiveData] getSelectedVoucher()
+    View -> View : recalculateTotal() (Cập nhật giảm giá, phí ship, tổng tiền)
+end
+
+== 3. Đặt hàng & Xử lý Giao dịch (Transaction) ==
+
+User -> View : Nhấn nút "Đặt hàng"
+View -> View : Kiểm tra địa chỉ != null && danh sách sách không rỗng\nTính toán subtotal, shippingFee, discount, finalTotal
+View -> View : btnPlaceOrder.setEnabled(false)
+
+View -> ViewModel : placeOrder(uid, orderItems, address, voucher,\nsubtotal, shippingFee, discount, note, selectedBookIds)
+
+ViewModel -> ViewModel : orderId = UUID.randomUUID().toString()
+create OrderEntity
+ViewModel -> OrderEntity : new Order(orderId, uid, orderItems, subtotal, shippingFee,\ndiscount, voucherCode, finalTotal, "pending", "pending", address, note, Timestamp.now())
+
+ViewModel -> OrderRepo : createOrder(order, FirebaseCallback<String>)
+activate OrderRepo
+
+OrderRepo -> Firestore : runTransaction(Transaction)
+activate Firestore
+
+group Firestore Transaction (Đảm bảo tính toàn vẹn tồn kho)
+    loop Lặp qua từng OrderItem trong đơn
+        OrderRepo -> Firestore : transaction.get(books/{bookId})
+        Firestore --> OrderRepo : DocumentSnapshot bookSnap
+        OrderRepo -> OrderRepo : Kiểm tra bookSnap tồn tại && currentStock >= item.getQuantity()
+        
+        alt Không đủ số lượng tồn kho / Sách không tồn tại
+            OrderRepo -> OrderRepo : throw FirebaseFirestoreException (Abort Transaction)
+        else Đủ tồn kho
+            OrderRepo -> Firestore : transaction.update(books/{bookId}, "stock", currentStock - quantity)
+        end
+    end
+    OrderRepo -> Firestore : transaction.set(orders/{orderId}, order)
+end
+
+alt Giao dịch thất bại (Hết hàng hoặc lỗi mạng)
+    Firestore --> OrderRepo : addOnFailureListener(Exception e)
+    OrderRepo --> ViewModel : callback.onFailure(e)
+    ViewModel -> ViewModel : _errorMessage.setValue("Lỗi đặt hàng: " + e.getMessage())
+    ViewModel --> View : [LiveData] getErrorMessage()
+    View -> View : btnPlaceOrder.setEnabled(true)
+    View --> User : Hiển thị Toast: "Đặt hàng thất bại, vui lòng thử lại"
+else Giao dịch thành công
+    Firestore --> OrderRepo : addOnSuccessListener()
+    deactivate Firestore
+    OrderRepo --> ViewModel : callback.onSuccess(createdOrderId)
+    deactivate OrderRepo
+
+    ViewModel -> ViewModel : clearCart(uid, selectedBookIds)
+    ViewModel -> CartRepo : removeCartItems(uid, selectedBookIds, callback)
+    activate CartRepo
+    CartRepo -> Firestore : Batch delete "carts/{uid}/items/{bookId}"
+    CartRepo --> ViewModel : Xóa item đã mua khỏi giỏ hàng thành công
+    deactivate CartRepo
+
+    ViewModel -> ViewModel : _placeOrderResult.setValue(createdOrderId)
+    ViewModel --> View : [LiveData] getPlaceOrderResult()
+    deactivate ViewModel
+
+    View -> View : btnPlaceOrder.setEnabled(true)
+    View --> User : Hiển thị Toast: "Đặt hàng thành công!"
+    View -> View : Điều hướng mở OrderDetailActivity(orderId) (Intent)
+    View -> View : finish()
+end
+deactivate View
+
+@enduml

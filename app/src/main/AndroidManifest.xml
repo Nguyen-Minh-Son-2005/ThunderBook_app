@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/logo"
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
+        android:theme="@style/Theme.BookApp">
+
+        <!-- AdMob App ID (Test ID) -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
+
+        <!-- ===== LAUNCHER: LoginActivity ===== -->
+        <activity
+            android:name=".View.user.LoginActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Auth -->
+        <activity
+            android:name=".View.user.RegisterActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".View.user.ForgotPasswordActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Home container (chứa HomeFragment + CartFragment + ProfileFragment) -->
+        <activity
+            android:name=".View.user.HomeActivity"
+            android:exported="false" />
+
+        <!-- Search & Browse -->
+        <activity
+            android:name=".View.user.SearchActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+
+        <!-- AI Chatbot Advisory -->
+        <activity
+            android:name=".View.user.ChatBotActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Book Detail -->
+        <activity
+            android:name=".View.user.BookReviewsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.user.BookDetailActivity"
+            android:exported="false" />
+
+        <!-- Checkout flow -->
+        <activity
+            android:name=".View.user.CheckoutActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".View.user.AddressListActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".View.user.AddEditAddressActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".View.user.SelectVoucherActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Order -->
+        <activity
+            android:name=".View.user.OrderHistoryActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".View.user.OrderDetailActivity"
+            android:exported="false" />
+
+        <!-- Reviews -->
+        <activity
+            android:name=".View.user.WriteReviewActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".View.user.MyReviewsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".View.user.FavoriteBooksActivity"
+            android:exported="false" />
+
+        <!-- Notifications -->
+        <activity
+            android:name=".View.user.NotificationActivity"
+            android:exported="false" />
+
+        <!-- Profile & Settings -->
+        <activity
+            android:name=".View.user.EditProfileActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- ===== ADMIN ACTIVITIES ===== -->
+        <activity
+            android:name=".View.admin.AdminDashboardActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".View.admin.AddEditBookActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".View.admin.AddEditVoucherActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".View.admin.AdminOrderDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.admin.AdminUserDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.admin.ManageAuthorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.admin.ManageBookActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.admin.ManageCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.admin.ManageNotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.admin.ManageOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.admin.ManagePublisherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.admin.ManageUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.admin.ManageVoucherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.admin.StatisticActivity"
+            android:exported="false" />
+
+    </application>
+
+</manifest>
